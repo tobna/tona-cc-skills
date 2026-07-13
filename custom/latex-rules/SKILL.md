@@ -60,6 +60,11 @@ cleveref. A `\label` for a float goes *after* its `\caption`, or the number is w
 - **Quotes**: `` `single' `` and ` ``double'' ` — never the straight `"`.
 - **Ellipsis**: `\dots`, never `...`.
 - **Non-breaking space `~`** before every reference and citation and inside number+unit when not using siunitx: `Figure~\ref{...}`, `\citep{...}` (prefer `~\cite`), `Section~\ref`, `5~kg`. Prevents a number stranded at a line start.
+- **Citation placement — scope sets the position**:
+  - a specific **term** → immediately after that term, bound with `~`: `the transformer~\cite{vaswani2017} scales well.`
+  - an **assertion / clause** → right after it, wherever that clause ends in the sentence.
+  - a **whole sentence** → at the end, *before* the period: `…and this holds across scales~\cite{kaplan2020}.`
+  - a **whole paragraph** (occasional only) → *after* the period: `…broadly applicable.~\cite{kaplan2020}`
 - **Emphasis**: `\emph{...}` by default (nests correctly); never `\textit` for emphasis, never the deprecated `{\it ...}` / `{\bf ...}`. `\textbf` bold emphasis is allowed but only **very rarely** — for a genuinely key term, not routine emphasis.
 - **Run-in headings, not `\paragraph`**: to save vertical space, open the paragraph with a bold lead-in `\textbf{Heading.}` (text, then a period) rather than `\paragraph{Heading}`. `packages.tex` provides `\parahead{Heading}` for this.
 - **Spacing after abbreviations**: `e.g.\ ` and `i.e.\ ` (backslash-space) so the period isn't treated as sentence-end; or use a macro.
