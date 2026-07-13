@@ -12,6 +12,29 @@ rely on plus my own custom ones. Clone it on a new machine, run one script, done
 | `plugins.sh` | Adds the marketplaces and installs the Claude Code plugins I use (`ponytail`, `frontend-design`, `tufte-vdqi`, …). |
 | `install.sh` | Installs everything (or a subset) into `~/.claude` — skills + plugins. |
 
+## What's in here
+
+### Skills (`skills-lock.json`)
+
+| Skill | What it does / how to use |
+|-------|---------------------------|
+| `marimo-notebook` | Writes marimo notebooks in the correct reactive-cell Python format. Loads automatically whenever you author or edit a `.py` marimo notebook. |
+| `implement-paper` | Turns a research paper into an interactive marimo notebook *with* you — fetches the paper, then builds it step by step. Say "implement this paper" with a link or arXiv id. |
+| `auto-paper-demo` | Same idea but hands-off: builds a full paper demo notebook end-to-end with no back-and-forth. Point it at a paper when you just want the finished demo. |
+| `anywidget-generator` | Generates custom [anywidget](https://anywidget.dev) interactive components for marimo. Ask for a widget and it scaffolds the JS + Python. |
+| `jupyter-to-marimo` | Converts a Jupyter `.ipynb` into a marimo `.py` notebook. Run it on an existing notebook to migrate. |
+| `find-skills` | Searches the open agent-skills ecosystem for a skill that already does what you need. Triggers on "is there a skill for X" / "how do I do X". |
+
+### Plugins (`plugins.sh`)
+
+| Plugin | What it does / how to use |
+|--------|---------------------------|
+| `ponytail` | Forces the laziest solution that works — stdlib/native over dependencies, questions whether code needs to exist at all. Active on coding tasks; toggle with `/ponytail lite\|full\|ultra` or "stop ponytail". |
+| `frontend-design` | Pushes Claude past generic "AI slop" UI toward distinctive, production-grade frontends. Loads automatically when building web components or pages. |
+| `tufte-vdqi` | Edward Tufte's data-viz principles as three skills (route, assess, render) — scores charts against Tufte's criteria and renders high-data-ink graphics. Use when making or critiquing plots. |
+| `andrej-karpathy-skills` | Karpathy's guidelines to cut common LLM coding mistakes: surgical diffs, surfaced assumptions, verifiable success criteria. Applies when writing, reviewing, or refactoring code. |
+| `pyright-lsp` | Runs the Pyright language server for Python — type errors, diagnostics, go-to-definition. Works automatically on Python files, no invocation needed. |
+
 ## Install
 
 Needs [`npx`](https://nodejs.org) and `jq`.
