@@ -60,7 +60,7 @@ cleveref. A `\label` for a float goes *after* its `\caption`, or the number is w
 - **Quotes**: `` `single' `` and ` ``double'' ` — never the straight `"`.
 - **Ellipsis**: `\dots`, never `...`.
 - **Non-breaking space `~`** before every reference and citation and inside number+unit when not using siunitx: `Figure~\ref{...}`, `\citep{...}` (prefer `~\cite`), `Section~\ref`, `5~kg`. Prevents a number stranded at a line start.
-- **Emphasis**: `\emph{...}` (nests correctly), never `\textit` for emphasis and never the deprecated `{\it ...}` / `{\bf ...}`.
+- **Emphasis**: `\emph{...}` by default (nests correctly); never `\textit` for emphasis, never the deprecated `{\it ...}` / `{\bf ...}`. `\textbf` bold emphasis is allowed but only **very rarely** — for a genuinely key term, not routine emphasis.
 - **Run-in headings, not `\paragraph`**: to save vertical space, open the paragraph with a bold lead-in `\textbf{Heading.}` (text, then a period) rather than `\paragraph{Heading}`. `packages.tex` provides `\parahead{Heading}` for this.
 - **Spacing after abbreviations**: `e.g.\ ` and `i.e.\ ` (backslash-space) so the period isn't treated as sentence-end; or use a macro.
 - **Always a thin space `\,` between a number and its unit**: `5\,\mathrm{ms}`, `10\,\mathrm{kg}`, `3.3\,\mathrm{GHz}` — never `5ms` or `5 ms` (a full space is too wide and can break across lines). `siunitx`'s `\qty{5}{\milli\second}` does this for you; use `\,` when writing units by hand.
@@ -135,7 +135,7 @@ for the narrative-level version.)
 
 **Formatting tells**
 
-- Don't `\textbf` random phrases for emphasis — use `\emph`, sparingly.
+- Don't `\textbf` random phrases — bold is for rare, genuinely-key terms; routine emphasis is `\emph`, used sparingly.
 - Don't turn prose that should be sentences into equal-sized bullet lists or a stack of identical `\paragraph`/`\parahead` blocks. Vary structure to the content.
 - Don't end every section/paragraph with a restating summary, and don't over-signpost ("As mentioned above", "As we will see").
 - Avoid the tidy tricolon ("fast, efficient, and scalable"), uniform paragraph lengths, and em-dash spam (at most one `---` per paragraph).
@@ -162,4 +162,4 @@ for the narrative-level version.)
 - [ ] Numbers/units via siunitx, or a thin space `\,` between every number and its unit; figures are vector; captions self-contained.
 - [ ] One sentence per line; no `\\` paragraph breaks; no obsolete packages.
 - [ ] Display math via `align*`/`equation`, never `\[\]`/`$$`/`eqnarray`; inline via `$…$`.
-- [ ] No AI buzzword/transition spam; emphasis via `\emph`, not stray `\textbf`.
+- [ ] No AI buzzword/transition spam; emphasis via `\emph` (bold only rarely, for key terms).
