@@ -4,6 +4,8 @@
 
 
 % my own set of packages
+\usepackage[T1]{fontenc}   % proper 8-bit fonts + real hyphenation
+\usepackage{lmodern}       % scalable Latin Modern (fixes bitmap CM warnings)
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage{amsmath}
@@ -44,7 +46,7 @@
 %\usepackage{pgfplots}
 %\usepackage[algcompatible]{algpseudocode}
 \usepackage{shuffle}
-\usepackage{svg}
+% \usepackage{svg}   % needs --shell-escape + inkscape and is rejected by arXiv; pre-convert SVGs to PDF instead
 \usepackage{pifont}
 %\usepackage{geometry}
 \usepackage{subcaption}
@@ -71,7 +73,7 @@
 %	\hspace{-2.5pt}}
 %\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
 
-% \newcommand{\R}{\mathbb R}
+\newcommand{\R}{\mathbb R}
 \newcommand{\N}{\mathbb N}
 \newcommand{\calN}{\mathcal{N}}
 \newcommand{\D}{\mathbb D}
@@ -83,7 +85,7 @@
 \newcommand{\I}{\mathcal I}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
-% \newcommand{\E}{\mathbb{E}}
+\newcommand{\E}{\mathbb{E}}
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\G}{\mathcal{G}}
 \newcommand{\M}{\mathcal{M}}
@@ -93,8 +95,8 @@
 \newcommand{\sigE}{\mathcal{E}}
 \newcommand{\Ball}[2]{B_#1(#2)} % \Ball \eps center
 \renewcommand{\L}{\mathcal{L}}
-% \newcommand{\eps}{\varepsilon}
-% \newcommand{\1}{\mathds{1}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\1}{\mathds{1}}
 \newcommand{\To}{\longrightarrow}
 \newcommand{\eqover}[1]{\stackrel{#1}{=}}
 \newcommand{\darover}[1]{\xrightarrow{#1}}
@@ -107,15 +109,15 @@
 \newcommand{\cov}{\operatorname{cov}}
 \newcommand{\corr}{\operatorname{corr}}
 \newcommand{\att}{\operatorname{attention}}
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\newcommand{\abs}[1]{\left| #1 \right|}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}   % \norm{x}, \norm*{x} (full size), \norm[\big]{x}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \newcommand{\mat}[4]{\begin{pmatrix}	#1 & #2 \\ #3 & #4 \end{pmatrix}}
-% \newcommand{\softmax}{\operatorname{softmax}}
-% \newcommand{\argmax}{\operatorname{argmax}}
+\DeclareMathOperator{\softmax}{softmax}
+\DeclareMathOperator*{\argmax}{arg\,max}   % * = subscript sits underneath in display
 \newcommand{\suff}{\operatorname{suff}}
 \newcommand{\comp}{\operatorname{comp}}
 \newcommand{\In}{\operatorname{In}}
-% \newcommand{\Var}{\operatorname{Var}}
+\DeclareMathOperator{\Var}{Var}
 \newcommand{\tensor}{\otimes}
 \newcommand{\bigtensor}{\bigotimes}
 \newcommand{\bx}{\mathbf{x}}
@@ -166,3 +168,7 @@
 	coltitle=white,
 	colbacktitle=blue!50!black
 }
+
+% --- Links & smart references: load LAST (delete if your class already loads hyperref) ---
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalize,noabbrev]{cleveref}   % \cref{...}, \Cref{...} — must come after hyperref
