@@ -1,0 +1,4 @@
+# Install artifacts written by the `skills` CLI — never committed.
+.agents/
+.claude/
+node_modules/
