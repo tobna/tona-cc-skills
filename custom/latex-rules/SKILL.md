@@ -124,8 +124,10 @@ thin-space grouping and minus signs everywhere.
 
 ## Removing AI-isms
 
-LaTeX and prose that "smell" AI-generated get noticed and discounted by reviewers. Strip
-the tells.
+LaTeX and prose that "smell" AI-generated get noticed and discounted by reviewers. None of
+the tells below is outright banned — each is fine used **very sparingly**, roughly once per
+one or two pages. It's the *frequency and clustering* that reads as AI, not any single
+instance. So the bullets below mean "keep rare," not "never."
 
 **Vocabulary tells** — cut the AI buzzwords: *leverage, utilize, delve, showcase, seamless,
 comprehensive, pivotal, underscore, realm, testament, tapestry, meticulous*, and *robust* as
