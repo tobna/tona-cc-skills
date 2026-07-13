@@ -67,8 +67,9 @@ cleveref. A `\label` for a float goes *after* its `\caption`, or the number is w
 
 ## Math
 
+- **Display math**: `align*` (unnumbered) or `align`/`equation` (numbered) — never `\[ … \]`, `$$ … $$`, or `eqnarray`. **Inline math**: `$ … $`, not `\( … \)`.
 - `\DeclareMathOperator{\argmax}{arg\,max}` for named operators — never `\text{argmax}` or bare `argmax` (wrong spacing/font).
-- Multi-line: `align`/`aligned` from amsmath. **Never `eqnarray`** (broken spacing).
+- Multi-line alignment with `align`; align within a single equation using `aligned`.
 - Delimiters: `\left( … \right)` auto-sizes but can oversize — prefer manual `\bigl( \bigr)` / `\Bigl` when you know the height.
 - Words inside math: `\text{...}` (needs amsmath), not `\mbox` or roman hacks.
 - Reuse notation consistently; define macros for recurring symbols (see below).
@@ -126,17 +127,6 @@ thin-space grouping and minus signs everywhere.
 LaTeX and prose that "smell" AI-generated get noticed and discounted by reviewers. Strip
 the tells.
 
-**Display math — never `\[ … \]` or `$$ … $$`.** Use `align*` for unnumbered display math,
-and `align` / `equation` when it needs a number (never `eqnarray`). `$$` is plain-TeX with
-broken spacing; `\[ … \]` is a giveaway default. **Inline math uses `$ … $`**, not `\( … \)`.
-
-```latex
-% no:  \[ \mathcal{L} = \tfrac1n \sum_i \ell(f(\bx_i), y_i) \]
-\begin{align*}
-  \mathcal{L} = \tfrac{1}{n} \sum_i \ell(f(\bx_i), y_i)
-\end{align*}
-```
-
 **Vocabulary tells** — cut the AI buzzwords: *leverage, utilize, delve, showcase, seamless,
 comprehensive, pivotal, underscore, realm, testament, tapestry, meticulous*, and *robust* as
 filler. Cut sentence-opening transition spam: *Furthermore, Moreover, Additionally, Notably,
@@ -171,4 +161,5 @@ for the narrative-level version.)
 - [ ] Tables use booktabs (no vrules/`\hline`); numbers aligned via `S` columns.
 - [ ] Numbers/units via siunitx, or a thin space `\,` between every number and its unit; figures are vector; captions self-contained.
 - [ ] One sentence per line; no `\\` paragraph breaks; no obsolete packages.
-- [ ] Display math via `align*`/`equation`, never `\[\]` or `$$`; inline via `$…$`. No AI buzzword/transition spam.
+- [ ] Display math via `align*`/`equation`, never `\[\]`/`$$`/`eqnarray`; inline via `$…$`.
+- [ ] No AI buzzword/transition spam; emphasis via `\emph`, not stray `\textbf`.
