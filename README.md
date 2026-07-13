@@ -1,44 +1,44 @@
-# cc-skills
+# tona-cc-skills
 
 The Claude Code / agent skills I actually use, in one place — third-party skills I
 rely on plus my own custom ones. Clone it on a new machine, run one script, done.
 
 ## Layout
 
-| Path | What |
-|------|------|
+| Path               | What                                                                                                                            |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
 | `skills-lock.json` | Manifest of the third-party skills I use (name → upstream repo). No files vendored — the `skills` CLI fetches them from source. |
-| `custom/` | Skills I authored. Real files, version-controlled here, symlinked live into `~/.claude/skills`. |
-| `plugins.sh` | Adds the marketplaces and installs the Claude Code plugins I use (`ponytail`, `frontend-design`, `tufte-vdqi`, …). |
-| `install.sh` | Installs everything (or a subset) into `~/.claude` — skills + plugins. |
+| `custom/`          | Skills I authored. Real files, version-controlled here, symlinked live into `~/.claude/skills`.                                 |
+| `plugins.sh`       | Adds the marketplaces and installs the Claude Code plugins I use (`ponytail`, `frontend-design`, `tufte-vdqi`, …).              |
+| `install.sh`       | Installs everything (or a subset) into `~/.claude` — skills + plugins.                                                          |
 
 ## What's in here
 
 ### Skills (`skills-lock.json`)
 
-| Skill | What it does / how to use |
-|-------|---------------------------|
-| `marimo-notebook` | Writes marimo notebooks in the correct reactive-cell Python format. Loads automatically whenever you author or edit a `.py` marimo notebook. |
-| `anywidget-generator` | Generates custom [anywidget](https://anywidget.dev) interactive components for marimo. Ask for a widget and it scaffolds the JS + Python. |
-| `jupyter-to-marimo` | Converts a Jupyter `.ipynb` into a marimo `.py` notebook. Run it on an existing notebook to migrate. |
-| `find-skills` | Searches the open agent-skills ecosystem for a skill that already does what you need. Triggers on "is there a skill for X" / "how do I do X". |
+| Skill                 | What it does / how to use                                                                                                                     |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `marimo-notebook`     | Writes marimo notebooks in the correct reactive-cell Python format. Loads automatically whenever you author or edit a `.py` marimo notebook.  |
+| `anywidget-generator` | Generates custom [anywidget](https://anywidget.dev) interactive components for marimo. Ask for a widget and it scaffolds the JS + Python.     |
+| `jupyter-to-marimo`   | Converts a Jupyter `.ipynb` into a marimo `.py` notebook. Run it on an existing notebook to migrate.                                          |
+| `find-skills`         | Searches the open agent-skills ecosystem for a skill that already does what you need. Triggers on "is there a skill for X" / "how do I do X". |
 
 ### Custom skills (`custom/`)
 
-| Skill | What it does / how to use |
-|-------|---------------------------|
+| Skill           | What it does / how to use                                                                                                                                                                                              |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `paper-writing` | Opinionated academic-paper guidance — narrative framing, abstract/intro structure, sentence-level clarity, figures, reviewer-punished mistakes. Loads when drafting or revising a paper, abstract, intro, or rebuttal. |
-| `latex-rules` | Opinionated LaTeX conventions — required packages, typography, math macros, booktabs/siunitx tables, cleveref refs, obsolete packages to avoid. Loads when writing or editing `.tex` files. |
+| `latex-rules`   | Opinionated LaTeX conventions — required packages, typography, math macros, booktabs/siunitx tables, cleveref refs, obsolete packages to avoid. Loads when writing or editing `.tex` files.                            |
 
 ### Plugins (`plugins.sh`)
 
-| Plugin | What it does / how to use |
-|--------|---------------------------|
-| `ponytail` | Forces the laziest solution that works — stdlib/native over dependencies, questions whether code needs to exist at all. Active on coding tasks; toggle with `/ponytail lite\|full\|ultra` or "stop ponytail". |
-| `frontend-design` | Pushes Claude past generic "AI slop" UI toward distinctive, production-grade frontends. Loads automatically when building web components or pages. |
-| `tufte-vdqi` | Edward Tufte's data-viz principles as three skills (route, assess, render) — scores charts against Tufte's criteria and renders high-data-ink graphics. Use when making or critiquing plots. |
-| `andrej-karpathy-skills` | Karpathy's guidelines to cut common LLM coding mistakes: surgical diffs, surfaced assumptions, verifiable success criteria. Applies when writing, reviewing, or refactoring code. |
-| `pyright-lsp` | Runs the Pyright language server for Python — type errors, diagnostics, go-to-definition. Works automatically on Python files, no invocation needed. |
+| Plugin                   | What it does / how to use                                                                                                                                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ponytail`               | Forces the laziest solution that works — stdlib/native over dependencies, questions whether code needs to exist at all. Active on coding tasks; toggle with `/ponytail lite\|full\|ultra` or "stop ponytail". |
+| `frontend-design`        | Pushes Claude past generic "AI slop" UI toward distinctive, production-grade frontends. Loads automatically when building web components or pages.                                                            |
+| `tufte-vdqi`             | Edward Tufte's data-viz principles as three skills (route, assess, render) — scores charts against Tufte's criteria and renders high-data-ink graphics. Use when making or critiquing plots.                  |
+| `andrej-karpathy-skills` | Karpathy's guidelines to cut common LLM coding mistakes: surgical diffs, surfaced assumptions, verifiable success criteria. Applies when writing, reviewing, or refactoring code.                             |
+| `pyright-lsp`            | Runs the Pyright language server for Python — type errors, diagnostics, go-to-definition. Works automatically on Python files, no invocation needed.                                                          |
 
 ## Install
 
@@ -79,5 +79,5 @@ then re-run `./install.sh`.
 
 `frontend-design`, `ponytail`, the karpathy skills, and `tufte-vdqi` are Claude Code
 **plugins**, installed by `plugins.sh` — not skills in `skills-lock.json`. Installing
-`frontend-design` as a skill *and* a plugin would double-register it, so it lives only
+`frontend-design` as a skill _and_ a plugin would double-register it, so it lives only
 in the plugin list.
