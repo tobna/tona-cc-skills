@@ -33,6 +33,12 @@ colors, the `takeaway` box). Copy it into the project and `\input{packages}` (no
 main document. Reusable notation goes in `packages.tex`; **one-off names used only in
 this paper (method name, dataset shorthand) are defined in the main `.tex`, not here.**
 
+**Keep `packages.tex` current:** when you improve the preamble while working on a paper —
+a new reusable macro, a better package, a bug fix — and the change would help future
+papers too, mirror it back into *this skill's* `packages.tex` (the single source of
+truth) and commit, so the next paper starts from the improved version. Leave genuinely
+paper-specific bits out of it.
+
 ## Cross-references — cleveref, always
 
 Never hand-type "Figure~\ref{...}". Use `\cref` / `\Cref` so the word and number stay
@@ -55,6 +61,7 @@ cleveref. A `\label` for a float goes *after* its `\caption`, or the number is w
 - **Ellipsis**: `\dots`, never `...`.
 - **Non-breaking space `~`** before every reference and citation and inside number+unit when not using siunitx: `Figure~\ref{...}`, `\citep{...}` (prefer `~\cite`), `Section~\ref`, `5~kg`. Prevents a number stranded at a line start.
 - **Emphasis**: `\emph{...}` (nests correctly), never `\textit` for emphasis and never the deprecated `{\it ...}` / `{\bf ...}`.
+- **Run-in headings, not `\paragraph`**: to save vertical space, open the paragraph with a bold lead-in `\textbf{Heading.}` (text, then a period) rather than `\paragraph{Heading}`. `packages.tex` provides `\parahead{Heading}` for this.
 - **Spacing after abbreviations**: `e.g.\ ` and `i.e.\ ` (backslash-space) so the period isn't treated as sentence-end; or use a macro.
 - **Always a thin space `\,` between a number and its unit**: `5\,\mathrm{ms}`, `10\,\mathrm{kg}`, `3.3\,\mathrm{GHz}` — never `5ms` or `5 ms` (a full space is too wide and can break across lines). `siunitx`'s `\qty{5}{\milli\second}` does this for you; use `\,` when writing units by hand.
 

@@ -7,26 +7,19 @@
 \usepackage[T1]{fontenc}   % proper 8-bit fonts + real hyphenation
 \usepackage{lmodern}       % scalable Latin Modern (fixes bitmap CM warnings)
 \usepackage{amssymb}
-\usepackage{amsfonts}
 \usepackage{amsmath}
 %\usepackage{tabu}
-\usepackage{amsxtra}
-\usepackage{cancel}
 \usepackage{dsfont}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usepackage{tikz-qtree}
 \usetikzlibrary{shapes}
 \usetikzlibrary{positioning}
 \usetikzlibrary{trees}
 \usepackage[most]{tcolorbox}
 %\usetikzlibrary{graphs,graphdrawing}
 %\usegdlibrary{trees}
-\usepackage{mathcomp}
 \usepackage{mathtools}
 \usepackage{multirow}
-\usepackage{verbatim}
-\usepackage{polynom}
 \usepackage{textcomp}
 %\usepackage[defaultlines=3,all]{nowidow}
 \usepackage{float}
@@ -40,12 +33,10 @@
 \usepackage{listings}
 \usepackage{url}
 \usepackage{enumitem}
-\usepackage{minibox}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 %\usepackage{pgfplots}
 %\usepackage[algcompatible]{algpseudocode}
-\usepackage{shuffle}
 % \usepackage{svg}   % needs --shell-escape + inkscape and is rejected by arXiv; pre-convert SVGs to PDF instead
 \usepackage{pifont}
 %\usepackage{geometry}
@@ -155,6 +146,7 @@
 
 \newcommand*\rot{\rotatebox{90}}
 \newcommand{\tldr}{\textbf{TL;DR:}\xspace}
+\newcommand{\parahead}[1]{\noindent\textbf{#1.}\enspace}  % run-in heading; use instead of \paragraph to save space
 
 
 \newtcolorbox{takeaway}[1][Takeaway]{
