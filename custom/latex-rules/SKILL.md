@@ -116,6 +116,11 @@ thin-space grouping and minus signs everywhere.
 
 - **One sentence per line** (semantic line breaks). Keeps git diffs and review comments
   sane; line breaks don't affect output. Never reflow a whole paragraph on a one-word edit.
+- **Auto-format for indentation, never for reflow.** Use `latexindent` (or `tex-fmt`) to keep
+  environment nesting and indentation consistent — but **keep line-wrapping off** so it never
+  reflows prose, which would wreck one-sentence-per-line and explode diffs. `latexindent`
+  leaves line breaks alone by default (don't enable `modifyLineBreaks`); for `tex-fmt` set
+  `wrap = false`. Run it on save or in a pre-commit hook so formatting stays out of content diffs.
 - **Blank line = paragraph break.** Never `\\` to end a paragraph (it makes a bad
   hanging line). `\\` is only for tabular/align/forced breaks.
 - **Define repeated notation as macros** — never type the same construct inline twice.
