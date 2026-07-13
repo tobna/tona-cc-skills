@@ -7,23 +7,11 @@
       "skillPath": "skills/anywidget/SKILL.md",
       "computedHash": "93a512dc9870809902459881640b041afe5fe460774e9b49a212d8d799922ab5"
     },
-    "auto-paper-demo": {
-      "source": "marimo-team/skills",
-      "sourceType": "github",
-      "skillPath": "skills/auto-paper-demo/SKILL.md",
-      "computedHash": "edba11eee233e8e7433a8d0b38798b1da0785eb8363028c1ab28f2c95f026ec8"
-    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
       "skillPath": "skills/find-skills/SKILL.md",
       "computedHash": "781bd6d3f9b19f8c9af6b53d8d0e4876d0183841b565db34ca7092ffa412d111"
-    },
-    "implement-paper": {
-      "source": "marimo-team/skills",
-      "sourceType": "github",
-      "skillPath": "skills/implement-paper/SKILL.md",
-      "computedHash": "c596221b1fac6a5821fb7c62695cde55a93934f9ccde2061853e07796f3c5a6a"
     },
     "jupyter-to-marimo": {
       "source": "marimo-team/skills",

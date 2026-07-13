@@ -19,8 +19,6 @@ rely on plus my own custom ones. Clone it on a new machine, run one script, done
 | Skill | What it does / how to use |
 |-------|---------------------------|
 | `marimo-notebook` | Writes marimo notebooks in the correct reactive-cell Python format. Loads automatically whenever you author or edit a `.py` marimo notebook. |
-| `implement-paper` | Turns a research paper into an interactive marimo notebook *with* you — fetches the paper, then builds it step by step. Say "implement this paper" with a link or arXiv id. |
-| `auto-paper-demo` | Same idea but hands-off: builds a full paper demo notebook end-to-end with no back-and-forth. Point it at a paper when you just want the finished demo. |
 | `anywidget-generator` | Generates custom [anywidget](https://anywidget.dev) interactive components for marimo. Ask for a widget and it scaffolds the JS + Python. |
 | `jupyter-to-marimo` | Converts a Jupyter `.ipynb` into a marimo `.py` notebook. Run it on an existing notebook to migrate. |
 | `find-skills` | Searches the open agent-skills ecosystem for a skill that already does what you need. Triggers on "is there a skill for X" / "how do I do X". |
@@ -53,7 +51,7 @@ symlinked from `custom/`. Restart Claude Code afterward.
 Anyone can grab a single skill straight from its upstream:
 
 ```bash
-npx skills add marimo-team/skills@implement-paper
+npx skills add marimo-team/skills@marimo-notebook
 npx skills add vercel-labs/skills@find-skills
 ```
 
