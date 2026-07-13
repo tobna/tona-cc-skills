@@ -139,6 +139,7 @@ for the narrative-level version.)
 - Don't turn prose that should be sentences into equal-sized bullet lists or a stack of identical `\paragraph`/`\parahead` blocks. Vary structure to the content.
 - Don't end every section/paragraph with a restating summary, and don't over-signpost ("As mentioned above", "As we will see").
 - Avoid the tidy tricolon ("fast, efficient, and scalable"), uniform paragraph lengths, and em-dash spam (at most one `---` per paragraph).
+- Don't use the colon `:` as a dramatic lead-in ("The takeaway is clear:", "One key insight:", "Our approach: …") — rewrite as a plain sentence. Colons are for lists and genuine appositives, not emphasis.
 
 ## Never use (obsolete — l2tabu)
 
