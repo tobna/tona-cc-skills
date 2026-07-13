@@ -126,6 +126,7 @@ thin-space grouping and minus signs everywhere.
   - **One-off project names** (method name, this paper's dataset shorthand): define in the **main `.tex`**, not `packages.tex` — they don't belong in the reusable preamble.
 - Don't fix spacing with `\vspace`/`\hspace` hacks or `~~~`; fix the cause.
 - Comment out, don't delete, when unsure — but strip dead commented blocks before submission.
+- **Keep the paper in git.** Track sources (`.tex`, `.bib`, figures, `packages.tex`); ignore the build cruft LaTeX regenerates (`.aux`, `.log`, `.out`, `.bbl`, `.synctex.gz`, `.fdb_latexmk`, …). Copy the bundled [`latex.gitignore`](latex.gitignore) into the project as `.gitignore`. Even a **local-only repo with no remote is far better than none** — one sentence per line plus git makes every change reviewable and revertible.
 
 ## Removing AI-isms
 

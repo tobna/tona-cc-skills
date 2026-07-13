@@ -1,0 +1,58 @@
+# LaTeX build artifacts — copy this to your paper repo as `.gitignore`.
+# Track sources (.tex, .bib, figures, packages.tex); ignore everything LaTeX regenerates.
+
+## Core (pdflatex/latexmk)
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.dvi
+*.xdv
+
+## Bibliography (biber/bibtex — regenerated on build)
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*-blx.bib
+
+## Index / glossary / nomenclature
+*.idx
+*.ind
+*.ilg
+*.glo
+*.gls
+*.glg
+*.acn
+*.acr
+*.alg
+*.nlo
+*.nls
+
+## Beamer
+*.nav
+*.snm
+*.vrb
+
+## Package caches / tool dirs
+*.auxlock
+_minted-*/
+svg-inkscape/
+*.figlist
+*.makefile
+
+## Editor / OS noise
+*.bak
+*.swp
+.DS_Store
+
+## Optional: uncomment to also ignore the built PDF (many track it — decide per project)
+# *.pdf
+#
+# arXiv note: submissions need the .bbl, so add it back (`git add -f main.bbl`) when packaging.
