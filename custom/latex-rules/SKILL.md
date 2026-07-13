@@ -121,6 +121,35 @@ thin-space grouping and minus signs everywhere.
 - Don't fix spacing with `\vspace`/`\hspace` hacks or `~~~`; fix the cause.
 - Comment out, don't delete, when unsure — but strip dead commented blocks before submission.
 
+## Removing AI-isms
+
+LaTeX and prose that "smell" AI-generated get noticed and discounted by reviewers. Strip
+the tells.
+
+**Display math — never `\[ … \]` or `$$ … $$`.** Use `align*` for unnumbered display math,
+and `align` / `equation` when it needs a number (never `eqnarray`). `$$` is plain-TeX with
+broken spacing; `\[ … \]` is a giveaway default. **Inline math uses `$ … $`**, not `\( … \)`.
+
+```latex
+% no:  \[ \mathcal{L} = \tfrac1n \sum_i \ell(f(\bx_i), y_i) \]
+\begin{align*}
+  \mathcal{L} = \tfrac{1}{n} \sum_i \ell(f(\bx_i), y_i)
+\end{align*}
+```
+
+**Vocabulary tells** — cut the AI buzzwords: *leverage, utilize, delve, showcase, seamless,
+comprehensive, pivotal, underscore, realm, testament, tapestry, meticulous*, and *robust* as
+filler. Cut sentence-opening transition spam: *Furthermore, Moreover, Additionally, Notably,
+Importantly, Overall, In conclusion, It is worth noting that.* (See the `paper-writing` skill
+for the narrative-level version.)
+
+**Formatting tells**
+
+- Don't `\textbf` random phrases for emphasis — use `\emph`, sparingly.
+- Don't turn prose that should be sentences into equal-sized bullet lists or a stack of identical `\paragraph`/`\parahead` blocks. Vary structure to the content.
+- Don't end every section/paragraph with a restating summary, and don't over-signpost ("As mentioned above", "As we will see").
+- Avoid the tidy tricolon ("fast, efficient, and scalable"), uniform paragraph lengths, and em-dash spam (at most one `---` per paragraph).
+
 ## Never use (obsolete — l2tabu)
 
 | Don't | Use instead |
@@ -132,7 +161,7 @@ thin-space grouping and minus signs everywhere.
 | `a4wide`, `fullpage` | `geometry` |
 | `times`, `pslatex` | `newtxtext`/`newtxmath` or `mathptmx` |
 | `\centerline` | `\centering` |
-| `$$ … $$` | `\[ … \]` or `equation` |
+| `$$ … $$`, `\[ … \]` | `align*` (unnumbered) / `equation` (numbered) |
 
 ## Quick review pass
 
@@ -142,3 +171,4 @@ thin-space grouping and minus signs everywhere.
 - [ ] Tables use booktabs (no vrules/`\hline`); numbers aligned via `S` columns.
 - [ ] Numbers/units via siunitx, or a thin space `\,` between every number and its unit; figures are vector; captions self-contained.
 - [ ] One sentence per line; no `\\` paragraph breaks; no obsolete packages.
+- [ ] Display math via `align*`/`equation`, never `\[\]` or `$$`; inline via `$…$`. No AI buzzword/transition spam.
