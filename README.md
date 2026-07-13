@@ -9,7 +9,8 @@ rely on plus my own custom ones. Clone it on a new machine, run one script, done
 |------|------|
 | `skills-lock.json` | Manifest of the third-party skills I use (name → upstream repo). No files vendored — the `skills` CLI fetches them from source. |
 | `custom/` | Skills I authored. Real files, version-controlled here, symlinked live into `~/.claude/skills`. |
-| `install.sh` | Installs everything (or a subset) into `~/.claude`. |
+| `plugins.sh` | Adds the marketplaces and installs the Claude Code plugins I use (`ponytail`, `frontend-design`, `tufte-vdqi`, …). |
+| `install.sh` | Installs everything (or a subset) into `~/.claude` — skills + plugins. |
 
 ## Install
 
@@ -20,6 +21,7 @@ Needs [`npx`](https://nodejs.org) and `jq`.
 ./install.sh find-skills implement-paper     # just these
 ```
 
+A full `./install.sh` also runs `./plugins.sh` (a subset install is skills-only).
 Third-party skills install globally (active in every project); custom skills are
 symlinked from `custom/`. Restart Claude Code afterward.
 
@@ -45,8 +47,9 @@ git add skills-lock.json && git commit  # commit the manifest change
 Custom skill: create `custom/<name>/SKILL.md` (e.g. `cd custom && npx skills init <name>`),
 then re-run `./install.sh`.
 
-## Not here
+## Skills vs plugins
 
-`frontend-design` is used as a Claude Code **plugin** (`frontend-design@claude-plugins-official`),
-not a skill — installing it here too would double-register it. Same for `ponytail` and the
-karpathy skills: those live in the plugin/marketplace config, not this repo.
+`frontend-design`, `ponytail`, the karpathy skills, and `tufte-vdqi` are Claude Code
+**plugins**, installed by `plugins.sh` — not skills in `skills-lock.json`. Installing
+`frontend-design` as a skill *and* a plugin would double-register it, so it lives only
+in the plugin list.

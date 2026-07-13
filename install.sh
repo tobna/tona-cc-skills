@@ -34,4 +34,7 @@ for d in custom/*/; do
   echo "linked custom/$name"
 done
 
-echo "Done. Restart Claude Code to pick up new skills."
+# 3. Plugins (full install only; subset installs are skills-only).
+if [ ${#want[@]} -eq 0 ] && [ -x ./plugins.sh ]; then ./plugins.sh; fi
+
+echo "Done. Restart Claude Code to pick up new skills/plugins."
