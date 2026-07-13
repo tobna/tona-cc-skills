@@ -23,6 +23,13 @@ rely on plus my own custom ones. Clone it on a new machine, run one script, done
 | `jupyter-to-marimo` | Converts a Jupyter `.ipynb` into a marimo `.py` notebook. Run it on an existing notebook to migrate. |
 | `find-skills` | Searches the open agent-skills ecosystem for a skill that already does what you need. Triggers on "is there a skill for X" / "how do I do X". |
 
+### Custom skills (`custom/`)
+
+| Skill | What it does / how to use |
+|-------|---------------------------|
+| `paper-writing` | Opinionated academic-paper guidance — narrative framing, abstract/intro structure, sentence-level clarity, figures, reviewer-punished mistakes. Loads when drafting or revising a paper, abstract, intro, or rebuttal. |
+| `latex-rules` | Opinionated LaTeX conventions — required packages, typography, math macros, booktabs/siunitx tables, cleveref refs, obsolete packages to avoid. Loads when writing or editing `.tex` files. |
+
 ### Plugins (`plugins.sh`)
 
 | Plugin | What it does / how to use |
