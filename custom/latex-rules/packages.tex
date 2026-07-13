@@ -1,0 +1,168 @@
+% \usepackage{color}
+
+% if you use cleveref..
+
+
+% my own set of packages
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+%\usepackage{tabu}
+\usepackage{amsxtra}
+\usepackage{cancel}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning}
+\usetikzlibrary{trees}
+\usepackage[most]{tcolorbox}
+%\usetikzlibrary{graphs,graphdrawing}
+%\usegdlibrary{trees}
+\usepackage{mathcomp}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{verbatim}
+\usepackage{polynom}
+\usepackage{textcomp}
+%\usepackage[defaultlines=3,all]{nowidow}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{pdflscape}
+\usepackage{csquotes}
+%\usepackage{setspace}
+\usepackage{afterpage}
+\usepackage{makecell}
+% \usepackage[all]{xy}
+\usepackage{listings}
+\usepackage{url}
+\usepackage{enumitem}
+\usepackage{minibox}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+%\usepackage{pgfplots}
+%\usepackage[algcompatible]{algpseudocode}
+\usepackage{shuffle}
+\usepackage{svg}
+\usepackage{pifont}
+%\usepackage{geometry}
+\usepackage{subcaption}
+% \usepackage{subfigure}
+% \usepackage{natbib}
+\usepackage{xspace}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{colortbl}
+\usepackage{footmisc}
+\usepackage[export]{adjustbox}
+
+% Mathshortcuts
+\DeclareMathSymbol{\mlq}{\mathord}{operators}{``}
+\DeclareMathSymbol{\mrq}{\mathord}{operators}{`'}
+
+% Setup checklists
+%\newlist{todolist}{itemize}{2}
+%\setlist[todolist]{label=$\square$}
+%\newcommand{\cmark}{\ding{51}}%
+%\newcommand{\xmark}{\ding{55}}%
+%\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+%	\hspace{-2.5pt}}
+%\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+
+% \newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\calN}{\mathcal{N}}
+\newcommand{\D}{\mathbb D}
+\newcommand{\calD}{\mathcal D}
+\newcommand{\C}{\mathbb C}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\A}{\mathcal A}
+\newcommand{\B}{\mathcal B}
+\newcommand{\I}{\mathcal I}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+% \newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\M}{\mathcal{M}}
+\renewcommand{\H}{\mathcal{H}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\sigB}{\mathbb B}
+\newcommand{\sigE}{\mathcal{E}}
+\newcommand{\Ball}[2]{B_#1(#2)} % \Ball \eps center
+\renewcommand{\L}{\mathcal{L}}
+% \newcommand{\eps}{\varepsilon}
+% \newcommand{\1}{\mathds{1}}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\eqover}[1]{\stackrel{#1}{=}}
+\newcommand{\darover}[1]{\xrightarrow{#1}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\del}{\partial}
+\newcommand{\indep}{\perp\!\!\!\perp}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\cov}{\operatorname{cov}}
+\newcommand{\corr}{\operatorname{corr}}
+\newcommand{\att}{\operatorname{attention}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\mat}[4]{\begin{pmatrix}	#1 & #2 \\ #3 & #4 \end{pmatrix}}
+% \newcommand{\softmax}{\operatorname{softmax}}
+% \newcommand{\argmax}{\operatorname{argmax}}
+\newcommand{\suff}{\operatorname{suff}}
+\newcommand{\comp}{\operatorname{comp}}
+\newcommand{\In}{\operatorname{In}}
+% \newcommand{\Var}{\operatorname{Var}}
+\newcommand{\tensor}{\otimes}
+\newcommand{\bigtensor}{\bigotimes}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bX}{\mathbf{X}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bW}{\mathbf{W}}
+\newcommand{\bt}{\mathbf{t}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\grad}{\nabla}
+\newcommand{\spanop}{\operatorname{span}}
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\Y}{\mathbb Y}
+\newcommand{\Hoel}{\text{Höl}}
+\newcommand{\Tau}{\mathcal{T}}
+\newcommand{\W}{\mathcal{W}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\emptyword}{\varnothing}
+\newcommand{\todo}[1]{\colorbox{red}{TODO: #1}}
+\newcommand{\taylorsm}{\operatorname{T-SM}}
+\newcommand{\ops}{\operatorname{ops}}
+\newcommand{\entr}{\operatorname{entries}}
+\newcommand{\opcap}{\operatorname{cap}}
+\definecolor{darkgreen}{HTML}{009B55}
+\newcommand{\gtxt}[1]{\text{\textcolor{gray}{#1}}}
+\newcommand{\grntxt}[1]{\text{\textcolor{darkgreen}{#1}}}
+\newcommand{\rdtxt}[1]{\text{\textcolor{red}{#1}}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\rowhighlight}{\rowcolor{gray!30}}
+\newcommand{\cellhighlight}{\cellcolor{yellow!40}}
+
+\newcommand*\rot{\rotatebox{90}}
+\newcommand{\tldr}{\textbf{TL;DR:}\xspace}
+
+
+\newtcolorbox{takeaway}[1][Takeaway]{
+	colback=blue!4!white,      % very light fill
+	colframe=blue!50!black,    % muted dark-blue frame
+	boxrule=0.6pt,
+	arc=2pt,
+	left=6pt,right=6pt,top=2pt,bottom=2pt,
+	title=#1,
+	fonttitle=\bfseries\small,
+	coltitle=white,
+	colbacktitle=blue!50!black
+}

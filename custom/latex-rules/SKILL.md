@@ -27,6 +27,12 @@ reasoning is short because these are settled practice (l2tabu; the `booktabs`,
 Load order that matters: `hyperref` near the end, `cleveref` **after** `hyperref`,
 `microtype` after font packages.
 
+**A ready-to-use [`packages.tex`](packages.tex) ships with this skill** — the maintained
+preamble plus the reusable macro set (number sets, operators, bold vectors/matrices,
+colors, the `takeaway` box). Copy it into the project and `\input{packages}` (no `.tex`) in the
+main document. Reusable notation goes in `packages.tex`; **one-off names used only in
+this paper (method name, dataset shorthand) are defined in the main `.tex`, not here.**
+
 ## Cross-references — cleveref, always
 
 Never hand-type "Figure~\ref{...}". Use `\cref` / `\Cref` so the word and number stay
@@ -99,9 +105,12 @@ thin-space grouping and minus signs everywhere.
   sane; line breaks don't affect output. Never reflow a whole paragraph on a one-word edit.
 - **Blank line = paragraph break.** Never `\\` to end a paragraph (it makes a bad
   hanging line). `\\` is only for tabular/align/forced breaks.
-- **Macros for repeated notation/terms**: `\newcommand{\model}{\textsc{OurMethod}}`,
-  `\newcommand{\R}{\mathbb{R}}`. Rename once, everywhere updates. Use `\newcommand`,
-  never `\def` (no clash protection).
+- **Define repeated notation as macros** — never type the same construct inline twice.
+  Reusable ones live in `packages.tex`; use `\newcommand`, never `\def` (no clash protection):
+  - **Bold vectors/matrices**: `\newcommand{\bx}{\mathbf{x}}`, `\newcommand{\bW}{\mathbf{W}}` — write `\bx`, not `\mathbf{x}`, every time.
+  - **Number sets**: `\newcommand{\R}{\mathbb{R}}`, `\newcommand{\E}{\mathbb{E}}`.
+  - **Named operators**: `\DeclareMathOperator{\softmax}{softmax}`, or the `\newcommand{\cov}{\operatorname{cov}}` form used throughout `packages.tex` — never bare `softmax` (wrong font/spacing).
+  - **One-off project names** (method name, this paper's dataset shorthand): define in the **main `.tex`**, not `packages.tex` — they don't belong in the reusable preamble.
 - Don't fix spacing with `\vspace`/`\hspace` hacks or `~~~`; fix the cause.
 - Comment out, don't delete, when unsure — but strip dead commented blocks before submission.
 
