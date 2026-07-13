@@ -50,7 +50,7 @@ cleveref. A `\label` for a float goes *after* its `\caption`, or the number is w
 - **Non-breaking space `~`** before every reference and citation and inside number+unit when not using siunitx: `Figure~\ref{...}`, `\citep{...}` (prefer `~\cite`), `Section~\ref`, `5~kg`. Prevents a number stranded at a line start.
 - **Emphasis**: `\emph{...}` (nests correctly), never `\textit` for emphasis and never the deprecated `{\it ...}` / `{\bf ...}`.
 - **Spacing after abbreviations**: `e.g.\ ` and `i.e.\ ` (backslash-space) so the period isn't treated as sentence-end; or use a macro.
-- Non-breaking thin space in math/units: `\,` (e.g. `5\,\mathrm{ms}` if not using siunitx).
+- **Always a thin space `\,` between a number and its unit**: `5\,\mathrm{ms}`, `10\,\mathrm{kg}`, `3.3\,\mathrm{GHz}` — never `5ms` or `5 ms` (a full space is too wide and can break across lines). `siunitx`'s `\qty{5}{\milli\second}` does this for you; use `\,` when writing units by hand.
 
 ## Math
 
@@ -124,5 +124,5 @@ thin-space grouping and minus signs everywhere.
 - [ ] All refs via `\cref`/`\Cref`; every float `\label` after its `\caption`.
 - [ ] `--` for ranges, `---` for em-dash, `` `` ''`` quotes, `\dots`, `~` before cites/refs.
 - [ ] Tables use booktabs (no vrules/`\hline`); numbers aligned via `S` columns.
-- [ ] Numbers/units via siunitx; figures are vector; captions self-contained.
+- [ ] Numbers/units via siunitx, or a thin space `\,` between every number and its unit; figures are vector; captions self-contained.
 - [ ] One sentence per line; no `\\` paragraph breaks; no obsolete packages.
