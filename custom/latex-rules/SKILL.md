@@ -13,7 +13,7 @@ reasoning is short because these are settled practice (l2tabu; the `booktabs`,
 
 ```latex
 \usepackage[T1]{fontenc}       % proper 8-bit fonts, real hyphenation
-\usepackage[utf8]{inputenc}    % (skip under LuaLaTeX/XeLaTeX — already UTF-8)
+% \usepackage[utf8]{inputenc}  % only needed on pre-2018 TeX — modern pdfLaTeX is UTF-8 by default
 \usepackage[protrusion=true,expansion=true]{microtype}  % char protrusion + font expansion; load LAST-ish, after fonts
 \usepackage{amsmath, amssymb, mathtools}  % never eqnarray; mathtools loads+extends amsmath
 \usepackage{booktabs}          % professional tables
@@ -142,6 +142,20 @@ in the full machinery.
 - `\includegraphics[width=\linewidth]{...}` — scale by `\linewidth`/`\columnwidth`, never hardcode `cm`.
 - Placement `[t]` or `[tb]`; avoid `[h]`/`[H]` fights with the float algorithm.
 - Self-contained captions (see the `paper-writing` skill).
+
+## Code & pseudocode
+
+- **Source code — default to `listings`.** It's pure TeX (no external tools), so it compiles
+  anywhere including **arXiv**; highlighting is plainer. `minted` (Python Pygments) highlights
+  far better but needs `--shell-escape`, which arXiv rejects and build systems flag — same
+  hazard as the `svg` package. Use `minted` only for local / camera-ready builds where
+  shell-escape is fine. Set a shared style once with `\lstset{...}`, not per-listing; wrap code
+  in `lstlisting` (or inline `\lstinline`), and keep code as PDF-native text, never a screenshot.
+- **Pseudocode — `algorithm` (the float) + a body package.** `algorithm` only provides the
+  floating, captionable, `\Cref`-able wrapper; pair it with `algpseudocode` (from `algorithmicx`)
+  or `algorithm2e` for the actual lines. `algpseudocode` is the modern default — prefer it over
+  the older `algorithmic`. Caption + `\label` go *above* the body (like tables); reference with
+  `\Cref{alg:...}`.
 
 ## Source hygiene
 
