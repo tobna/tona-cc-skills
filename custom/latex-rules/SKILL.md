@@ -47,14 +47,20 @@ paper-specific bits out of it.
 
 ## Cross-references — cleveref, always
 
-Never hand-type "Figure~\ref{...}". Use `\cref` / `\Cref` so the word and number stay
-linked and consistent:
+Never hand-type "Figure~\ref{...}". Use cleveref so the word and number stay linked and
+consistent — and **prefer `\Cref` (capitalized) everywhere**, even mid-sentence, over `\cref`.
+Consistent "Figure 3" / "Equation (5)" reads cleaner than the lowercase "fig." form and stays
+correct regardless of the `capitalize` option. Shipped preamble uses `[capitalize,noabbrev]`:
 
 ```latex
-\cref{fig:arch}        % → "fig. 3"      (mid-sentence)
-\Cref{sec:method}      % → "Section 2"   (sentence start)
-\cref{eq:loss,eq:reg}  % → "eqs. (4) and (5)"
+\Cref{fig:arch}        % → "Figure 3"
+\Cref{sec:method}      % → "Section 2"
+\Cref{eq:loss,eq:reg}  % → "Equations (4) and (5)"
 ```
+
+Drop to lowercase `\cref` when a venue wants lowercase names mid-sentence, or **to save space
+on a tight page limit** — combine it with dropping `noabbrev` (→ "Fig. 3", "Sec. 2", "Eq. (5)")
+for the most compact form. Whichever you pick, stay consistent across the paper.
 
 Label with a type prefix, always right after `\caption`/`\section`/`\label`-target:
 `fig:`, `tab:`, `eq:`, `sec:`, `alg:`, `thm:`, `app:`. Use `\eqref` only if not using
@@ -65,7 +71,7 @@ cleveref. A `\label` for a float goes *after* its `\caption`, or the number is w
 - **Dashes**: `-` hyphen (intra-word), `--` en-dash (ranges: `pages 5--10`), `---` em-dash (—no spaces around it).
 - **Quotes**: `` `single' `` and ` ``double'' ` — never the straight `"`.
 - **Ellipsis**: `\dots`, never `...`.
-- **Non-breaking space `~`** before every reference and citation and inside number+unit when not using siunitx: `Figure~\ref{...}`, `\citep{...}` (prefer `~\cite`), `Section~\ref`, `5~kg`. Prevents a number stranded at a line start.
+- **Non-breaking space `~`** before every citation and inside a hand-written number+unit when not using siunitx: `~\cite{...}`, `5~kg`. Prevents a number stranded at a line start. Cross-references need **no** manual `~` — always `\Cref{fig:...}`, never `Figure~\ref{...}`; cleveref supplies the word *and* the tie for you.
 - **Citation placement — scope sets the position**:
   - a specific **term** → immediately after that term, bound with `~`: `the transformer~\cite{vaswani2017} scales well.`
   - an **assertion / clause** → right after it, wherever that clause ends in the sentence.
@@ -80,11 +86,22 @@ cleveref. A `\label` for a float goes *after* its `\caption`, or the number is w
 
 - **Display math**: `align*` (unnumbered) or `align`/`equation` (numbered) — never `\[ … \]`, `$$ … $$`, or `eqnarray`. **Inline math**: `$ … $`, not `\( … \)`.
 - `\DeclareMathOperator{\argmax}{arg\,max}` for named operators — never `\text{argmax}` or bare `argmax` (wrong spacing/font).
-- Multi-line alignment with `align`; align within a single equation using `aligned`.
-- Delimiters: `\left( … \right)` auto-sizes but can oversize — prefer manual `\bigl( \bigr)` / `\Bigl` when you know the height.
+- Multi-line alignment with `align` gives one number *per line*. For a **single equation broken across rows that should carry only one number**, use `split` (aligned on `&`) inside `equation` or `align` — the number sits centered on the whole block:
+
+```latex
+\begin{equation}
+  \begin{split}
+    \mathcal{L} &= \mathbb{E}[\ell(x, y)] \\
+                &\quad + \lambda \lVert \theta \rVert^2 .
+  \end{split}
+\end{equation}
+```
+
+  Use `aligned` instead when the aligned block is a sub-part of a larger expression (it carries no number of its own).
+- Delimiters: `\left( … \right)` auto-sizing is allowed and a fine default. Switch to manual `\bigl( \bigr)` / `\Bigl` only when auto oversizes (e.g. it hugs a subscript or fraction too loosely) and you know the height you want.
 - Words inside math: `\text{...}` (needs amsmath), not `\mbox` or roman hacks.
 - Reuse notation consistently; define macros for recurring symbols (see below).
-- Reference equations with `\cref{eq:...}` / `\eqref`, never a raw "(3)".
+- Reference equations with `\Cref{eq:...}` (→ "Equation (3)"), never a raw "(3)". Lowercase `\cref{eq:...}` (→ "eq. (3)") is the compact fallback to save space — same consistency rule as the other cross-refs. `\eqref{eq:...}` (→ bare "(3)") only when the sentence already names the equation — and it needs a manual tie, `loss~\eqref{eq:...}`, since (unlike `\cref`/`\Cref`) it supplies no word of its own.
 - **Picky niceties** (nice to have, not blocking): `\coloneqq` for a definition `:=` and `\eqqcolon` for `=:` (both from `mathtools`) — the spacing around a bare `:=` is wrong; `\colon` not a bare `:` in a map `f\colon A \to B` (bare `:` is a relation, too much space); `\dots` not `...` (already required above).
 
 ## Tables — booktabs
@@ -109,6 +126,12 @@ Header cells over `S` columns need `{braces}` to stay text. Never eyeball-align 
 `\num{1.2e-3}`, `\qty{5}{\milli\second}`, `\SI`-style ranges `\qtyrange{5}{10}{\kg}`,
 percentages `\qty{92.4}{\percent}`. One source of truth for formatting; consistent
 thin-space grouping and minus signs everywhere.
+
+By-hand units with a thin space — `5\,\mathrm{ms}`, `10\,\mathrm{kg}` — are also fine, but
+**pick one approach and keep it consistent across the whole paper**: don't mix `\qty{5}{\ms}`
+in one place with `5\,\mathrm{ms}` in another. siunitx is the safer default (uniform spacing,
+minus signs, and ranges for free); hand-written `\,` is acceptable when you'd rather not pull
+in the full machinery.
 
 ## Figures
 
@@ -173,11 +196,13 @@ Because this uses its own boolean (not `\documentclass[draft]`), figures still r
 `microtype` stays on. (If you ever *do* pass the class-level `draft` option, note it turns
 `microtype` off — pass `final` to microtype to keep it.)
 
-## Linting (opt-in — do not install unless asked)
+## Linting
 
-A linting stack catches mechanical issues before a co-author or reviewer does. **Don't install
-or run any of these unprompted** — only reach for them when the user asks to lint, or asks to
-set up tooling. They add setup and noise otherwise.
+A linting stack catches mechanical issues before a co-author or reviewer does. **Don't
+*install* any of these unprompted** — but if one is **already installed** (check first, e.g.
+`command -v chktex`), running it is fine, and you may **recommend** adopting one when the
+document would clearly benefit (recurring dash/ref/spacing slips, a co-authored draft, prose
+that reads AI-shaped).
 
 - **`chktex`** — LaTeX-specific warnings: missing `~` before refs, wrong dash lengths, `\ldots`
   vs `\dots`, spacing slips. The closest fit to these rules; run it first.
@@ -227,7 +252,7 @@ synonym churn, template future-work sections — live in the `paper-writing` ski
 ## Quick review pass
 
 - [ ] `microtype` on; `hyperref`+`cleveref` loaded in that order.
-- [ ] All refs via `\cref`/`\Cref`; every float `\label` after its `\caption`.
+- [ ] All refs via `\Cref` (preferred) / `\cref`; every float `\label` after its `\caption`.
 - [ ] `--` for ranges, `---` for em-dash, `` `` ''`` quotes, `\dots`, `~` before cites/refs.
 - [ ] Tables use booktabs (no vrules/`\hline`); numbers aligned via `S` columns.
 - [ ] Numbers/units via siunitx, or a thin space `\,` between every number and its unit; figures are vector; captions self-contained.
