@@ -75,6 +75,23 @@ git add skills-lock.json && git commit  # commit the manifest change
 Custom skill: create `custom/<name>/SKILL.md` (e.g. `cd custom && npx skills init <name>`),
 then re-run `./install.sh`.
 
+### By prompt, no clone
+
+Don't want to clone the repo or run `install.sh`? Paste this straight into Claude Code — it
+fetches the skill's files from GitHub and drops them into `~/.claude/skills/`. Swap
+`latex-rules` for any skill under `custom/` (e.g. `paper-writing`):
+
+```text
+Install the `latex-rules` skill from the GitHub repo tobna/tona-cc-skills, without
+cloning it. List the files under custom/latex-rules/ via the GitHub API
+https://api.github.com/repos/tobna/tona-cc-skills/contents/custom/latex-rules?ref=main
+then download every file (SKILL.md plus any bundled assets) with its raw URL
+into ~/.claude/skills/latex-rules/, keeping the same filenames. Then confirm by listing the skill.
+```
+
+To **update** later, run the same prompt again — it re-downloads the latest files. (This
+copies files rather than symlinking, so updates are a re-run, not automatic.)
+
 ## Skills vs plugins
 
 `frontend-design`, `ponytail`, the karpathy skills, and `tufte-vdqi` are Claude Code
