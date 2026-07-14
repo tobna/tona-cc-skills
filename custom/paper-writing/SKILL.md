@@ -1,6 +1,6 @@
 ---
 name: paper-writing
-description: Opinionated guidance for writing and revising academic/research papers — narrative framing, abstract and introduction structure, sentence-level clarity, figure design, and the mistakes reviewers punish. Use when drafting, revising, or reviewing a paper, abstract, introduction, related work, or rebuttal, or when prose feels generic, templated, or AI-shaped.
+description: Opinionated guidance for writing and revising academic/research papers — narrative framing, abstract and introduction structure, sentence-level clarity, figure design, citation integrity, and the mistakes reviewers punish. Use when drafting, revising, or reviewing a paper, abstract, introduction, related work, or rebuttal; when checking that citations/references are real and correctly used; or when prose feels generic, templated, or AI-shaped.
 ---
 
 # Paper writing
@@ -148,6 +148,30 @@ frequency and clustering that reads as AI, not any one instance.** The fix is al
 The LaTeX/formatting counterparts — stray `\textbf`, equal-sized bullet stacks, em-dash spam,
 colon lead-ins, "not X but Y," and the buzzword list — live in the `latex-rules` skill.
 
+## Citations must be real
+
+LLM-assisted writing has made **fabricated citations** a common, reviewer-punished failure —
+common enough that some venues now treat them as research misconduct. A citation can fail three
+ways; verify every load-bearing one:
+
+- **Existence** — the work is real. Models invent plausible-looking references: non-existent
+  papers, phantom DOIs, fabricated arXiv IDs, invented author lists. Verify each against a
+  **canonical index** — DBLP, arXiv, ACL Anthology, OpenReview, or a resolving DOI (CrossRef) —
+  not the model's memory, and not a Google/Semantic Scholar snippet alone (those secondary
+  sources are themselves contaminated).
+- **Metadata** — right authors, year, title, venue. Watch arXiv-year vs. proceedings-year, title
+  drift between versions, preprint mistaken for the official venue, and scrambled co-author order.
+- **Context (the subtle, dangerous one)** — the cited paper actually supports the claim you
+  attach to it. A *real* paper cited for something it doesn't show — or contradicts — is worse
+  than a fake one: it survives an existence and metadata check and only a reader who knows the
+  work catches it. For any claim a citation is carrying, read the source, not just its abstract.
+
+Only the entries you actually `\cite` matter — a shared master `.bib` across projects will have
+plenty of uncited entries, and that's fine. Check that every `\cite` resolves to a real key and
+that the cited entry passes the three layers above. Run this as a dedicated pass **after the
+bibliography is frozen**, right before submission — not on a moving draft. `\cite` *placement*
+mechanics live in `latex-rules`.
+
 ## Mathematical writing
 
 Goal: let the reader **follow**, not sound sophisticated. State assumptions *before* the
@@ -184,7 +208,7 @@ strongest comparison, or give the simplest visual summary of the main claim. Rul
 | Related Work as paper-by-paper list | Reorganize by method family / research question |
 | Results read as a data dump | Each paragraph: question → evidence → answer |
 | Discussion restates the results | Interpret and draw implications instead |
-| AI-generated / unverified citations | Verify every reference against a real source |
+| AI-generated / unverified citations | Verify existence, metadata, and that each source supports its claim (see Citations) |
 | Inconsistent terminology | One name per concept |
 
 ## Pre-submission checklist
@@ -196,7 +220,7 @@ strongest comparison, or give the simplest visual summary of the main claim. Rul
 - [ ] Limitations stated. Terminology consistent. No generic openings. Hedging trimmed.
 - [ ] No AI-shaped prose: plain "is/has", no significance-tails, no false authority, no template future-work.
 - [ ] Figures use vector graphics and self-contained captions.
-- [ ] Citations verified; error bars / statistics reported; compute and code/data availability stated.
+- [ ] Every cited reference verified — exists (canonical index), correct metadata, supports its claim. Error bars / statistics reported; compute and code/data availability stated.
 - [ ] Every number in prose/tables matches its source; no quantity stated two ways; restated theorems match the main statement.
 - [ ] Results read as question → evidence → answer, headline first; discussion interprets rather than restates.
 
@@ -206,6 +230,8 @@ Reviews are in; space is **extremely** tight (often ~1 page) and responses move 
 
 - **Tag each point with its reviewer** — begin every item with a bold, colored **R1** / **R2** / **R3** so each reviewer instantly finds where their concerns are addressed. Answer a shared concern once, but tag all the reviewers who raised it. (`latex-rules`' `packages.tex` ships `\Rone`…`\Rfour` for exactly this.)
 - **Separate misunderstanding from real weakness.** For a misread, clarify in one line and point to where the paper says it (and fix that wording). For a real gap, add evidence — a new number, experiment, or analysis beats a paragraph of argument.
+- **Don't deny a reduction — distinguish structurally.** When a reviewer says your method "reduces to X" or "is just generic Y," agree on the local reduction, then name the specific structural feature your approach preserves that X/Y does not — anchored to a concrete mechanism (a theorem dependency, a derivation step, an empirical consequence), never a bare assertion.
+- **Surface non-obvious design choices yourself.** If the setup has a caveat a hostile reviewer could reverse-engineer (compute-matched ≠ epoch-matched, a frozen parameter subset, an atypical seed or hold-out protocol), name it plainly with numbers. Pre-empting the attack costs a line; being caught costs the reviewer's trust in everything else.
 - **Lead with the highest-impact response**: new results first, then shared concerns.
 - **Prioritize the swing reviewer** (borderline, engaged) — but don't ignore a negative one: rebut their points *for the swing reviewer's benefit*, showing concretely why the criticism is wrong so the swing reviewer doesn't absorb it and mark you down too.
 - **Concede small points cheaply** to earn credibility on the ones you contest. Fighting everything reads as defensive.
