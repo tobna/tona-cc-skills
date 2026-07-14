@@ -155,6 +155,11 @@ in the full machinery.
   reflows prose, which would wreck one-sentence-per-line and explode diffs. `latexindent`
   leaves line breaks alone by default (don't enable `modifyLineBreaks`); for `tex-fmt` set
   `wrap = false`. Run it on save or in a pre-commit hook so formatting stays out of content diffs.
+- **Indent with spaces, not tabs.** Indentation is cosmetic in LaTeX (it never reaches the
+  output), so the only thing that matters is looking identical in every editor and diff — which
+  tabs don't. `latexindent`'s built-in default is a *tab*, so set it explicitly: `latexindent
+  -y='defaultIndent: "  "'` (two spaces), or put `defaultIndent: "  "` in a `.latexindent.yaml`.
+  Pick one and keep the file free of mixed tabs/spaces.
 - **Blank line = paragraph break.** Never `\\` to end a paragraph (it makes a bad
   hanging line). `\\` is only for tabular/align/forced breaks.
 - **Define repeated notation as macros** — never type the same construct inline twice.
