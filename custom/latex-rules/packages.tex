@@ -1,184 +1,217 @@
-% \usepackage{color}
+% latex-rules — reusable preamble (see the latex-rules skill).
+% Reusable macros only; define paper-specific notation in your main .tex, not here.
 
-% if you use cleveref..
+% ==== packages ====
 
-
-% my own set of packages
+% ---- fonts & encoding ----
 \usepackage[T1]{fontenc}   % proper 8-bit fonts + real hyphenation
 \usepackage{lmodern}       % scalable Latin Modern (fixes bitmap CM warnings)
-\usepackage{amssymb}
+
+% ---- math ----
 \usepackage{amsmath}
-%\usepackage{tabu}
-\usepackage{dsfont}
+\usepackage{amssymb}
+\usepackage{mathtools}     % loads + extends amsmath
+\usepackage{dsfont}        % \mathds{1}
+
+% ---- graphics & drawing ----
 \usepackage{graphicx}
+\usepackage[export]{adjustbox}
 \usepackage{tikz}
 \usetikzlibrary{shapes}
 \usetikzlibrary{positioning}
 \usetikzlibrary{trees}
-\usepackage[most]{tcolorbox}
 %\usetikzlibrary{graphs,graphdrawing}
 %\usegdlibrary{trees}
-\usepackage{mathtools}
-\usepackage{multirow}
-\usepackage{textcomp}
-%\usepackage[defaultlines=3,all]{nowidow}
-\usepackage{float}
-\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{subcaption}    % NOT subfigure / subfig
 \usepackage{pdflscape}
-\usepackage{csquotes}
-%\usepackage{setspace}
-\usepackage{afterpage}
-\usepackage{makecell}
-% \usepackage[all]{xy}
-\usepackage{listings}
-\usepackage{url}
-\usepackage{enumitem}
-\usepackage{algorithm}
-\usepackage{algorithmic}
-%\usepackage{pgfplots}
-%\usepackage[algcompatible]{algpseudocode}
-% \usepackage{svg}   % needs --shell-escape + inkscape and is rejected by arXiv; pre-convert SVGs to PDF instead
-\usepackage{pifont}
-%\usepackage{geometry}
-\usepackage{subcaption}
-% \usepackage{subfigure}
-% \usepackage{natbib}
-\usepackage{xspace}
-\usepackage{siunitx}
-\usepackage{booktabs}
-\usepackage[protrusion=true,expansion=true]{microtype}  % char protrusion + font expansion; drop expansion under XeLaTeX (unsupported)
-\usepackage{colortbl}
-\usepackage{footmisc}
-\usepackage[export]{adjustbox}
 
-% Mathshortcuts
+% ---- color ----
+\usepackage{xcolor}
+
+% ---- tables ----
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{colortbl}
+
+% ---- typography, lists, units ----
+\usepackage[protrusion=true,expansion=true]{microtype}  % char protrusion + font expansion; drop expansion under XeLaTeX (unsupported)
+\usepackage{csquotes}
+\usepackage{enumitem}
+\usepackage{siunitx}
+\sisetup{detect-all, per-mode=symbol}   % detect-all: match surrounding font; per-mode=symbol: m/s not m s^-1
+\usepackage{xspace}
+
+% ---- floats, algorithms, symbols ----
+\usepackage{float}
+\usepackage{afterpage}
+\usepackage{footmisc}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}   % algorithmicx; modern replacement for algorithmic
+\usepackage{pifont}
+%\usepackage{pgfplots}
+
+% ---- occasionally useful (uncomment as needed) ----
+%\usepackage{tabu}
+%\usepackage[defaultlines=3,all]{nowidow}
+%\usepackage{setspace}
+%\usepackage{geometry}
+%\usepackage[all]{xy}
+%\usepackage{natbib}
+%\usepackage{subfigure}
+% \usepackage{svg}   % needs --shell-escape + inkscape and is rejected by arXiv; pre-convert SVGs to PDF instead
+
+% ==== math notation ====
+% Symbol macros are wrapped in \ensuremath, so they also work in text (\R, \bx, ... auto-enter math).
+
+% ---- quote marks in math ----
 \DeclareMathSymbol{\mlq}{\mathord}{operators}{``}
 \DeclareMathSymbol{\mrq}{\mathord}{operators}{`'}
 
-% Setup checklists
-%\newlist{todolist}{itemize}{2}
-%\setlist[todolist]{label=$\square$}
-%\newcommand{\cmark}{\ding{51}}%
-%\newcommand{\xmark}{\ding{55}}%
-%\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
-%	\hspace{-2.5pt}}
-%\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
+% ---- number sets (blackboard bold) ----
+% NOTE: \P overrides the built-in pilcrow (¶); see also \S \O \L \H below.
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\D}{\ensuremath{\mathbb{D}}}
+\newcommand{\E}{\ensuremath{\mathbb{E}}}
+\newcommand{\X}{\ensuremath{\mathbb{X}}}
+\newcommand{\Y}{\ensuremath{\mathbb{Y}}}
+\renewcommand{\P}{\ensuremath{\mathbb{P}}}
+\newcommand{\sigB}{\ensuremath{\mathbb{B}}}
+\newcommand{\1}{\ensuremath{\mathds{1}}}
 
-\newcommand{\R}{\mathbb R}
-\newcommand{\N}{\mathbb N}
-\newcommand{\calN}{\mathcal{N}}
-\newcommand{\D}{\mathbb D}
-\newcommand{\calD}{\mathcal D}
-\newcommand{\C}{\mathbb C}
-\renewcommand{\P}{\mathbb{P}}
-\newcommand{\A}{\mathcal A}
-\newcommand{\B}{\mathcal B}
-\newcommand{\I}{\mathcal I}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\E}{\mathbb{E}}
-\newcommand{\F}{\mathcal{F}}
-\newcommand{\G}{\mathcal{G}}
-\newcommand{\M}{\mathcal{M}}
-\renewcommand{\H}{\mathcal{H}}
-\newcommand{\X}{\mathbb{X}}
-\newcommand{\sigB}{\mathbb B}
-\newcommand{\sigE}{\mathcal{E}}
-\newcommand{\Ball}[2]{B_#1(#2)} % \Ball \eps center
-\renewcommand{\L}{\mathcal{L}}
-\newcommand{\eps}{\varepsilon}
-\newcommand{\1}{\mathds{1}}
-\newcommand{\To}{\longrightarrow}
-\newcommand{\eqover}[1]{\stackrel{#1}{=}}
-\newcommand{\darover}[1]{\xrightarrow{#1}}
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\del}{\partial}
-\newcommand{\indep}{\perp\!\!\!\perp}
-\renewcommand{\Re}{\operatorname{Re}}
-\renewcommand{\phi}{\varphi}
-\renewcommand{\Im}{\operatorname{Im}}
-\newcommand{\cov}{\operatorname{cov}}
-\newcommand{\corr}{\operatorname{corr}}
-\newcommand{\att}{\operatorname{attention}}
-\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}   % \norm{x}, \norm*{x} (full size), \norm[\big]{x}
-\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
-\newcommand{\twobytwo}[4]{\begin{pmatrix}	#1 & #2 \\ #3 & #4 \end{pmatrix}}
+% ---- calligraphic sets ----
+% NOTE: \S \O \L \H override built-in text commands (§, Ø, Ł, and the o-double-acute accent \H{o}).
+\newcommand{\calN}{\ensuremath{\mathcal{N}}}
+\newcommand{\calD}{\ensuremath{\mathcal{D}}}
+\newcommand{\A}{\ensuremath{\mathcal{A}}}
+\newcommand{\B}{\ensuremath{\mathcal{B}}}
+\newcommand{\I}{\ensuremath{\mathcal{I}}}
+\newcommand{\F}{\ensuremath{\mathcal{F}}}
+\newcommand{\G}{\ensuremath{\mathcal{G}}}
+\newcommand{\M}{\ensuremath{\mathcal{M}}}
+\newcommand{\Tau}{\ensuremath{\mathcal{T}}}
+\newcommand{\W}{\ensuremath{\mathcal{W}}}
+\newcommand{\sigE}{\ensuremath{\mathcal{E}}}
+\renewcommand{\H}{\ensuremath{\mathcal{H}}}
+\renewcommand{\L}{\ensuremath{\mathcal{L}}}
+\renewcommand{\S}{\ensuremath{\mathcal{S}}}
+\renewcommand{\O}{\ensuremath{\mathcal{O}}}
+
+% ---- named operators ----
+% NOTE: \Re \Im are redefined to roman "Re"/"Im" (not the default blackletter ℜ/ℑ).
 \DeclareMathOperator{\softmax}{softmax}
 \DeclareMathOperator*{\argmax}{arg\,max}   % * = subscript sits underneath in display
-\newcommand{\suff}{\operatorname{suff}}
-\newcommand{\comp}{\operatorname{comp}}
-\newcommand{\In}{\operatorname{In}}
 \DeclareMathOperator{\Var}{Var}
-\newcommand{\tensor}{\otimes}
-\newcommand{\bigtensor}{\bigotimes}
-\newcommand{\bx}{\mathbf{x}}
-\newcommand{\bX}{\mathbf{X}}
-\newcommand{\by}{\mathbf{y}}
-\newcommand{\bz}{\mathbf{z}}
-\newcommand{\bB}{\mathbf{B}}
-\newcommand{\bp}{\mathbf{p}}
-\newcommand{\bW}{\mathbf{W}}
-\newcommand{\bt}{\mathbf{t}}
-\newcommand{\be}{\mathbf{e}}
-\newcommand{\grad}{\nabla}
-\newcommand{\spanop}{\operatorname{span}}
-\renewcommand{\S}{\mathcal{S}}
-\newcommand{\Y}{\mathbb Y}
+\newcommand{\cov}{\ensuremath{\operatorname{cov}}}
+\newcommand{\corr}{\ensuremath{\operatorname{corr}}}
+\newcommand{\spanop}{\ensuremath{\operatorname{span}}}
+\newcommand{\att}{\ensuremath{\operatorname{attention}}}
+\newcommand{\suff}{\ensuremath{\operatorname{suff}}}
+\newcommand{\comp}{\ensuremath{\operatorname{comp}}}
+\newcommand{\In}{\ensuremath{\operatorname{In}}}
+\newcommand{\opcap}{\ensuremath{\operatorname{cap}}}
+\newcommand{\entr}{\ensuremath{\operatorname{entries}}}
+\newcommand{\ops}{\ensuremath{\operatorname{ops}}}
+\newcommand{\id}{\ensuremath{\mathrm{id}}}
+\renewcommand{\Re}{\ensuremath{\operatorname{Re}}}
+\renewcommand{\Im}{\ensuremath{\operatorname{Im}}}
+
+% ---- symbols & shorthands ----
+\newcommand{\eps}{\ensuremath{\varepsilon}}
+\renewcommand{\phi}{\ensuremath{\varphi}}     % deliberate: \phi -> varphi
+\newcommand{\del}{\ensuremath{\partial}}
+\newcommand{\grad}{\ensuremath{\nabla}}
+\newcommand{\indep}{\ensuremath{\perp\!\!\!\perp}}
+\newcommand{\emptyword}{\ensuremath{\varnothing}}
+\newcommand{\tensor}{\ensuremath{\otimes}}
+\newcommand{\bigtensor}{\ensuremath{\bigotimes}}
+\newcommand{\To}{\ensuremath{\longrightarrow}}
+\newcommand{\eqover}[1]{\ensuremath{\stackrel{#1}{=}}}
+\newcommand{\darover}[1]{\ensuremath{\xrightarrow{#1}}}
 \newcommand{\Hoel}{\text{Höl}}
-\newcommand{\Tau}{\mathcal{T}}
-\newcommand{\W}{\mathcal{W}}
-\renewcommand{\O}{\mathcal{O}}
-\newcommand{\emptyword}{\varnothing}
-% \todo is defined near the draft-mode block at the end of this file
-\newcommand{\taylorsm}{\operatorname{T-SM}}
-\newcommand{\ops}{\operatorname{ops}}
-\newcommand{\entr}{\operatorname{entries}}
-\newcommand{\opcap}{\operatorname{cap}}
+
+% ---- paired delimiters ----
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}   % \norm{x}, \norm*{x} (full size), \norm[\big]{x}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+
+% ---- bold vectors / matrices ----
+\newcommand{\bx}{\ensuremath{\mathbf{x}}}
+\newcommand{\bX}{\ensuremath{\mathbf{X}}}
+\newcommand{\by}{\ensuremath{\mathbf{y}}}
+\newcommand{\bz}{\ensuremath{\mathbf{z}}}
+\newcommand{\bB}{\ensuremath{\mathbf{B}}}
+\newcommand{\bp}{\ensuremath{\mathbf{p}}}
+\newcommand{\bW}{\ensuremath{\mathbf{W}}}
+\newcommand{\bt}{\ensuremath{\mathbf{t}}}
+\newcommand{\be}{\ensuremath{\mathbf{e}}}
+
+% ---- small constructs ----
+\newcommand{\Ball}[2]{\ensuremath{B_#1(#2)}}   % \Ball{\eps}{center}
+\newcommand{\twobytwo}[4]{\ensuremath{\begin{pmatrix} #1 & #2 \\ #3 & #4 \end{pmatrix}}}
+
+% ==== text, color & layout helpers ====
 \definecolor{darkgreen}{HTML}{009B55}
 \newcommand{\gtxt}[1]{\text{\textcolor{gray}{#1}}}
 \newcommand{\grntxt}[1]{\text{\textcolor{darkgreen}{#1}}}
 \newcommand{\rdtxt}[1]{\text{\textcolor{red}{#1}}}
 \newcommand{\code}[1]{\texttt{#1}}
-% Rebuttal reviewer tags: bold, distinctly colored R1..R4 to signpost which reviewer a point answers
+\newcommand{\tldr}{\textbf{TL;DR:}\xspace}
+\newcommand{\parahead}[1]{\noindent\textbf{#1.}\enspace}  % run-in heading; use instead of \paragraph to save space
+\newcommand*\rot{\rotatebox{90}}
+
+% ---- table cell helpers ----
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\rowhighlight}{\rowcolor{gray!30}}
+\newcommand{\cellhighlight}{\cellcolor{yellow!40}}
+
+% ---- rebuttal reviewer tags: bold, distinct colors to signpost which reviewer a point answers ----
 \newcommand{\Rone}{\textbf{\textcolor[HTML]{1F77B4}{R1}}}    % blue
 \newcommand{\Rtwo}{\textbf{\textcolor[HTML]{D62728}{R2}}}    % red
 \newcommand{\Rthree}{\textbf{\textcolor[HTML]{2CA02C}{R3}}}  % green
 \newcommand{\Rfour}{\textbf{\textcolor[HTML]{D9730D}{R4}}}   % muted orange
-\newcommand{\cmark}{\ding{51}}%
-\newcommand{\xmark}{\ding{55}}%
-\newcommand{\rowhighlight}{\rowcolor{gray!30}}
-\newcommand{\cellhighlight}{\cellcolor{yellow!40}}
 
-\newcommand*\rot{\rotatebox{90}}
-\newcommand{\tldr}{\textbf{TL;DR:}\xspace}
-\newcommand{\parahead}[1]{\noindent\textbf{#1.}\enspace}  % run-in heading; use instead of \paragraph to save space
-
-
+% ---- takeaway callout box ----
 \newtcolorbox{takeaway}[1][Takeaway]{
-	colback=blue!4!white,      % very light fill
-	colframe=blue!50!black,    % muted dark-blue frame
-	boxrule=0.6pt,
-	arc=2pt,
-	left=6pt,right=6pt,top=2pt,bottom=2pt,
-	title=#1,
-	fonttitle=\bfseries\small,
-	coltitle=white,
-	colbacktitle=blue!50!black
+  colback=blue!4!white,      % very light fill
+  colframe=blue!50!black,    % muted dark-blue frame
+  boxrule=0.6pt,
+  arc=2pt,
+  left=6pt, right=6pt, top=2pt, bottom=2pt,
+  title=#1,
+  fonttitle=\bfseries\small,
+  coltitle=white,
+  colbacktitle=blue!50!black
 }
 
-% --- Links & smart references: load LAST (delete if your class already loads hyperref) ---
+% ==== links & smart references: load LAST (delete if your class already loads hyperref) ====
 \usepackage[hidelinks]{hyperref}
 \usepackage[capitalize,noabbrev]{cleveref}   % \cref{...}, \Cref{...} — must come after hyperref
 
-% \todo: always-visible red box, works with or without draft mode (as before) — strip todos before submitting
-\newcommand{\todo}[1]{\colorbox{red}{TODO: #1}}
+% ==== draft mode & \todo ====
+% "Explicit" = the main .tex defined \ifdraftmode before \input{packages}.
+% (The \ifcsname/\csname dance avoids skipping over an already-defined \ifdraftmode, which
+%  crashes the naive \ifdefined...\newif idiom.)
+\newif\ifdraftmodeexplicit
+\ifcsname ifdraftmode\endcsname \draftmodeexplicittrue \else \draftmodeexplicitfalse \fi
+\ifdraftmodeexplicit\else \expandafter\newif\csname ifdraftmode\endcsname \fi
 
-% --- Draft-mode aids: line numbers, label keys, overfull bars ---
+% \todo: visible red box by default and in draft mode; a no-op only when draft mode is
+% explicitly OFF (\draftmodefalse in the main .tex), so leftover todos vanish in the final build.
+\newcommand{\todo}[1]{\colorbox{red}{TODO: #1}}
+\ifdraftmodeexplicit \ifdraftmode\else \renewcommand{\todo}[1]{}\fi \fi
+
+% Draft-mode aids (line numbers, label keys, overfull bars) — on only when draft mode is enabled.
 % Worth it for long documents / theses; usually overkill for a short single paper.
-% To enable, put "\newif\ifdraftmode \draftmodetrue" in the main .tex BEFORE \input{packages}.
-\ifdefined\ifdraftmode\else \newif\ifdraftmode \fi   % default: off if the main file didn't set it
+% Enable by putting "\newif\ifdraftmode \draftmodetrue" in the main .tex BEFORE \input{packages}.
 \ifdraftmode
-	\usepackage{lineno}\linenumbers   % line numbers for "see line 214" review comments (prose only; align/equation bodies aren't numbered without extra setup)
-	\usepackage{showkeys}             % print \label / \ref keys in the margin
-	\overfullrule=5pt                 % black bar in the margin marks every overfull line
+  \usepackage{lineno}\linenumbers   % line numbers for "see line 214" review comments (prose only; align/equation bodies aren't numbered without extra setup)
+  \usepackage{showkeys}             % print \label / \ref keys in the margin
+  \overfullrule=5pt                 % black bar in the margin marks every overfull line
 \fi
