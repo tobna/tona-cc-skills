@@ -40,6 +40,7 @@ Third-party skills and Claude Code plugins I rely on. (Skills auto-load; a few t
 | `anywidget-generator` | Scaffolds [anywidget](https://anywidget.dev) interactive components (JS + Python) for marimo. |
 | `jupyter-to-marimo`   | Converts a Jupyter `.ipynb` into a marimo `.py` notebook.                                     |
 | `find-skills`         | Finds an existing skill for a task. Triggers on "is there a skill for X".                     |
+| `analyze-results`     | Analyzes ML experiment results — stats, comparison tables, insights. Triggers on "analyze results". |
 
 ### Plugins (`plugins.sh`)
 

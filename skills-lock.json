@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "analyze-results": {
+      "source": "wanshuiyin/Auto-claude-code-research-in-sleep",
+      "sourceType": "github",
+      "skillPath": "skills/analyze-results/SKILL.md",
+      "computedHash": "defc15cf49ce48598ee220ac853d4425aedc1356feb69614a823a3697e9efe38"
+    },
     "anywidget-generator": {
       "source": "marimo-team/skills",
       "sourceType": "github",
