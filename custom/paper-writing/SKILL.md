@@ -80,6 +80,38 @@ end. Never bury the key sentence in the middle.
 - **One name per concept** — don't drift between model/network/architecture, or sample/instance/example.
 - **Verbs signal contribution**: prefer *develop, propose, introduce, characterize* over *combine, modify, extend, expand* — wording shapes whether a reviewer reads it as real work.
 
+## AI-shaped prose
+
+Reviewers increasingly recognize — and quietly discount — writing that reads as
+LLM-generated. No single item below is forbidden; each is fine once in a while. **It's the
+frequency and clustering that reads as AI, not any one instance.** The fix is almost always
+"say it plainly."
+
+- **Don't dodge "is" and "has."** AI reaches for *serves as, stands as, represents, functions
+  as, acts as* instead of *is*, and *boasts, features, offers* instead of *has*. Write
+  "Attention **is** the bottleneck," not "Attention **serves as** the bottleneck."
+- **Cut the participial significance-tail** — the vague `-ing` clause bolted onto a sentence to
+  inflate importance: "…, **further underscoring its scalability**", "…, **highlighting the
+  importance of** alignment", "…, **contributing to** the broader field." Delete it, or replace
+  it with a concrete consequence.
+- **No false authority.** *Observers note, experts argue, studies have shown, it is widely
+  regarded, researchers treat X as* — vague attributions implying a consensus with nothing
+  behind them. In a paper, attribute to a specific citation or cut the claim.
+- **Don't inflate significance.** *pivotal moment, marks a turning point, plays a crucial role,
+  enduring legacy, rich landscape / tapestry, a testament to* — mundane results dressed as
+  milestones. State what the result is; let the reader weigh it.
+- **One name per concept** (also above) — synonym churn (drifting model → network →
+  architecture → framework for the same thing) is a repetition-penalty artifact, not style.
+  Repeat the term; consistency reads as rigor.
+- **Skip the template "Challenges and Future Directions"** — "Despite its promise, X faces
+  several challenges…" plus generic speculation. Write specific limitations tied to your actual
+  results, or write nothing.
+- **Vary structure.** Every paragraph as topic-sentence → three supports → restating summary
+  reads as a filled-in template. Let the content set the shape.
+
+The LaTeX/formatting counterparts — stray `\textbf`, equal-sized bullet stacks, em-dash spam,
+colon lead-ins, "not X but Y," and the buzzword list — live in the `latex-rules` skill.
+
 ## Mathematical writing
 
 Goal: let the reader **follow**, not sound sophisticated. State assumptions *before* the
@@ -119,6 +151,7 @@ strongest comparison, or give the simplest visual summary of the main claim. Rul
 - [ ] Abstract follows the five-sentence formula with a quantitative result.
 - [ ] Intro ≤ 1.5 pages; method appears by page 2–3; 2–4 contribution bullets.
 - [ ] Limitations stated. Terminology consistent. No generic openings. Hedging trimmed.
+- [ ] No AI-shaped prose: plain "is/has", no significance-tails, no false authority, no template future-work.
 - [ ] Figures use vector graphics and self-contained captions.
 - [ ] Citations verified; error bars / statistics reported; compute and code/data availability stated.
 

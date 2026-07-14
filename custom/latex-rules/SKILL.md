@@ -195,10 +195,12 @@ one or two pages. It's the *frequency and clustering* that reads as AI, not any 
 instance. So the bullets below mean "keep rare," not "never."
 
 **Vocabulary tells** — cut the AI buzzwords: *leverage, utilize, delve, showcase, seamless,
-comprehensive, pivotal, underscore, realm, testament, tapestry, meticulous*, and *robust* as
-filler. Cut sentence-opening transition spam: *Furthermore, Moreover, Additionally, Notably,
-Importantly, Overall, In conclusion, It is worth noting that.* (See the `paper-writing` skill
-for the narrative-level version.)
+comprehensive, pivotal, underscore, realm, testament, tapestry, meticulous, intricate, nuanced,
+crucial, foster, boast, landscape*, and *robust* as filler. Cut sentence-opening transition
+spam: *Furthermore, Moreover, Additionally, Notably, Importantly, Overall, In conclusion, It is
+worth noting that.* The **structural** prose tells — dodging "is/has" (*serves as*, *boasts*),
+participial significance-tails, false authority (*experts argue*), significance inflation,
+synonym churn, template future-work sections — live in the `paper-writing` skill.
 
 **Formatting tells**
 
