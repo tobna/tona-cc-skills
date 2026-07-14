@@ -15,10 +15,10 @@ reasoning is short because these are settled practice (l2tabu; the `booktabs`,
 \usepackage[T1]{fontenc}       % proper 8-bit fonts, real hyphenation
 \usepackage[utf8]{inputenc}    % (skip under LuaLaTeX/XeLaTeX — already UTF-8)
 \usepackage[protrusion=true,expansion=true]{microtype}  % char protrusion + font expansion; load LAST-ish, after fonts
-\usepackage{amsmath, amssymb}  % never eqnarray; amsmath instead
+\usepackage{amsmath, amssymb, mathtools}  % never eqnarray; mathtools loads+extends amsmath
 \usepackage{booktabs}          % professional tables
 \usepackage{siunitx}           % numbers, units, aligned decimals
-\usepackage graphicx
+\usepackage{graphicx}
 \usepackage{subcaption}        % NOT subfigure / subfig
 \usepackage[hidelinks]{hyperref}   % load near-last
 \usepackage{cleveref}          % load AFTER hyperref
@@ -64,14 +64,15 @@ for the most compact form. Whichever you pick, stay consistent across the paper.
 
 Label with a type prefix, always right after `\caption`/`\section`/`\label`-target:
 `fig:`, `tab:`, `eq:`, `sec:`, `alg:`, `thm:`, `app:`. Use `\eqref` only if not using
-cleveref. A `\label` for a float goes *after* its `\caption`, or the number is wrong.
+cleveref (with one exception for named equations — see Math). A `\label` for a float goes
+*after* its `\caption`, or the number is wrong.
 
 ## Typography
 
 - **Dashes**: `-` hyphen (intra-word), `--` en-dash (ranges: `pages 5--10`), `---` em-dash (—no spaces around it).
 - **Quotes**: `` `single' `` and ` ``double'' ` — never the straight `"`.
 - **Ellipsis**: `\dots`, never `...`.
-- **Non-breaking space `~`** before every citation and inside a hand-written number+unit when not using siunitx: `~\cite{...}`, `5~kg`. Prevents a number stranded at a line start. Cross-references need **no** manual `~` — always `\Cref{fig:...}`, never `Figure~\ref{...}`; cleveref supplies the word *and* the tie for you.
+- **Non-breaking space `~`** before every citation: `~\cite{...}`. Prevents the marker stranded at a line start. Cross-references need **no** manual `~` — always `\Cref{fig:...}`, never `Figure~\ref{...}`; cleveref supplies the word *and* the tie for you. (A number+unit uses the thin space `\,`, not `~` — see the unit rule below.)
 - **Citation placement — scope sets the position**:
   - a specific **term** → immediately after that term, bound with `~`: `the transformer~\cite{vaswani2017} scales well.`
   - an **assertion / clause** → right after it, wherever that clause ends in the sentence.
@@ -101,7 +102,7 @@ cleveref. A `\label` for a float goes *after* its `\caption`, or the number is w
 - Delimiters: `\left( … \right)` auto-sizing is allowed and a fine default. Switch to manual `\bigl( \bigr)` / `\Bigl` only when auto oversizes (e.g. it hugs a subscript or fraction too loosely) and you know the height you want.
 - Words inside math: `\text{...}` (needs amsmath), not `\mbox` or roman hacks.
 - Reuse notation consistently; define macros for recurring symbols (see below).
-- Reference equations with `\Cref{eq:...}` (→ "Equation (3)"), never a raw "(3)". Lowercase `\cref{eq:...}` (→ "eq. (3)") is the compact fallback to save space — same consistency rule as the other cross-refs. `\eqref{eq:...}` (→ bare "(3)") only when the sentence already names the equation — and it needs a manual tie, `loss~\eqref{eq:...}`, since (unlike `\cref`/`\Cref`) it supplies no word of its own.
+- Reference equations with `\Cref{eq:...}` (→ "Equation (3)"), never a raw "(3)"; lowercase `\cref{eq:...}` (→ "eq. (3)") is the compact fallback to save space — same consistency rule as the other cross-refs. `\eqref{eq:...}` (→ bare "(3)") is the form for documents *without* cleveref, but it's also fine **with** cleveref when the sentence already names the equation: `the loss~\eqref{eq:loss}`. Either way it needs a manual tie (`~`), since it supplies no word of its own.
 - **Picky niceties** (nice to have, not blocking): `\coloneqq` for a definition `:=` and `\eqqcolon` for `=:` (both from `mathtools`) — the spacing around a bare `:=` is wrong; `\colon` not a bare `:` in a map `f\colon A \to B` (bare `:` is a relation, too much space); `\dots` not `...` (already required above).
 
 ## Tables — booktabs
@@ -253,7 +254,7 @@ synonym churn, template future-work sections — live in the `paper-writing` ski
 
 - [ ] `microtype` on; `hyperref`+`cleveref` loaded in that order.
 - [ ] All refs via `\Cref` (preferred) / `\cref`; every float `\label` after its `\caption`.
-- [ ] `--` for ranges, `---` for em-dash, `` `` ''`` quotes, `\dots`, `~` before cites/refs.
+- [ ] `--` for ranges, `---` for em-dash, `` `` ''`` quotes, `\dots`, `~` before every `\cite` (cleveref refs need none).
 - [ ] Tables use booktabs (no vrules/`\hline`); numbers aligned via `S` columns.
 - [ ] Numbers/units via siunitx, or a thin space `\,` between every number and its unit; figures are vector; captions self-contained.
 - [ ] One sentence per line; no `\\` paragraph breaks; no obsolete packages.
