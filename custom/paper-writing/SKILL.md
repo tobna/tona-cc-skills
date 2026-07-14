@@ -172,6 +172,24 @@ that the cited entry passes the three layers above. Run this as a dedicated pass
 bibliography is frozen**, right before submission — not on a moving draft. `\cite` *placement*
 mechanics live in `latex-rules`.
 
+**Verifying a citation** — only when the user explicitly asks to check one or all citations (this
+is a slow web pass; never run it unprompted while drafting). For each entry, web-search until the
+canonical record is found, then confirm authors/year/title/venue match the `.bib`:
+
+- `[first-author surname] [year] [first 3 words of title]` — the general locate query.
+- `"[full paper title]" site:semanticscholar.org OR site:arxiv.org` — exact-title match on an index.
+- `[first author] [year] [venue/journal name]` — disambiguates when a title is generic or reused.
+- `doi:[DOI]` — if the entry has a DOI (a resolving DOI ≈ existence confirmed).
+- `arxiv:[arxiv-id]` — if the entry has an arXiv ID.
+
+No canonical record after these → flag it as likely fabricated. A record found but with a
+different author list, year, or venue → flag it as a metadata error, with the record's correct values.
+
+**Never silently edit the `.bib`.** Report every proposed change — fabricated entries to remove,
+metadata to correct, wrong-context citations to reconsider — as a list for the user to approve,
+and check back before applying. The author is the one who can confirm which paper they actually
+meant; a citation "fix" applied blind can swap in the wrong work.
+
 ## Mathematical writing
 
 Goal: let the reader **follow**, not sound sophisticated. State assumptions *before* the
