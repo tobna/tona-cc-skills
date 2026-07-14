@@ -1,10 +1,12 @@
 # Custom skills
 
-Skills I author, version-controlled here. Each is a folder with a `SKILL.md`:
+Skills I author. `install.sh` symlinks each `custom/*` into `~/.claude/skills/`, so edits go live immediately.
+
+- [`paper-writing`](paper-writing/SKILL.md) — paper-writing guidance: framing, clarity, figures, citation integrity, rebuttals.
+- [`latex-rules`](latex-rules/SKILL.md) — LaTeX conventions: packages, typography, tables, cleveref refs, source hygiene.
+
+Install into Claude Code — paste into the prompt:
 
 ```
-custom/my-skill/SKILL.md
+Install the custom skills from github.com/tobna/tona-cc-skills (the custom/ folder) into ~/.claude/skills/.
 ```
-
-`install.sh` symlinks every `custom/*` into `~/.claude/skills/`, so edits here are
-live immediately. Bootstrap a new one with `npx skills init my-skill` inside this dir.
