@@ -32,6 +32,13 @@ judge before reading the method carefully. So spend roughly equal effort on: the
 **abstract**, the **introduction**, the **figures**, and everything else *combined*.
 Never bury the contribution after Section 3.
 
+## Draft order
+
+Write in roughly the reverse of the reading order: **figures/tables → Results → Methods →
+Discussion → Related Work → Introduction → Abstract → Title.** You can't frame a tight abstract
+or intro until the results exist and you know which one carries the paper — drafting them first
+just means rewriting them. Lock the figures and the headline result, then write the framing to fit.
+
 ## Structure: Context → Content → Conclusion
 
 One shape repeats at every scale: **set context, deliver content, land a conclusion.** The
