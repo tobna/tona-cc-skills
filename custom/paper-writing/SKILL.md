@@ -84,6 +84,7 @@ The section reviewers scrutinize hardest — make each result an argument, not a
 - **Captions carry the takeaway too** — a caption should state its main finding in a line, and point to where it shows (the gap in the last column, the crossover at 10k steps). A skimming reviewer reads figures and captions before prose.
 - **Push the periphery to the appendix.** Smaller ablations, sensitivity sweeps, and failure cases that don't move the paper's story belong in an appendix — reference them, but keep the main results section carrying only what advances the claim.
 - **Report honestly**: variance / error bars, compute, failure cases. A confound a reviewer finds first is fatal.
+- **Every number matches its source.** A value in the abstract, prose, or a table must equal what the results files say, and the same quantity must never appear with two different values in two places. Number drift across revisions is a reviewer red flag and trivially caught in review.
 
 ## Discussion, conclusion, limitations
 
@@ -151,7 +152,11 @@ colon lead-ins, "not X but Y," and the buzzword list — live in the `latex-rule
 
 Goal: let the reader **follow**, not sound sophisticated. State assumptions *before* the
 theorem; pair proofs with intuition (keep intuition in the main text, not only the
-appendix); keep notation consistent; define every symbol at first use. Conventional
+appendix); keep notation consistent; define every symbol at first use. **If a theorem is
+restated in the appendix (or abstract/contributions), the restatement must match the main
+one exactly** — case splits, quantifiers, assumptions, and variable names drift silently
+across revisions, and a reviewer who spots the mismatch distrusts the whole proof.
+Conventional
 notation: scalars lowercase italic `$x$`; vectors lowercase bold `$\mathbf{x}$`;
 matrices uppercase bold `$\mathbf{W}$`; sets calligraphic `$\mathcal{X}$`; named
 functions roman `$\mathrm{softmax}$`.
@@ -192,6 +197,7 @@ strongest comparison, or give the simplest visual summary of the main claim. Rul
 - [ ] No AI-shaped prose: plain "is/has", no significance-tails, no false authority, no template future-work.
 - [ ] Figures use vector graphics and self-contained captions.
 - [ ] Citations verified; error bars / statistics reported; compute and code/data availability stated.
+- [ ] Every number in prose/tables matches its source; no quantity stated two ways; restated theorems match the main statement.
 - [ ] Results read as question → evidence → answer, headline first; discussion interprets rather than restates.
 
 ## Rebuttal
