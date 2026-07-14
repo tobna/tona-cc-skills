@@ -46,7 +46,7 @@
 \usepackage{xspace}
 \usepackage{siunitx}
 \usepackage{booktabs}
-\usepackage{microtype}
+\usepackage[protrusion=true,expansion=true]{microtype}  % char protrusion + font expansion; drop expansion under XeLaTeX (unsupported)
 \usepackage{colortbl}
 \usepackage{footmisc}
 \usepackage[export]{adjustbox}
@@ -129,7 +129,7 @@
 \newcommand{\W}{\mathcal{W}}
 \renewcommand{\O}{\mathcal{O}}
 \newcommand{\emptyword}{\varnothing}
-\newcommand{\todo}[1]{\colorbox{red}{TODO: #1}}
+% \todo is defined near the draft-mode block at the end of this file
 \newcommand{\taylorsm}{\operatorname{T-SM}}
 \newcommand{\ops}{\operatorname{ops}}
 \newcommand{\entr}{\operatorname{entries}}
@@ -164,3 +164,16 @@
 % --- Links & smart references: load LAST (delete if your class already loads hyperref) ---
 \usepackage[hidelinks]{hyperref}
 \usepackage[capitalize,noabbrev]{cleveref}   % \cref{...}, \Cref{...} — must come after hyperref
+
+% \todo: always-visible red box, works with or without draft mode (as before) — strip todos before submitting
+\newcommand{\todo}[1]{\colorbox{red}{TODO: #1}}
+
+% --- Draft-mode aids: line numbers, label keys, overfull bars ---
+% Worth it for long documents / theses; usually overkill for a short single paper.
+% To enable, put "\newif\ifdraftmode \draftmodetrue" in the main .tex BEFORE \input{packages}.
+\ifdefined\ifdraftmode\else \newif\ifdraftmode \fi   % default: off if the main file didn't set it
+\ifdraftmode
+	\usepackage{lineno}\linenumbers   % line numbers for "see line 214" review comments (prose only; align/equation bodies aren't numbered without extra setup)
+	\usepackage{showkeys}             % print \label / \ref keys in the margin
+	\overfullrule=5pt                 % black bar in the margin marks every overfull line
+\fi

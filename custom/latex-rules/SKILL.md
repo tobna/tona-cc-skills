@@ -14,7 +14,7 @@ reasoning is short because these are settled practice (l2tabu; the `booktabs`,
 ```latex
 \usepackage[T1]{fontenc}       % proper 8-bit fonts, real hyphenation
 \usepackage[utf8]{inputenc}    % (skip under LuaLaTeX/XeLaTeX — already UTF-8)
-\usepackage microtype          % better justification; load LAST-ish, after fonts
+\usepackage[protrusion=true,expansion=true]{microtype}  % char protrusion + font expansion; load LAST-ish, after fonts
 \usepackage{amsmath, amssymb}  % never eqnarray; amsmath instead
 \usepackage{booktabs}          % professional tables
 \usepackage{siunitx}           % numbers, units, aligned decimals
@@ -26,6 +26,12 @@ reasoning is short because these are settled practice (l2tabu; the `booktabs`,
 
 Load order that matters: `hyperref` near the end, `cleveref` **after** `hyperref`,
 `microtype` after font packages.
+
+**microtype**: `protrusion` (hangs punctuation into the margin) and `expansion` (subtly
+stretches glyphs to improve justification) are the two that matter — turn both on. Both work
+under pdfLaTeX and LuaLaTeX; `expansion` is unsupported under XeLaTeX, so drop it there. It
+silences most overfull-`\hbox` warnings for free and is the single cheapest quality win in the
+preamble.
 
 **A ready-to-use [`packages.tex`](packages.tex) ships with this skill** — the maintained
 preamble plus the reusable macro set (number sets, operators, bold vectors/matrices,
@@ -79,6 +85,7 @@ cleveref. A `\label` for a float goes *after* its `\caption`, or the number is w
 - Words inside math: `\text{...}` (needs amsmath), not `\mbox` or roman hacks.
 - Reuse notation consistently; define macros for recurring symbols (see below).
 - Reference equations with `\cref{eq:...}` / `\eqref`, never a raw "(3)".
+- **Picky niceties** (nice to have, not blocking): `\coloneqq` for a definition `:=` and `\eqqcolon` for `=:` (both from `mathtools`) — the spacing around a bare `:=` is wrong; `\colon` not a bare `:` in a map `f\colon A \to B` (bare `:` is a relation, too much space); `\dots` not `...` (already required above).
 
 ## Tables — booktabs
 
@@ -116,6 +123,9 @@ thin-space grouping and minus signs everywhere.
 
 - **One sentence per line** (semantic line breaks). Keeps git diffs and review comments
   sane; line breaks don't affect output. Never reflow a whole paragraph on a one-word edit.
+  If a project *does* enforce a max line length, keep the max-one-sentence-per-line rule anyway:
+  never start a second sentence on a line, and when a single long sentence must wrap, break at a
+  clause boundary — right after `. ! ? ; : ,` — not mid-clause. Sentence-end still gets its own break.
 - **Auto-format for indentation, never for reflow.** Use `latexindent` (or `tex-fmt`) to keep
   environment nesting and indentation consistent — but **keep line-wrapping off** so it never
   reflows prose, which would wreck one-sentence-per-line and explode diffs. `latexindent`
@@ -132,6 +142,50 @@ thin-space grouping and minus signs everywhere.
 - Don't fix spacing with `\vspace`/`\hspace` hacks or `~~~`; fix the cause.
 - Comment out, don't delete, when unsure — but strip dead commented blocks before submission.
 - **Keep the paper in git.** Track sources (`.tex`, `.bib`, figures, `packages.tex`); ignore the build cruft LaTeX regenerates (`.aux`, `.log`, `.out`, `.bbl`, `.synctex.gz`, `.fdb_latexmk`, …). Copy the bundled [`latex.gitignore`](latex.gitignore) into the project as `.gitignore`. Even a **local-only repo with no remote is far better than none** — one sentence per line plus git makes every change reviewable and revertible.
+
+## Draft mode (opt-in — recommended for theses, optional for short papers)
+
+One boolean toggles a bundle of author-facing scaffolding that never reaches the final PDF.
+**This earns its keep on long documents (theses, tech reports) where you review with
+co-authors and page-count is loose; for a short single paper it's usually overkill** — decide
+by length. `packages.tex` ships the block, off by default. Enable it by adding **one line to
+the main `.tex`, before `\input{packages}`**:
+
+```latex
+\newif\ifdraftmode \draftmodetrue   % ← comment out (or delete) this line for the final build
+\input{packages}
+```
+
+When on, it switches on three aids at once; when off (the line commented), all of them vanish:
+
+- **`\overfullrule=5pt`** — a black bar in the margin at every overfull line, so you *see*
+  bad boxes instead of hunting the log.
+- **`lineno` line numbers** — co-authors and reviewers can say "line 214". (Numbers prose;
+  `align`/`equation` bodies aren't numbered without extra setup.)
+- **`showkeys`** — prints each `\label`/`\ref` key in the margin: no more guessing what a
+  float is called while cross-referencing.
+
+The red **`\todo{...}`** boxes are *not* tied to this toggle — they work with or without draft
+mode, exactly as before, so drop a `\todo` anywhere and strip them before submitting. (If you'd
+rather a stray TODO fail the final build, redefine `\todo` to a `\PackageError`.)
+
+Because this uses its own boolean (not `\documentclass[draft]`), figures still render and
+`microtype` stays on. (If you ever *do* pass the class-level `draft` option, note it turns
+`microtype` off — pass `final` to microtype to keep it.)
+
+## Linting (opt-in — do not install unless asked)
+
+A linting stack catches mechanical issues before a co-author or reviewer does. **Don't install
+or run any of these unprompted** — only reach for them when the user asks to lint, or asks to
+set up tooling. They add setup and noise otherwise.
+
+- **`chktex`** — LaTeX-specific warnings: missing `~` before refs, wrong dash lengths, `\ldots`
+  vs `\dots`, spacing slips. The closest fit to these rules; run it first.
+- **`Vale`** — prose style/consistency against a configurable vocabulary — good for enforcing the
+  AI-ism word list below and house terminology.
+- **LTeX+** — grammar and spelling on a LanguageTool engine, but LaTeX-aware: the LSP
+  extension (VS Code / Neovim) parses `.tex` directly, so there's no markup-stripping step and
+  far fewer false positives on commands. The maintained successor to the original LTeX.
 
 ## Removing AI-isms
 
