@@ -165,6 +165,7 @@ strongest comparison, or give the simplest visual summary of the main claim. Rul
 - **Vector graphics** (PDF/EPS), never raster plots.
 - **No decorative title inside the figure** — put it in the caption.
 - **Colorblind-safe**: avoid red-green, work in grayscale, use line styles/markers in addition to color.
+- **Vet every new or changed figure with the `tufte-vdqi` plugin** if it's installed — run its assess/checklist pass on the chart before committing to it. If the plugin isn't installed, you may offer to install it **once**; if the user declines, respect that and never ask again this session.
 
 ## Common mistakes → fixes
 
