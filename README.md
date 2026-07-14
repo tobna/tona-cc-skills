@@ -1,100 +1,94 @@
 # tona-cc-skills
 
-The Claude Code / agent skills I actually use, in one place — third-party skills I
-rely on plus my own custom ones. Clone it on a new machine, run one script, done.
+My Claude Code / agent skills — opinionated guides for academic paper writing and clean LaTeX.
+The repo also bundles the third-party skills and plugins I rely on, so a single install sets
+everything up.
 
-## Layout
+**Install by asking Claude** — no clone needed. Paste into Claude Code:
 
-| Path               | What                                                                                                                            |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `skills-lock.json` | Manifest of the third-party skills I use (name → upstream repo). No files vendored — the `skills` CLI fetches them from source. |
-| `custom/`          | Skills I authored. Real files, version-controlled here, symlinked live into `~/.claude/skills`.                                 |
-| `plugins.sh`       | Adds the marketplaces and installs the Claude Code plugins I use (`ponytail`, `frontend-design`, `tufte-vdqi`, …).              |
-| `install.sh`       | Installs everything (or a subset) into `~/.claude` — skills + plugins.                                                          |
+```text
+Install the custom skills from github.com/tobna/tona-cc-skills (the custom/ folder) into ~/.claude/skills/.
+```
 
-## What's in here
+Only want some? Tell Claude which (e.g. "only `latex-rules`"). Re-run to update. Restart Claude
+Code after installing. For the full set — third-party skills and plugins too — see [Install](#install).
 
-### Skills (`skills-lock.json`)
+## My skills (`custom/`)
 
-| Skill                 | What it does / how to use                                                                                                                     |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `marimo-notebook`     | Writes marimo notebooks in the correct reactive-cell Python format. Loads automatically whenever you author or edit a `.py` marimo notebook.  |
-| `anywidget-generator` | Generates custom [anywidget](https://anywidget.dev) interactive components for marimo. Ask for a widget and it scaffolds the JS + Python.     |
-| `jupyter-to-marimo`   | Converts a Jupyter `.ipynb` into a marimo `.py` notebook. Run it on an existing notebook to migrate.                                          |
-| `find-skills`         | Searches the open agent-skills ecosystem for a skill that already does what you need. Triggers on "is there a skill for X" / "how do I do X". |
+| Skill           | What it does                                                                                                                        |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `paper-writing` | Opinionated paper-writing guidance — framing, abstract/intro, clarity, figures, rebuttals. Loads when drafting or revising a paper. |
+| `latex-rules`   | Opinionated LaTeX conventions — packages, typography, math macros, booktabs/siunitx tables, cleveref refs. Loads on `.tex` files.   |
 
-### Custom skills (`custom/`)
+Like all skills, these **activate automatically** — you don't call them; Claude pulls one in
+when you're doing the thing it covers.
 
-| Skill           | What it does / how to use                                                                                                                                                                                              |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `paper-writing` | Opinionated academic-paper guidance — narrative framing, abstract/intro structure, sentence-level clarity, figures, reviewer-punished mistakes. Loads when drafting or revising a paper, abstract, intro, or rebuttal. |
-| `latex-rules`   | Opinionated LaTeX conventions — required packages, typography, math macros, booktabs/siunitx tables, cleveref refs, obsolete packages to avoid. Loads when writing or editing `.tex` files.                            |
+## Also bundled
+
+Third-party skills and Claude Code plugins I rely on. (Skills auto-load; a few tools ship as
+**plugins** instead — same idea, different packaging.)
+
+### Third-party skills (`skills-lock.json`)
+
+| Skill                 | What it does                                                                                  |
+| --------------------- | --------------------------------------------------------------------------------------------- |
+| `marimo-notebook`     | Authoring marimo notebooks in the reactive-cell format. Auto-loads on `.py` marimo files.     |
+| `anywidget-generator` | Scaffolds [anywidget](https://anywidget.dev) interactive components (JS + Python) for marimo. |
+| `jupyter-to-marimo`   | Converts a Jupyter `.ipynb` into a marimo `.py` notebook.                                     |
+| `find-skills`         | Finds an existing skill for a task. Triggers on "is there a skill for X".                     |
 
 ### Plugins (`plugins.sh`)
 
-| Plugin                   | What it does / how to use                                                                                                                                                                                     |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ponytail`               | Forces the laziest solution that works — stdlib/native over dependencies, questions whether code needs to exist at all. Active on coding tasks; toggle with `/ponytail lite\|full\|ultra` or "stop ponytail". |
-| `frontend-design`        | Pushes Claude past generic "AI slop" UI toward distinctive, production-grade frontends. Loads automatically when building web components or pages.                                                            |
-| `tufte-vdqi`             | Edward Tufte's data-viz principles as three skills (route, assess, render) — scores charts against Tufte's criteria and renders high-data-ink graphics. Use when making or critiquing plots.                  |
-| `andrej-karpathy-skills` | Karpathy's guidelines to cut common LLM coding mistakes: surgical diffs, surfaced assumptions, verifiable success criteria. Applies when writing, reviewing, or refactoring code.                             |
-| `pyright-lsp`            | Runs the Pyright language server for Python — type errors, diagnostics, go-to-definition. Works automatically on Python files, no invocation needed.                                                          |
+| Plugin                   | What it does                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------- |
+| `ponytail`               | Forces the laziest solution that works. Toggle `/ponytail lite\|full\|ultra`.         |
+| `frontend-design`        | Pushes past generic "AI slop" UI toward distinctive frontends. Loads on web UI work.  |
+| `tufte-vdqi`             | Tufte's data-viz principles (route / assess / render) for making or critiquing plots. |
+| `andrej-karpathy-skills` | Karpathy's guidelines to cut common LLM coding mistakes.                              |
+| `pyright-lsp`            | Pyright language server for Python — type errors, diagnostics. Auto on `.py`.         |
 
 ## Install
 
-Needs [`npx`](https://nodejs.org) and `jq`.
+**Custom skills, no clone** — ask Claude (the prompt up top), or in one line:
+`Install the custom skills from github.com/tobna/tona-cc-skills into ~/.claude/skills/.`
 
-```bash
-./install.sh                                 # all skills
-./install.sh find-skills implement-paper     # just these
-```
-
-A full `./install.sh` also runs `./plugins.sh` (a subset install is skills-only).
-Third-party skills install globally (active in every project); custom skills are
-symlinked from `custom/`. Restart Claude Code afterward.
-
-## Cherry-pick without cloning
-
-Anyone can grab a single skill straight from its upstream:
+**A single third-party skill**, straight from upstream:
 
 ```bash
 npx skills add marimo-team/skills@marimo-notebook
-npx skills add vercel-labs/skills@find-skills
 ```
 
-Or restore this exact set from the lockfile: `npx skills experimental_install`.
+**Full setup via script** — custom skills, third-party skills, and plugins at once (needs
+`npx` + `jq`):
 
-## Add / update skills
+```bash
+git clone https://github.com/tobna/tona-cc-skills && cd tona-cc-skills && ./install.sh
+./install.sh find-skills paper-writing    # or a named subset (skills-only, no plugins)
+```
+
+Third-party skills install globally (active in every project); custom skills are symlinked
+from `custom/`.
+
+## Maintaining this repo
+
+Track a third-party skill, pull upstream fixes, or restore the exact pinned set:
 
 ```bash
 npx skills add <owner>/<repo>@<skill>   # adds it to skills-lock.json
 npx skills update                       # pull upstream fixes
-git add skills-lock.json && git commit  # commit the manifest change
+npx skills experimental_install         # restore the exact locked set
+git add skills-lock.json && git commit
 ```
 
-Custom skill: create `custom/<name>/SKILL.md` (e.g. `cd custom && npx skills init <name>`),
-then re-run `./install.sh`.
+New custom skill: `cd custom && npx skills init <name>`, write its `SKILL.md`, re-run
+`./install.sh`. A tool listed under **Plugins** lives only in `plugins.sh`, not
+`skills-lock.json` — installing it as both would double-register it.
 
-### By prompt, no clone
+### Layout
 
-Don't want to clone the repo or run `install.sh`? Paste this straight into Claude Code — it
-fetches the skill's files from GitHub and drops them into `~/.claude/skills/`. Swap
-`latex-rules` for any skill under `custom/` (e.g. `paper-writing`):
-
-```text
-Install the `latex-rules` skill from the GitHub repo tobna/tona-cc-skills, without
-cloning it. List the files under custom/latex-rules/ via the GitHub API
-https://api.github.com/repos/tobna/tona-cc-skills/contents/custom/latex-rules?ref=main
-then download every file (SKILL.md plus any bundled assets) with its raw URL
-into ~/.claude/skills/latex-rules/, keeping the same filenames. Then confirm by listing the skill.
-```
-
-To **update** later, run the same prompt again — it re-downloads the latest files. (This
-copies files rather than symlinking, so updates are a re-run, not automatic.)
-
-## Skills vs plugins
-
-`frontend-design`, `ponytail`, the karpathy skills, and `tufte-vdqi` are Claude Code
-**plugins**, installed by `plugins.sh` — not skills in `skills-lock.json`. Installing
-`frontend-design` as a skill _and_ a plugin would double-register it, so it lives only
-in the plugin list.
+| Path               | What                                                                         |
+| ------------------ | ---------------------------------------------------------------------------- |
+| `skills-lock.json` | Manifest of third-party skills (name → upstream repo). No files vendored.    |
+| `custom/`          | Skills I authored. Real files here, symlinked live into `~/.claude/skills`.  |
+| `plugins.sh`       | Adds the marketplaces and installs the Claude Code plugins.                  |
+| `install.sh`       | Installs everything (or a named subset) into `~/.claude` — skills + plugins. |
