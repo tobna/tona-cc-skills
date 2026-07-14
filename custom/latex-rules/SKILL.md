@@ -122,6 +122,10 @@ numeric columns on the decimal with `siunitx`'s `S` column:
 
 Header cells over `S` columns need `{braces}` to stay text. Never eyeball-align numbers.
 
+**Too wide?** `\resizebox{\linewidth}{!}{...}` scales it down — last resort, prefer dropping
+columns first. **In two-column papers, put important results in a full-width `table*`** (spans
+both columns) rather than cramming one column.
+
 ## Numbers and units — siunitx
 
 `\num{1.2e-3}`, `\qty{5}{\milli\second}`, `\SI`-style ranges `\qtyrange{5}{10}{\kg}`,
