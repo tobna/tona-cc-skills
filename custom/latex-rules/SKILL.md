@@ -187,6 +187,8 @@ in the full machinery.
   - **Named operators**: `\DeclareMathOperator{\softmax}{softmax}`, or the `\newcommand{\cov}{\operatorname{cov}}` form used throughout `packages.tex` — never bare `softmax` (wrong font/spacing).
   - **One-off project names** (method name, this paper's dataset shorthand): define in the **main `.tex`**, not `packages.tex` — they don't belong in the reusable preamble.
 - Don't fix spacing with `\vspace`/`\hspace` hacks or `~~~`; fix the cause.
+- **If the project uses papis** (`papis --version` succeeds), the `.bib` is generated from the
+  library, not hand-written — follow the `papis-latex` skill instead of editing it.
 - Comment out, don't delete, when unsure — but strip dead commented blocks before submission.
 - **Keep the paper in git.** Track sources (`.tex`, `.bib`, figures, `packages.tex`); ignore the build cruft LaTeX regenerates (`.aux`, `.log`, `.out`, `.bbl`, `.synctex.gz`, `.fdb_latexmk`, …). Copy the bundled [`latex.gitignore`](latex.gitignore) into the project as `.gitignore`. Even a **local-only repo with no remote is far better than none** — one sentence per line plus git makes every change reviewable and revertible.
 
