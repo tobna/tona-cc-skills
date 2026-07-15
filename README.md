@@ -19,6 +19,7 @@ Code after installing. For the full set — third-party skills and plugins too �
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | [`paper-writing`](custom/paper-writing/SKILL.md) | Opinionated paper-writing guidance — framing, abstract/intro, clarity, figures, rebuttals. Loads when drafting or revising a paper. |
 | [`latex-rules`](custom/latex-rules/SKILL.md)     | Opinionated LaTeX conventions — packages, typography, math macros, booktabs/siunitx tables, cleveref refs. Loads on `.tex` files.   |
+| [`python-rules`](custom/python-rules/SKILL.md)   | Opinionated Python conventions — uv/ruff/pyright, modern syntax, loguru, tests that run anywhere. Loads on `.py` files.             |
 
 Like all skills, these **activate automatically** — you don't call them; Claude pulls one in
 when you're doing the thing it covers.
