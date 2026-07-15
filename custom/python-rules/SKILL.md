@@ -1,6 +1,6 @@
 ---
 name: python-rules
-description: Opinionated Python conventions — which tools to reach for, which idioms are current, and how much machinery a piece of code actually deserves. Use for any Python work: writing, editing, or reviewing code, setting up a project, or picking tooling and dependencies.
+description: "Opinionated Python conventions — which tools to reach for, which idioms are current, and how much machinery a piece of code actually deserves. Use for any Python work: writing, editing, or reviewing code, setting up a project, or picking tooling and dependencies."
 ---
 
 # Python rules
