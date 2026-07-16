@@ -18,15 +18,18 @@ are fine once the bibliography is final; they die on the next `make bib`.
 ## The pipeline
 
 ```sh
-papis export -a -b -f bibtex -o main.bib
-papis bibtex --no-auto-read read main.bib filter-cited -f main.tex unique save -f main.bib
+papis export -a -b -f bibtex -o <bib>
+papis bibtex --no-auto-read read <bib> filter-cited -f <tex> unique save -f <bib>
 ```
 
 **The dump is unfiltered on purpose.** `papis export` has no `.tex` awareness, and
-`filter-cited`/`iscited` need an already-read `.bib`, so neither can drive `export`. The
+`filter-cited`/`iscited` need an already-read `.bib`. The
 alternative is handing `export` a query — which means _you_ picked the entries, and the
 query rots the moment a citation falls outside it (so a `project:my-paper` tag loses too).
 `--no-auto-read` stops papis loading a `default-read-bibfile` behind your back.
+
+**`bibtex-ignore-keys` strips keys on export** — ignore `url` and no style can print one,
+while `doctor -k url` reports it missing forever.
 
 ## Refs
 
@@ -37,14 +40,26 @@ query rots the moment a citation falls outside it (so a `project:my-paper` tag l
 papis export -a -f bibtex | grep -oP '^@\w+\{\K[^,]+' | head
 ```
 
-`ref-format` only names _new_ entries at `papis add` time; a stored `ref` always wins, so
-changing it renames nothing. Fix one key by editing that entry's `ref:`. Adopting papis for
-an existing document means renaming every `\cite{}` — the main migration cost.
+### Papis ref format and keys
+
+Papis ref formats and ref keys are **global** properties and should be left alone if possible.
+If you really think a ref key should change, you **have to** ask the user first, since it may (will!) affect other projects.
+`ref-format` only names _new_ entries at `papis add` time; changing it renames nothing, so you probably should not!
 
 **Add a paper:** `papis add --from arxiv <id> --batch` (also `doi`, `isbn`, `pmid`).
 
-**`bibtex-ignore-keys` strips keys on export** — ignore `url` and no style can print one,
-while `doctor -k url` reports it missing forever.
+## Migrating to papis
+
+Adopting papis for an existing document usually means renaming `\cite{}` calls in the `.tex` — the main migration cost.
+
+Check the existing papis (default) library for the citation entries you need.
+You may match via the ref key, but make sure it's really the same paper!
+Otherwise, search for the title/author(s) in the papis library (for example via `papis list "<title words> author:<author>"`) and migrate to papis' ref key.
+You can extract the citation entries you need to find from a possible `.bbl` file in the project tree.
+
+If the project has no `Makefile` yet, add one using the template `Makefile` of this skill.
+If it has a `Makefile`, adjust it while keeping the original intent.
+You should probably add a `bib` build step to auto-update the library.
 
 ## Traps
 
@@ -62,12 +77,11 @@ while `doctor -k url` reports it missing forever.
 ## Makefile
 
 **A ready-to-use [`Makefile`](Makefile) ships with this skill** — copy it in and edit
-`TEX`/`BIB` at the top. Targets: `tex` (default, latex only), `full` (everything, no papis),
+`TEX`/`BIB` at the top. Targets: `tex` (default, latexmk),
 `bib` (regenerate from the library), `bib-check`, `clean`.
 
-**papis never runs on a build** — only `make bib`, because regenerating is a decision, not a
-side effect. **`bib-check` changes nothing**: it greps the last build's `.blg` instead of
-re-running bibtex, which would clobber the `.bbl` that `make tex` then bakes in.
+**papis does not run on a build** — only `make bib`, because regenerating is a **decision**, not a
+side effect. **`bib-check` changes nothing**: it greps the last build's `.blg`.
 
 Cold check: `make clean && rm -f main.bib && make bib && make full` → only cited entries in
 `main.bib`, no `Citation.*undefined` in `main.log`.
@@ -86,3 +100,4 @@ auto-read = True
 
 `ref-format` is **global-only** — it applies to the library at add time, so scoping it per
 project would give a paper a different ref depending on where it was added from.
+Thus, **don't**.

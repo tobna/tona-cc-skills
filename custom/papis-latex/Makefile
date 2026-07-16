@@ -7,15 +7,17 @@ PAPIS := papis bibtex --no-auto-read read $(BIB)
 
 .PHONY: all tex full bib bib-check clean
 
-all: tex
+all: full
 
 # latex only
-tex:
+tex-only:
 	latexmk -pdf -e '$$bibtex_use=0' $(TEX).tex
 
 # latex + bibtex, no papis
 full:
 	latexmk -pdf $(TEX).tex
+
+bibtex: full
 
 # regenerate $(BIB) from the library
 bib:
