@@ -60,6 +60,8 @@ You can extract the citation entries you need to find from a possible `.bbl` fil
 If the project has no `Makefile` yet, add one using the template `Makefile` of this skill.
 If it has a `Makefile`, adjust it while keeping the original intent.
 You should probably add a `bib` build step to auto-update the library.
+In case of multiple _different_ files that can be build (for example extra rebuttal, supplementary material, ...), add a separate build target for each file.
+By default, only the main/default `.tex` file should be build.
 
 ## Traps
 
