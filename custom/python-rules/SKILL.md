@@ -1,6 +1,6 @@
 ---
 name: python-rules
-description: "Opinionated Python conventions — which tools to reach for, which idioms are current, and how much machinery a piece of code actually deserves. Use for any Python work: writing, editing, or reviewing code, setting up a project, or picking tooling and dependencies."
+description: "Opinionated Python conventions — which tools to reach for, which idioms are current, and how much machinery a piece of code actually deserves. Use for **any** Python work `*.py`: writing, editing, or reviewing code, setting up a project, or picking tooling and dependencies."
 ---
 
 # Python rules
@@ -12,13 +12,13 @@ needs no logger, no tests, no layout. Whether code should exist at all is `ponyt
 
 ## Toolchain
 
-| Job | Tool | Replaces |
-|---|---|---|
+| Job                                        | Tool            | Replaces                                    |
+| ------------------------------------------ | --------------- | ------------------------------------------- |
 | Packaging, venvs, Python installs, running | **uv** — always | pip, virtualenv, pipx, pyenv, poetry, conda |
-| Lint + format + import sorting | **ruff** | black, flake8, isort, pyupgrade |
-| Type check | **pyright** | mypy |
-| Test | **pytest** | unittest |
-| Logging | **loguru** | logging boilerplate |
+| Lint + format + import sorting             | **ruff**        | black, flake8, isort, pyupgrade             |
+| Type check                                 | **pyright**     | mypy                                        |
+| Test                                       | **pytest**      | unittest                                    |
+| Logging                                    | **loguru**      | logging boilerplate                         |
 
 `uv init` · `uv add torch` · `uv add --dev ruff pytest` · `uv run x.py` · `uv sync` · `uvx ruff check`
 
@@ -81,7 +81,7 @@ Optional — **match what the file already does**; consistency within a file bea
 
 ## Errors, logging, I/O
 
-- Specific exceptions; never bare `except:` or `except Exception: pass`. A custom exception class needs a caller that catches *it*.
+- Specific exceptions; never bare `except:` or `except Exception: pass`. A custom exception class needs a caller that catches _it_.
 - **`raise ... from e`** when re-raising, or the traceback is lost.
 - **loguru** — `from loguru import logger`. No `getLogger`, no handler setup. Codebase already has logging? Use that.
 - **f-strings in logs too** — `logger.info(f"loss {loss:.3f}")`; formatting a number is free. Defer only real compute, and only via `logger.opt(lazy=True).debug("{}", lambda: expensive(x))` — `logger.debug("{}", expensive(x))` defers nothing.
@@ -93,7 +93,7 @@ Optional — **match what the file already does**; consistency within a file bea
 
 - **`breakpoint()`** — never `import pdb; pdb.set_trace()`. Same thing, shorter, and `PYTHONBREAKPOINT=0` disables every one of them without an edit (`=ipdb.set_trace` swaps the debugger).
 - **`pytest -x --pdb`** drops into a debugger at the first failure; `-l` shows locals in the traceback. Beats re-running with prints added.
-- **Read tracebacks bottom-up**: the last line is what broke, and the lowest frame in *your* code is usually where to look.
+- **Read tracebacks bottom-up**: the last line is what broke, and the lowest frame in _your_ code is usually where to look.
 - **`logger.exception(...)`** inside an `except` — or loguru's `@logger.catch` — records the traceback. `logger.error(str(e))` throws away the part you need.
 - Reproduce on the smallest failing input before changing anything.
 - Print-debugging a small script is fine; committing it isn't. Ruff's `T10` catches a stray `breakpoint()` if you want it enforced (`T20` catches `print`, but that fights the rule above — only for libraries).
@@ -118,20 +118,20 @@ share setup. Mock at architectural boundaries only — never code you own; pass 
 
 ## Never use (`ruff check --fix` rewrites most)
 
-| Don't | Use instead |
-|---|---|
-| `.format()`, `%`, `"a" + str(b)` | f-strings |
-| `os.path.join`, `os.listdir`, `glob.glob` | `pathlib.Path` |
-| `List[int]`, `Optional[X]`, `Union[A, B]` | `list[int]`, `X \| None`, `A \| B` |
-| `TypeVar` + `Generic[T]` (new code) | PEP 695 `def f[T](...)`, `class C[T]` |
-| `setup.py`, `setup.cfg`, `requirements.txt` | `pyproject.toml` + `uv.lock` |
-| `pip`, `virtualenv`, `poetry`, `conda` | `uv` |
-| `black`, `flake8`, `isort` | `ruff format`, `ruff check` |
-| `==` pins in `pyproject.toml` | `>=MAJOR.MINOR` + committed `uv.lock` |
-| `range(len(xs))` | `enumerate(xs)` / `zip(a, b, strict=True)` |
-| `except:` / `except Exception: pass` | specific exception, or `contextlib.suppress` |
-| `type=bool`, paired `store_true`/`store_false` | `action=argparse.BooleanOptionalAction` |
-| `pickle` for data | JSON / CSV / parquet |
-| `dict` as an ad-hoc record | `@dataclass` |
-| `datetime.utcnow()` | `datetime.now(timezone.utc)` |
-| `typing.Text`, `six`, `# -*- coding: utf-8 -*-`, `class C(object)` | delete |
+| Don't                                                              | Use instead                                  |
+| ------------------------------------------------------------------ | -------------------------------------------- |
+| `.format()`, `%`, `"a" + str(b)`                                   | f-strings                                    |
+| `os.path.join`, `os.listdir`, `glob.glob`                          | `pathlib.Path`                               |
+| `List[int]`, `Optional[X]`, `Union[A, B]`                          | `list[int]`, `X \| None`, `A \| B`           |
+| `TypeVar` + `Generic[T]` (new code)                                | PEP 695 `def f[T](...)`, `class C[T]`        |
+| `setup.py`, `setup.cfg`, `requirements.txt`                        | `pyproject.toml` + `uv.lock`                 |
+| `pip`, `virtualenv`, `poetry`, `conda`                             | `uv`                                         |
+| `black`, `flake8`, `isort`                                         | `ruff format`, `ruff check`                  |
+| `==` pins in `pyproject.toml`                                      | `>=MAJOR.MINOR` + committed `uv.lock`        |
+| `range(len(xs))`                                                   | `enumerate(xs)` / `zip(a, b, strict=True)`   |
+| `except:` / `except Exception: pass`                               | specific exception, or `contextlib.suppress` |
+| `type=bool`, paired `store_true`/`store_false`                     | `action=argparse.BooleanOptionalAction`      |
+| `pickle` for data                                                  | JSON / CSV / parquet                         |
+| `dict` as an ad-hoc record                                         | `@dataclass`                                 |
+| `datetime.utcnow()`                                                | `datetime.now(timezone.utc)`                 |
+| `typing.Text`, `six`, `# -*- coding: utf-8 -*-`, `class C(object)` | delete                                       |

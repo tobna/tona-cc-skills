@@ -1,6 +1,6 @@
 ---
 name: latex-rules
-description: Opinionated LaTeX conventions for academic papers — required packages, typography (dashes, quotes, non-breaking spaces), math notation and macros, booktabs tables, siunitx numbers, figures, cleveref cross-references, source hygiene, and obsolete packages to never use. Use when writing, editing, or reviewing .tex files or when a document's LaTeX looks sloppy or dated.
+description: Opinionated LaTeX conventions for academic papers — required packages, typography (dashes, quotes, non-breaking spaces), math notation and macros, booktabs tables, siunitx numbers, figures, cleveref cross-references, source hygiene, and obsolete packages to never use. **Always** use this when writing, editing, or reviewing `*.tex` files or when a document's LaTeX looks sloppy or dated.
 ---
 
 # LaTeX rules
@@ -41,7 +41,7 @@ this paper (method name, dataset shorthand) are defined in the main `.tex`, not 
 
 **Keep `packages.tex` current:** when you improve the preamble while working on a paper —
 a new reusable macro, a better package, a bug fix — and the change would help future
-papers too, mirror it back into *this skill's* `packages.tex` (the single source of
+papers too, mirror it back into _this skill's_ `packages.tex` (the single source of
 truth) and commit, so the next paper starts from the improved version. Leave genuinely
 paper-specific bits out of it.
 
@@ -65,29 +65,29 @@ for the most compact form. Whichever you pick, stay consistent across the paper.
 Label with a type prefix, always right after `\caption`/`\section`/`\label`-target:
 `fig:`, `tab:`, `eq:`, `sec:`, `alg:`, `thm:`, `app:`. Use `\eqref` only if not using
 cleveref (with one exception for named equations — see Math). A `\label` for a float goes
-*after* its `\caption`, or the number is wrong.
+_after_ its `\caption`, or the number is wrong.
 
 ## Typography
 
 - **Dashes**: `-` hyphen (intra-word), `--` en-dash (ranges: `pages 5--10`), `---` em-dash (—no spaces around it).
 - **Quotes**: `` `single' `` and ` ``double'' ` — never the straight `"`.
 - **Ellipsis**: `\dots`, never `...`.
-- **Non-breaking space `~`** before every citation: `~\cite{...}`. Prevents the marker stranded at a line start. Cross-references need **no** manual `~` — always `\Cref{fig:...}`, never `Figure~\ref{...}`; cleveref supplies the word *and* the tie for you. (A number+unit uses the thin space `\,`, not `~` — see the unit rule below.)
+- **Non-breaking space `~`** before every citation: `~\cite{...}`. Prevents the marker stranded at a line start. Cross-references need **no** manual `~` — always `\Cref{fig:...}`, never `Figure~\ref{...}`; cleveref supplies the word _and_ the tie for you. (A number+unit uses the thin space `\,`, not `~` — see the unit rule below.)
 - **Citation placement — scope sets the position**:
   - a specific **term** → immediately after that term, bound with `~`: `the transformer~\cite{vaswani2017} scales well.`
   - an **assertion / clause** → right after it, wherever that clause ends in the sentence.
-  - a **whole sentence** → at the end, *before* the period: `…and this holds across scales~\cite{kaplan2020}.`
-  - a **whole paragraph** (occasional only) → *after* the period: `…broadly applicable.~\cite{kaplan2020}`
+  - a **whole sentence** → at the end, _before_ the period: `…and this holds across scales~\cite{kaplan2020}.`
+  - a **whole paragraph** (occasional only) → _after_ the period: `…broadly applicable.~\cite{kaplan2020}`
 - **Emphasis**: `\emph{...}` by default (nests correctly); never `\textit` for emphasis, never the deprecated `{\it ...}` / `{\bf ...}`. `\textbf` bold emphasis is allowed but only **very rarely** — for a genuinely key term, not routine emphasis.
 - **Run-in headings, not `\paragraph`**: to save vertical space, open the paragraph with a bold lead-in `\textbf{Heading.}` (text, then a period) rather than `\paragraph{Heading}`. `packages.tex` provides `\parahead{Heading}` for this.
-- **Spacing after abbreviations**: `e.g.\ ` and `i.e.\ ` (backslash-space) so the period isn't treated as sentence-end; or use a macro.
+- **Spacing after abbreviations**: `e.g.\` and `i.e.\` (backslash-space) so the period isn't treated as sentence-end; or use a macro.
 - **Always a thin space `\,` between a number and its unit**: `5\,\mathrm{ms}`, `10\,\mathrm{kg}`, `3.3\,\mathrm{GHz}` — never `5ms` or `5 ms` (a full space is too wide and can break across lines). `siunitx`'s `\qty{5}{\milli\second}` does this for you; use `\,` when writing units by hand.
 
 ## Math
 
 - **Display math**: `align*` (unnumbered) or `align`/`equation` (numbered) — never `\[ … \]`, `$$ … $$`, or `eqnarray`. **Inline math**: `$ … $`, not `\( … \)`.
 - `\DeclareMathOperator{\argmax}{arg\,max}` for named operators — never `\text{argmax}` or bare `argmax` (wrong spacing/font).
-- Multi-line alignment with `align` gives one number *per line*. For a **single equation broken across rows that should carry only one number**, use `split` (aligned on `&`) inside `equation` or `align` — the number sits centered on the whole block:
+- Multi-line alignment with `align` gives one number _per line_. For a **single equation broken across rows that should carry only one number**, use `split` (aligned on `&`) inside `equation` or `align` — the number sits centered on the whole block:
 
 ```latex
 \begin{equation}
@@ -98,11 +98,12 @@ cleveref (with one exception for named equations — see Math). A `\label` for a
 \end{equation}
 ```
 
-  Use `aligned` instead when the aligned block is a sub-part of a larger expression (it carries no number of its own).
+Use `aligned` instead when the aligned block is a sub-part of a larger expression (it carries no number of its own).
+
 - Delimiters: `\left( … \right)` auto-sizing is allowed and a fine default. Switch to manual `\bigl( \bigr)` / `\Bigl` only when auto oversizes (e.g. it hugs a subscript or fraction too loosely) and you know the height you want.
 - Words inside math: `\text{...}` (needs amsmath), not `\mbox` or roman hacks.
 - Reuse notation consistently; define macros for recurring symbols (see below).
-- Reference equations with `\Cref{eq:...}` (→ "Equation (3)"), never a raw "(3)"; lowercase `\cref{eq:...}` (→ "eq. (3)") is the compact fallback to save space — same consistency rule as the other cross-refs. `\eqref{eq:...}` (→ bare "(3)") is the form for documents *without* cleveref, but it's also fine **with** cleveref when the sentence already names the equation: `the loss~\eqref{eq:loss}`. Either way it needs a manual tie (`~`), since it supplies no word of its own.
+- Reference equations with `\Cref{eq:...}` (→ "Equation (3)"), never a raw "(3)"; lowercase `\cref{eq:...}` (→ "eq. (3)") is the compact fallback to save space — same consistency rule as the other cross-refs. `\eqref{eq:...}` (→ bare "(3)") is the form for documents _without_ cleveref, but it's also fine **with** cleveref when the sentence already names the equation: `the loss~\eqref{eq:loss}`. Either way it needs a manual tie (`~`), since it supplies no word of its own.
 - **Picky niceties** (nice to have, not blocking): `\coloneqq` for a definition `:=` and `\eqqcolon` for `=:` (both from `mathtools`) — the spacing around a bare `:=` is wrong; `\colon` not a bare `:` in a map `f\colon A \to B` (bare `:` is a relation, too much space); `\dots` not `...` (already required above).
 
 ## Tables — booktabs
@@ -158,14 +159,14 @@ in the full machinery.
 - **Pseudocode — `algorithm` (the float) + a body package.** `algorithm` only provides the
   floating, captionable, `\Cref`-able wrapper; pair it with `algpseudocode` (from `algorithmicx`)
   or `algorithm2e` for the actual lines. `algpseudocode` is the modern default — prefer it over
-  the older `algorithmic`. Caption + `\label` go *above* the body (like tables); reference with
+  the older `algorithmic`. Caption + `\label` go _above_ the body (like tables); reference with
   `\Cref{alg:...}`.
 
 ## Source hygiene
 
 - **One sentence per line** (semantic line breaks). Keeps git diffs and review comments
   sane; line breaks don't affect output. Never reflow a whole paragraph on a one-word edit.
-  If a project *does* enforce a max line length, keep the max-one-sentence-per-line rule anyway:
+  If a project _does_ enforce a max line length, keep the max-one-sentence-per-line rule anyway:
   never start a second sentence on a line, and when a single long sentence must wrap, break at a
   clause boundary — right after `. ! ? ; : ,` — not mid-clause. Sentence-end still gets its own break.
 - **Auto-format for indentation, never for reflow.** Use `latexindent` (or `tex-fmt`) to keep
@@ -175,8 +176,8 @@ in the full machinery.
   `wrap = false`. Run it on save or in a pre-commit hook so formatting stays out of content diffs.
 - **Indent with spaces, not tabs.** Indentation is cosmetic in LaTeX (it never reaches the
   output), so the only thing that matters is looking identical in every editor and diff — which
-  tabs don't. `latexindent`'s built-in default is a *tab*, so set it explicitly: `latexindent
-  -y='defaultIndent: "  "'` (two spaces), or put `defaultIndent: "  "` in a `.latexindent.yaml`.
+  tabs don't. `latexindent`'s built-in default is a _tab_, so set it explicitly: `latexindent
+-y='defaultIndent: "  "'` (two spaces), or put `defaultIndent: "  "` in a `.latexindent.yaml`.
   Pick one and keep the file free of mixed tabs/spaces.
 - **Blank line = paragraph break.** Never `\\` to end a paragraph (it makes a bad
   hanging line). `\\` is only for tabular/align/forced breaks.
@@ -207,25 +208,25 @@ the main `.tex`, before `\input{packages}`**:
 
 When on, it switches on three aids at once; when off (the line commented), all of them vanish:
 
-- **`\overfullrule=5pt`** — a black bar in the margin at every overfull line, so you *see*
+- **`\overfullrule=5pt`** — a black bar in the margin at every overfull line, so you _see_
   bad boxes instead of hunting the log.
 - **`lineno` line numbers** — co-authors and reviewers can say "line 214". (Numbers prose;
   `align`/`equation` bodies aren't numbered without extra setup.)
 - **`showkeys`** — prints each `\label`/`\ref` key in the margin: no more guessing what a
   float is called while cross-referencing.
 
-The red **`\todo{...}`** boxes are *not* tied to this toggle — they work with or without draft
+The red **`\todo{...}`** boxes are _not_ tied to this toggle — they work with or without draft
 mode, exactly as before, so drop a `\todo` anywhere and strip them before submitting. (If you'd
 rather a stray TODO fail the final build, redefine `\todo` to a `\PackageError`.)
 
 Because this uses its own boolean (not `\documentclass[draft]`), figures still render and
-`microtype` stays on. (If you ever *do* pass the class-level `draft` option, note it turns
+`microtype` stays on. (If you ever _do_ pass the class-level `draft` option, note it turns
 `microtype` off — pass `final` to microtype to keep it.)
 
 ## Linting
 
 A linting stack catches mechanical issues before a co-author or reviewer does. **Don't
-*install* any of these unprompted** — but if one is **already installed** (check first, e.g.
+_install_ any of these unprompted** — but if one is **already installed** (check first, e.g.
 `command -v chktex`), running it is fine, and you may **recommend** adopting one when the
 document would clearly benefit (recurring dash/ref/spacing slips, a co-authored draft, prose
 that reads AI-shaped).
@@ -242,15 +243,15 @@ that reads AI-shaped).
 
 LaTeX and prose that "smell" AI-generated get noticed and discounted by reviewers. None of
 the tells below is outright banned — each is fine used **very sparingly**, roughly once per
-one or two pages. It's the *frequency and clustering* that reads as AI, not any single
+one or two pages. It's the _frequency and clustering_ that reads as AI, not any single
 instance. So the bullets below mean "keep rare," not "never."
 
-**Vocabulary tells** — cut the AI buzzwords: *leverage, utilize, delve, showcase, seamless,
+**Vocabulary tells** — cut the AI buzzwords: _leverage, utilize, delve, showcase, seamless,
 comprehensive, pivotal, underscore, realm, testament, tapestry, meticulous, intricate, nuanced,
-crucial, foster, boast, landscape*, and *robust* as filler. Cut sentence-opening transition
-spam: *Furthermore, Moreover, Additionally, Notably, Importantly, Overall, In conclusion, It is
-worth noting that.* The **structural** prose tells — dodging "is/has" (*serves as*, *boasts*),
-participial significance-tails, false authority (*experts argue*), significance inflation,
+crucial, foster, boast, landscape_, and _robust_ as filler. Cut sentence-opening transition
+spam: _Furthermore, Moreover, Additionally, Notably, Importantly, Overall, In conclusion, It is
+worth noting that._ The **structural** prose tells — dodging "is/has" (_serves as_, _boasts_),
+participial significance-tails, false authority (_experts argue_), significance inflation,
 synonym churn, template future-work sections — live in the `paper-writing` skill.
 
 **Formatting tells**
@@ -264,22 +265,22 @@ synonym churn, template future-work sections — live in the `paper-writing` ski
 
 ## Never use (obsolete — l2tabu)
 
-| Don't | Use instead |
-|---|---|
-| `eqnarray` | `align` (amsmath) |
-| `\bf`, `\it`, `\rm`, `\tt` | `\textbf`, `\emph`, `\textrm`, `\texttt` |
-| `subfigure`, `subfig` | `subcaption` |
-| `epsfig`, `\psfig` | `graphicx` + `\includegraphics` |
-| `a4wide`, `fullpage` | `geometry` |
-| `times`, `pslatex` | `newtxtext`/`newtxmath` or `mathptmx` |
-| `\centerline` | `\centering` |
-| `$$ … $$`, `\[ … \]` | `align*` (unnumbered) / `equation` (numbered) |
+| Don't                      | Use instead                                   |
+| -------------------------- | --------------------------------------------- |
+| `eqnarray`                 | `align` (amsmath)                             |
+| `\bf`, `\it`, `\rm`, `\tt` | `\textbf`, `\emph`, `\textrm`, `\texttt`      |
+| `subfigure`, `subfig`      | `subcaption`                                  |
+| `epsfig`, `\psfig`         | `graphicx` + `\includegraphics`               |
+| `a4wide`, `fullpage`       | `geometry`                                    |
+| `times`, `pslatex`         | `newtxtext`/`newtxmath` or `mathptmx`         |
+| `\centerline`              | `\centering`                                  |
+| `$$ … $$`, `\[ … \]`       | `align*` (unnumbered) / `equation` (numbered) |
 
 ## Quick review pass
 
 - [ ] `microtype` on; `hyperref`+`cleveref` loaded in that order.
 - [ ] All refs via `\Cref` (preferred) / `\cref`; every float `\label` after its `\caption`.
-- [ ] `--` for ranges, `---` for em-dash, `` `` ''`` quotes, `\dots`, `~` before every `\cite` (cleveref refs need none).
+- [ ] `--` for ranges, `---` for em-dash, ` ` ''``quotes,`\dots`, `~`before every`\cite` (cleveref refs need none).
 - [ ] Tables use booktabs (no vrules/`\hline`); numbers aligned via `S` columns.
 - [ ] Numbers/units via siunitx, or a thin space `\,` between every number and its unit; figures are vector; captions self-contained.
 - [ ] One sentence per line; no `\\` paragraph breaks; no obsolete packages.

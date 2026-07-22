@@ -1,6 +1,6 @@
 ---
 name: papis-latex
-description: "Opinionated workflow for driving a LaTeX project's bibliography — use papis for generating the .bib with export + filter-cited, the Makefile targets, and the traps in papis bibtex (doctor, iscited, filter-cited). Use when the task touches a .bib, references, or citations: regenerating or adding entries, \\cite keys that don't resolve, entries missing or wrong, or any temptation to hand-edit a .bib."
+description: "Opinionated workflow for driving a LaTeX project's bibliography — use papis for generating the .bib with export + filter-cited, the Makefile targets, and the traps in papis bibtex (doctor, iscited, filter-cited). Use when the task touches a .bib, references, or citations: regenerating or adding entries, \\cite keys that don't resolve, entries missing or wrong, or any temptation to hand-edit a .bib. Also use before running any `papis` command."
 ---
 
 # papis + LaTeX
