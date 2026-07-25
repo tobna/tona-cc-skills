@@ -15,11 +15,11 @@ Code after installing. For the full set — third-party skills and plugins too �
 
 ## My skills (`custom/`)
 
-| Skill           | What it does                                                                                                                        |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| [`paper-writing`](custom/paper-writing/SKILL.md) | Opinionated paper-writing guidance — framing, abstract/intro, clarity, figures, rebuttals. Loads when drafting or revising a paper. |
-| [`latex-rules`](custom/latex-rules/SKILL.md)     | Opinionated LaTeX conventions — packages, typography, math macros, booktabs/siunitx tables, cleveref refs. Loads on `.tex` files.   |
-| [`python-rules`](custom/python-rules/SKILL.md)   | Opinionated Python conventions — uv/ruff/pyright, modern syntax, loguru, tests that run anywhere. Loads on `.py` files.             |
+| Skill                                            | What it does                                                                                                                                                              |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`paper-writing`](custom/paper-writing/SKILL.md) | Opinionated paper-writing guidance — framing, abstract/intro, clarity, figures, rebuttals. Loads when drafting or revising a paper.                                       |
+| [`latex-rules`](custom/latex-rules/SKILL.md)     | Opinionated LaTeX conventions — packages, typography, math macros, booktabs/siunitx tables, cleveref refs. Loads on `.tex` files.                                         |
+| [`python-rules`](custom/python-rules/SKILL.md)   | Opinionated Python conventions — uv/ruff/pyright, modern syntax, loguru, tests that run anywhere. Loads on `.py` files.                                                   |
 | [`papis-latex`](custom/papis-latex/SKILL.md)     | papis workflow for a LaTeX project's bibliography — generate the `.bib` via export + filter-cited, Makefile targets, `papis bibtex` traps. Loads on `.bib`/citation work. |
 
 Like all skills, these **activate automatically** — you don't call them; Claude pulls one in
@@ -36,12 +36,12 @@ Third-party skills and Claude Code plugins I rely on. (Skills auto-load; a few t
 
 ### Third-party skills (`skills-lock.json`)
 
-| Skill                 | What it does                                                                                  |
-| --------------------- | --------------------------------------------------------------------------------------------- |
-| `marimo-notebook`     | Authoring marimo notebooks in the reactive-cell format. Auto-loads on `.py` marimo files.     |
-| `anywidget-generator` | Scaffolds [anywidget](https://anywidget.dev) interactive components (JS + Python) for marimo. |
-| `jupyter-to-marimo`   | Converts a Jupyter `.ipynb` into a marimo `.py` notebook.                                     |
-| `find-skills`         | Finds an existing skill for a task. Triggers on "is there a skill for X".                     |
+| Skill                 | What it does                                                                                        |
+| --------------------- | --------------------------------------------------------------------------------------------------- |
+| `marimo-notebook`     | Authoring marimo notebooks in the reactive-cell format. Auto-loads on `.py` marimo files.           |
+| `anywidget-generator` | Scaffolds [anywidget](https://anywidget.dev) interactive components (JS + Python) for marimo.       |
+| `jupyter-to-marimo`   | Converts a Jupyter `.ipynb` into a marimo `.py` notebook.                                           |
+| `find-skills`         | Finds an existing skill for a task. Triggers on "is there a skill for X".                           |
 | `analyze-results`     | Analyzes ML experiment results — stats, comparison tables, insights. Triggers on "analyze results". |
 
 ### Plugins (`plugins.sh`)
@@ -53,6 +53,19 @@ Third-party skills and Claude Code plugins I rely on. (Skills auto-load; a few t
 | `tufte-vdqi`             | Tufte's data-viz principles (route / assess / render) for making or critiquing plots. |
 | `andrej-karpathy-skills` | Karpathy's guidelines to cut common LLM coding mistakes.                              |
 | `pyright-lsp`            | Pyright language server for Python — type errors, diagnostics. Auto on `.py`.         |
+
+### Niceties
+
+I'm using [this](https://github.com/daniel3303/ClaudeCodeStatusLine) statusline for claude code, which gives all the information that's necessary in my opinion.
+Install it by asking claude to
+
+```
+Clone https://github.com/daniel3303/ClaudeCodeStatusLine to ~/.claude/statusline/ (or %USERPROFILE%\.claude\statusline\ on Windows) and configure it as my status bar by following its INSTALL.md.
+```
+
+```
+
+```
 
 ## Install
 
