@@ -13,6 +13,8 @@ Install the custom skills from github.com/tobna/tona-cc-skills (the custom/ fold
 Only want some? Tell Claude which (e.g. "only `latex-rules`"). Re-run to update. Restart Claude
 Code after installing. For the full set — third-party skills and plugins too — see [Install](#install).
 
+In my experience it helps to tell claude to always load the relevant skills in the global `CLAUDE.md` at `~/.claude/CLAUDE.md`.
+
 ## My skills (`custom/`)
 
 | Skill                                            | What it does                                                                                                                                                              |
