@@ -9,9 +9,9 @@ A paper is not a log of experiments. It is **one technical claim, organized into
 story a reviewer is willing to believe.** Everything below serves that.
 
 Distilled from the writing views of Neel Nanda, Andrej Karpathy, Sebastian Farquhar,
-Zachary Lipton, Gopen & Swan's *The Science of Scientific Writing*, Mensh & Kording's
-*Ten Simple Rules for Structuring Papers*, and Simon Peyton Jones's *How to Write a Great
-Research Paper*.
+Zachary Lipton, Gopen & Swan's _The Science of Scientific Writing_, Mensh & Kording's
+_Ten Simple Rules for Structuring Papers_, and Simon Peyton Jones's _How to Write a Great
+Research Paper_.
 
 ## Start here: the one-sentence test
 
@@ -29,7 +29,7 @@ writing prose.** Every section then supports that one claim; none launches a sec
 
 Reviewers read **Title → Abstract → Introduction → Figure 1 → the rest**, and often
 judge before reading the method carefully. So spend roughly equal effort on: the
-**abstract**, the **introduction**, the **figures**, and everything else *combined*.
+**abstract**, the **introduction**, the **figures**, and everything else _combined_.
 Never bury the contribution after Section 3.
 
 ## Draft order
@@ -50,7 +50,7 @@ instantiated for each part.
 ## Abstract — five sentences
 
 1. What you achieved (the specific contribution — sentence 1 or 2, not generic).
-2. Why the problem is important *and* hard.
+2. Why the problem is important _and_ hard.
 3. How you approached it.
 4. What evidence supports the claim.
 5. The one number / result / guarantee to remember.
@@ -86,7 +86,7 @@ The section reviewers scrutinize hardest — make each result an argument, not a
 
 - **One question per paragraph: question → evidence → answer.** Open with what the experiment tests, point to the figure/table, close with the claim it establishes. Each result rests on the last.
 - **Every experiment maps to a stated claim.** If it tests nothing from the intro, cut it or say why it's here.
-- **Order by importance**: headline comparison first (the result that carries the contribution), then ablations that isolate *why* it works, then robustness/sensitivity. Don't open on setup minutiae.
+- **Order by importance**: headline comparison first (the result that carries the contribution), then ablations that isolate _why_ it works, then robustness/sensitivity. Don't open on setup minutiae.
 - **State the takeaway in words** — never make the reader infer the point from a table. Numbers support the sentence; they don't replace it.
 - **Captions carry the takeaway too** — a caption should state its main finding in a line, and point to where it shows (the gap in the last column, the crossover at 10k steps). A skimming reviewer reads figures and captions before prose.
 - **Push the periphery to the appendix.** Smaller ablations, sensitivity sweeps, and failure cases that don't move the paper's story belong in an appendix — reference them, but keep the main results section carrying only what advances the claim.
@@ -95,7 +95,7 @@ The section reviewers scrutinize hardest — make each result an argument, not a
 
 ## Discussion, conclusion, limitations
 
-- **Recap the one contribution** in a sentence — what to remember — then *interpret*, don't restate the results.
+- **Recap the one contribution** in a sentence — what to remember — then _interpret_, don't restate the results.
 - **State limitations honestly and specifically.** Reviewers punish hidden weaknesses far harder than acknowledged ones; naming a limitation defuses it and signals judgment.
 - **Why it matters / what's next** — concrete follow-ons, not the template "In future work we will explore various directions" (see AI-shaped prose).
 
@@ -117,11 +117,11 @@ end. Never bury the key sentence in the middle.
 
 ## Word choice
 
-- **Cut hedging** unless the uncertainty is real: *may, can, might, potentially*. Overhedging reads as self-doubt, not rigor.
-- **Cut fillers**: *actually, very, really, quite, basically, essentially, Importantly, Notably, It is worth noting that.*
-- **Replace vague with specific**: performance → *accuracy / F1 / latency*; improves → *increases by X%*; large → *1B parameters*; fast → *3× faster*.
+- **Cut hedging** unless the uncertainty is real: _may, can, might, potentially_. Overhedging reads as self-doubt, not rigor.
+- **Cut fillers**: _actually, very, really, quite, basically, essentially, Importantly, Notably, It is worth noting that._
+- **Replace vague with specific**: performance → _accuracy / F1 / latency_; improves → _increases by X%_; large → _1B parameters_; fast → _3× faster_.
 - **One name per concept** — don't drift between model/network/architecture, or sample/instance/example.
-- **Verbs signal contribution**: prefer *develop, propose, introduce, characterize* over *combine, modify, extend, expand* — wording shapes whether a reviewer reads it as real work.
+- **Verbs signal contribution**: prefer _develop, propose, introduce, characterize_ over _combine, modify, extend, expand_ — wording shapes whether a reviewer reads it as real work.
 
 ## AI-shaped prose
 
@@ -130,18 +130,18 @@ LLM-generated. No single item below is forbidden; each is fine once in a while. 
 frequency and clustering that reads as AI, not any one instance.** The fix is almost always
 "say it plainly."
 
-- **Don't dodge "is" and "has."** AI reaches for *serves as, stands as, represents, functions
-  as, acts as* instead of *is*, and *boasts, features, offers* instead of *has*. Write
+- **Don't dodge "is" and "has."** AI reaches for _serves as, stands as, represents, functions
+  as, acts as_ instead of _is_, and _boasts, features, offers_ instead of _has_. Write
   "Attention **is** the bottleneck," not "Attention **serves as** the bottleneck."
 - **Cut the participial significance-tail** — the vague `-ing` clause bolted onto a sentence to
   inflate importance: "…, **further underscoring its scalability**", "…, **highlighting the
   importance of** alignment", "…, **contributing to** the broader field." Delete it, or replace
   it with a concrete consequence.
-- **No false authority.** *Observers note, experts argue, studies have shown, it is widely
-  regarded, researchers treat X as* — vague attributions implying a consensus with nothing
+- **No false authority.** _Observers note, experts argue, studies have shown, it is widely
+  regarded, researchers treat X as_ — vague attributions implying a consensus with nothing
   behind them. In a paper, attribute to a specific citation or cut the claim.
-- **Don't inflate significance.** *pivotal moment, marks a turning point, plays a crucial role,
-  enduring legacy, rich landscape / tapestry, a testament to* — mundane results dressed as
+- **Don't inflate significance.** _pivotal moment, marks a turning point, plays a crucial role,
+  enduring legacy, rich landscape / tapestry, a testament to_ — mundane results dressed as
   milestones. State what the result is; let the reader weigh it.
 - **One name per concept** (also above) — synonym churn (drifting model → network →
   architecture → framework for the same thing) is a repetition-penalty artifact, not style.
@@ -154,6 +154,8 @@ frequency and clustering that reads as AI, not any one instance.** The fix is al
 
 The LaTeX/formatting counterparts — stray `\textbf`, equal-sized bullet stacks, em-dash spam,
 colon lead-ins, "not X but Y," and the buzzword list — live in the `latex-rules` skill.
+
+Also follow the suggestions of the `humanizer` skill if installed.
 
 ## Citations must be real
 
@@ -169,14 +171,14 @@ ways; verify every load-bearing one:
 - **Metadata** — right authors, year, title, venue. Watch arXiv-year vs. proceedings-year, title
   drift between versions, preprint mistaken for the official venue, and scrambled co-author order.
 - **Context (the subtle, dangerous one)** — the cited paper actually supports the claim you
-  attach to it. A *real* paper cited for something it doesn't show — or contradicts — is worse
+  attach to it. A _real_ paper cited for something it doesn't show — or contradicts — is worse
   than a fake one: it survives an existence and metadata check and only a reader who knows the
   work catches it. For any claim a citation is carrying, read the source, not just its abstract.
 
 Only the entries you actually `\cite` matter — a shared master `.bib` across projects will have
 plenty of uncited entries, and that's fine. Check that every `\cite` resolves to a real key and
 that the cited entry passes the three layers above. Run this as a dedicated pass **after the
-bibliography is frozen**, right before submission — not on a moving draft. `\cite` *placement*
+bibliography is frozen**, right before submission — not on a moving draft. `\cite` _placement_
 mechanics live in `latex-rules`.
 
 **Verifying a citation** — only when the user explicitly asks to check one or all citations (this
@@ -199,7 +201,7 @@ meant; a citation "fix" applied blind can swap in the wrong work.
 
 ## Mathematical writing
 
-Goal: let the reader **follow**, not sound sophisticated. State assumptions *before* the
+Goal: let the reader **follow**, not sound sophisticated. State assumptions _before_ the
 theorem; pair proofs with intuition (keep intuition in the main text, not only the
 appendix); keep notation consistent; define every symbol at first use. **If a theorem is
 restated in the appendix (or abstract/contributions), the restatement must match the main
@@ -223,18 +225,18 @@ strongest comparison, or give the simplest visual summary of the main claim. Rul
 
 ## Common mistakes → fixes
 
-| Mistake | Fix |
-|---|---|
-| Intro > 1.5 pages | Move background to Related Work |
-| Method buried late | Front-load the contribution |
-| No contribution bullets | Add 2–4 concrete, falsifiable claims |
-| Experiments not tied to claims | State what each experiment tests |
-| Generic abstract opening | Start from the actual contribution |
-| Related Work as paper-by-paper list | Reorganize by method family / research question |
-| Results read as a data dump | Each paragraph: question → evidence → answer |
-| Discussion restates the results | Interpret and draw implications instead |
+| Mistake                             | Fix                                                                                 |
+| ----------------------------------- | ----------------------------------------------------------------------------------- |
+| Intro > 1.5 pages                   | Move background to Related Work                                                     |
+| Method buried late                  | Front-load the contribution                                                         |
+| No contribution bullets             | Add 2–4 concrete, falsifiable claims                                                |
+| Experiments not tied to claims      | State what each experiment tests                                                    |
+| Generic abstract opening            | Start from the actual contribution                                                  |
+| Related Work as paper-by-paper list | Reorganize by method family / research question                                     |
+| Results read as a data dump         | Each paragraph: question → evidence → answer                                        |
+| Discussion restates the results     | Interpret and draw implications instead                                             |
 | AI-generated / unverified citations | Verify existence, metadata, and that each source supports its claim (see Citations) |
-| Inconsistent terminology | One name per concept |
+| Inconsistent terminology            | One name per concept                                                                |
 
 ## Pre-submission checklist
 
@@ -258,7 +260,7 @@ Reviews are in; space is **extremely** tight (often ~1 page) and responses move 
 - **Don't deny a reduction — distinguish structurally.** When a reviewer says your method "reduces to X" or "is just generic Y," agree on the local reduction, then name the specific structural feature your approach preserves that X/Y does not — anchored to a concrete mechanism (a theorem dependency, a derivation step, an empirical consequence), never a bare assertion.
 - **Surface non-obvious design choices yourself.** If the setup has a caveat a hostile reviewer could reverse-engineer (compute-matched ≠ epoch-matched, a frozen parameter subset, an atypical seed or hold-out protocol), name it plainly with numbers. Pre-empting the attack costs a line; being caught costs the reviewer's trust in everything else.
 - **Lead with the highest-impact response**: new results first, then shared concerns.
-- **Prioritize the swing reviewer** (borderline, engaged) — but don't ignore a negative one: rebut their points *for the swing reviewer's benefit*, showing concretely why the criticism is wrong so the swing reviewer doesn't absorb it and mark you down too.
+- **Prioritize the swing reviewer** (borderline, engaged) — but don't ignore a negative one: rebut their points _for the swing reviewer's benefit_, showing concretely why the criticism is wrong so the swing reviewer doesn't absorb it and mark you down too.
 - **Concede small points cheaply** to earn credibility on the ones you contest. Fighting everything reads as defensive.
 - **Stay factual and courteous** — no wounded tone, no lecturing. Thank the reviewer, then answer.
 - **Tiny figures/tables are fine here** — a small plot or 3-row table often beats a paragraph; reviewers can zoom in on the PDF.

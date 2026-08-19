@@ -262,6 +262,7 @@ synonym churn, template future-work sections — live in the `paper-writing` ski
 - Avoid the tidy tricolon ("fast, efficient, and scalable"), uniform paragraph lengths, and em-dash spam (at most one `---` per paragraph).
 - Don't use the colon `:` as a dramatic lead-in ("The takeaway is clear:", "One key insight:", "Our approach: …") — rewrite as a plain sentence. Colons are for lists and genuine appositives, not emphasis.
 - Kill the negation-parallelism cliché: "It's not X, it's Y", "not only … but …", "This isn't just about X — it's about Y". State the point directly instead of dressing it as a reversal.
+- also follow the suggestions of the `humanizer` skill, if installed.
 
 ## Never use (obsolete — l2tabu)
 
