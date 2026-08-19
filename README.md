@@ -55,6 +55,7 @@ Third-party skills and Claude Code plugins I rely on. (Skills auto-load; a few t
 | `tufte-vdqi`             | Tufte's data-viz principles (route / assess / render) for making or critiquing plots. |
 | `andrej-karpathy-skills` | Karpathy's guidelines to cut common LLM coding mistakes.                              |
 | `pyright-lsp`            | Pyright language server for Python — type errors, diagnostics. Auto on `.py`.         |
+| `humanizer`              | Strips AI-sounding tells from prose so writing reads as human.                        |
 
 ### Niceties
 

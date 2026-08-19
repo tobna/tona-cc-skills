@@ -32,6 +32,7 @@ in sync with `README.md` whenever a skill is added, removed, or renamed.
 | `frontend-design`        | Pushes past generic UI toward distinctive frontends.     |
 | `tufte-vdqi`             | Tufte data-viz principles for making/critiquing plots.   |
 | `andrej-karpathy-skills` | Karpathy's guidelines to cut common LLM coding mistakes. |
+| `humanizer`              | Strips AI-sounding tells from prose so writing reads as human. |
 | `pyright-lsp`            | Pyright language server for Python.                      |
 
 ## Layout

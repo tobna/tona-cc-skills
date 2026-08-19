@@ -8,6 +8,7 @@ marketplaces=(
   forrestchang/andrej-karpathy-skills
   DietrichGebert/ponytail
   gnurio/tufte-vdqi-plugin
+  blader/humanizer
 )
 plugins=(
   pyright-lsp@claude-plugins-official
@@ -15,11 +16,12 @@ plugins=(
   andrej-karpathy-skills@karpathy-skills
   ponytail@ponytail
   tufte-vdqi@tufte-vdqi-marketplace
+  humanizer@humanizer
 )
 
 for m in "${marketplaces[@]}"; do
   echo "marketplace: $m"
-  claude plugin marketplace add "$m" </dev/null || true   # already-added is fine
+  claude plugin marketplace add "$m" </dev/null || true # already-added is fine
 done
 for p in "${plugins[@]}"; do
   echo "install: $p"
