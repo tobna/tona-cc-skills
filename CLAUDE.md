@@ -12,6 +12,7 @@ in sync with `README.md` whenever a skill is added, removed, or renamed.
 | `paper-writing`| Academic paper writing/revising — framing, abstract/intro, figures, rebuttals. |
 | `latex-rules`  | LaTeX conventions — packages, typography, math macros, booktabs/siunitx, cleveref. |
 | `python-rules` | Python conventions — uv/ruff/pyright, modern syntax, loguru, tests.    |
+| `slidewriting` | Talk decks via the Slidewriting method — storyboard, action titles, framing, real slides; gated per step. |
 | `papis-latex`  | papis-driven `.bib` generation for LaTeX projects — export + filter-cited, Makefile, `papis bibtex` traps. |
 
 ### Third-party (`skills-lock.json`, installed globally via `npx skills`)
