@@ -34,7 +34,30 @@ for d in custom/*/; do
   echo "linked custom/$name"
 done
 
-# 3. Plugins (full install only; subset installs are skills-only).
+# 3. Hooks symlinked into ~/.claude/hooks and registered in settings.json
+#    (full install only). Registration is idempotent: it matches on the command
+#    string, so re-running never stacks a second copy, and an unrelated
+#    PreToolUse hook already in the file is left alone.
+if [ ${#want[@]} -eq 0 ]; then
+  home="${CLAUDE_HOME:-$HOME/.claude}"
+  mkdir -p "$home/hooks"
+  for h in hooks/*.sh; do
+    [ -e "$h" ] || continue
+    ln -sfn "$PWD/$h" "$home/hooks/$(basename "$h")"
+    echo "linked $h"
+  done
+  settings="$home/settings.json"
+  [ -f "$settings" ] || echo '{}' > "$settings"
+  cmd='~/.claude/hooks/no-ai-attribution.sh'
+  jq --arg c "$cmd" '
+    .hooks.PreToolUse //= []
+    | if any(.hooks.PreToolUse[]; (.hooks // [])[].command == $c) then .
+      else .hooks.PreToolUse += [{matcher: "Bash", hooks: [{type: "command", command: $c, timeout: 10}]}] end
+  ' "$settings" > "$settings.tmp" && mv "$settings.tmp" "$settings"
+  echo "registered no-ai-attribution PreToolUse hook"
+fi
+
+# 4. Plugins (full install only; subset installs are skills-only).
 if [ ${#want[@]} -eq 0 ] && [ -x ./plugins.sh ]; then ./plugins.sh; fi
 
 echo "Done. Restart Claude Code to pick up new skills/plugins."

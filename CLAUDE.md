@@ -42,7 +42,29 @@ in sync with `README.md` whenever a skill is added, removed, or renamed.
 | `custom/`          | Skills I authored. Real files, symlinked live into `~/.claude/skills`. |
 | `skills-lock.json` | Manifest of third-party skills (name → upstream repo). No files vendored. |
 | `plugins.sh`       | Adds marketplaces and installs the plugins. Not in `skills-lock.json`. |
+| `hooks/`           | Hook scripts. Symlinked into `~/.claude/hooks` and registered in `settings.json` by `install.sh`. |
 | `install.sh`       | Installs everything (or a named subset) into `~/.claude`.          |
 
 A plugin lives only in `plugins.sh`, never also in `skills-lock.json` — listing it in both
 double-registers it.
+
+## Hooks (`hooks/*`, symlinked into `~/.claude/hooks`)
+
+| Hook                    | Event          | What it does                                              |
+| ----------------------- | -------------- | --------------------------------------------------------- |
+| `no-ai-attribution.sh`  | PreToolUse/Bash | Denies a `git commit` or `gh pr create` whose text contains "claude" or "anthropic". |
+
+`install.sh` symlinks these and registers them in `~/.claude/settings.json`, matching on the
+command string so a re-run never stacks a duplicate and an unrelated `PreToolUse` entry is
+left alone.
+
+`no-ai-attribution.sh` enforces the Git rule in `~/.claude/CLAUDE.md`. It exists **because the
+prompt rule was not enough** — the model twice followed a harness instruction to append an
+attribution trailer despite the ban, the second time in a form no list of known trailer
+formats had named. So the check is deliberately literal: it bans the words, not a list of
+formats, and refuses a commit message that merely names the `CLAUDE.md` file. Loosening that
+with a scrub rule reopens the exact seam it exists to close — if it becomes annoying, weigh
+that first.
+
+It only sees the message when it is on the command line (`-m`, or a `-F -` heredoc). A bare
+`git commit` opens an editor and never reaches the hook; a repo `commit-msg` hook covers that.

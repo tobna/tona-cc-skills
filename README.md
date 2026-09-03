@@ -15,6 +15,19 @@ Code after installing. For the full set — third-party skills and plugins too �
 
 In my experience it helps to tell claude to always load the relevant skills in the global `CLAUDE.md` at `~/.claude/CLAUDE.md`.
 
+## Hooks (`hooks/`)
+
+Shell hooks that Claude Code runs itself, so they hold even when a prompt rule does not.
+`install.sh` symlinks them into `~/.claude/hooks` and registers them in `~/.claude/settings.json`.
+
+| Hook                   | Fires on         | What it does                                                                          |
+| ---------------------- | ---------------- | ------------------------------------------------------------------------------------- |
+| `no-ai-attribution.sh` | every Bash call  | Refuses a `git commit` or `gh pr create` whose text contains "claude" or "anthropic" — no `Co-Authored-By`, no "Generated with", no session-URL trailer, in any wording. |
+
+The ban is on the words, not on a list of known trailer formats, so a novel form is refused
+too. The trade-off is deliberate: a commit message that merely names the `CLAUDE.md` file is
+also refused.
+
 ## My skills (`custom/`)
 
 | Skill                                            | What it does                                                                                                                                                              |
