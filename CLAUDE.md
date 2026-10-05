@@ -55,6 +55,7 @@ and should not get. **`npx skills update` overwrites all of it** — re-apply af
 | `skills-lock.json` | Manifest of third-party skills (name → upstream repo). No files vendored. |
 | `plugins.sh`       | Adds marketplaces and installs the plugins. Not in `skills-lock.json`. |
 | `hooks/`           | Hook scripts. Symlinked into `~/.claude/hooks` and registered in `settings.json` by `install.sh`. |
+| `tests/`           | Hook checks. `tests/no-ai-attribution.sh` feeds commands to the hook; run it after touching the hook. |
 | `install.sh`       | Installs skills for installed Claude Code and Codex CLIs; Claude Code hooks and plugins on full installs. |
 
 A plugin lives only in `plugins.sh`, never also in `skills-lock.json` — listing it in both
@@ -64,7 +65,7 @@ double-registers it.
 
 | Hook                    | Event          | What it does                                              |
 | ----------------------- | -------------- | --------------------------------------------------------- |
-| `no-ai-attribution.sh`  | PreToolUse/Bash | Denies a `git commit` or `gh pr create` whose text contains "claude" or "anthropic". |
+| `no-ai-attribution.sh`  | PreToolUse/Bash | Denies a `git commit` or `gh pr create`/`edit` whose message contains "claude", "anthropic", "codex", "chatgpt", "openai", or "gpt-…". |
 
 `install.sh` symlinks these and registers them in `~/.claude/settings.json`, matching on the
 command string so a re-run never stacks a duplicate and an unrelated `PreToolUse` entry is
@@ -79,5 +80,11 @@ formats, and refuses a commit message that merely names the `CLAUDE.md` file. Lo
 with a scrub rule reopens the exact seam it exists to close — if it becomes annoying, weigh
 that first.
 
-It only sees the message when it is on the command line (`-m`, or a `-F -` heredoc). A bare
+It checks only the message — `git commit` `-m`/`-F`/`--trailer`/`--author`, `gh pr`
+`--title`/`--body`/`--body-file`, heredocs included — so paths elsewhere in the command
+(`git add CLAUDE.md`, `cd ~/.codex`) pass. An embedded stdlib-Python step does the parsing
+(shlex). Where it cannot pin the message down (unparseable command, `-F -` fed by a pipe, a
+message file not written yet) it fails closed to scanning the whole command.
+
+It only sees the message when it is on the command line or in an existing `-F` file. A bare
 `git commit` opens an editor and never reaches the hook; a repo `commit-msg` hook covers that.
