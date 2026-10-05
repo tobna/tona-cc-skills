@@ -1,6 +1,6 @@
 # tona-cc-skills
 
-My Claude Code / agent skills — opinionated guides for academic paper writing and clean LaTeX.
+My Claude Code / Codex skills — opinionated guides for academic paper writing and clean LaTeX.
 The repo also bundles the third-party skills and plugins I rely on, so a single install sets
 everything up.
 
@@ -13,7 +13,9 @@ Install the custom skills from github.com/tobna/tona-cc-skills (the custom/ fold
 Only want some? Tell Claude which (e.g. "only `latex-rules`"). Re-run to update. Restart Claude
 Code after installing. For the full set — third-party skills and plugins too — see [Install](#install).
 
-In my experience it helps to tell claude to always load the relevant skills in the global `CLAUDE.md` at `~/.claude/CLAUDE.md`.
+The full installer links the shared global instructions from
+[`global/agent-instructions.md`](global/agent-instructions.md) to `~/.claude/CLAUDE.md` for
+Claude Code and `~/.codex/AGENTS.md` for Codex.
 
 ## Hooks (`hooks/`)
 
@@ -96,16 +98,20 @@ Clone https://github.com/daniel3303/ClaudeCodeStatusLine to ~/.claude/statusline
 npx skills add marimo-team/skills@marimo-notebook
 ```
 
-**Full setup via script** — custom skills, third-party skills, and plugins at once (needs
-`npx` + `jq`):
+**Full setup via script** — custom skills, third-party skills, shared global instructions, and
+Claude Code plugins at once (needs `npx` + `jq`):
 
 ```bash
 git clone https://github.com/tobna/tona-cc-skills && cd tona-cc-skills && ./install.sh
 ./install.sh find-skills paper-writing    # or a named subset (skills-only, no plugins)
 ```
 
-Third-party skills install globally (active in every project); custom skills are symlinked
-from `custom/`.
+Third-party skills install globally through the `skills` CLI for whichever of `claude` and
+`codex` are on `PATH` (active in every project). Custom skills are symlinked from `custom/`
+into `~/.claude/skills/` for Claude Code and `~/.agents/skills/` for Codex. Claude Code hooks
+and plugins are installed only when `claude` is on `PATH`. On a full install, existing global
+instruction files are backed up before linking the shared file. Re-run `./install.sh` after
+adding a custom skill; edits to existing skills appear through their links.
 
 ## Maintaining this repo
 
@@ -127,6 +133,8 @@ New custom skill: `cd custom && npx skills init <name>`, write its `SKILL.md`, r
 | Path               | What                                                                         |
 | ------------------ | ---------------------------------------------------------------------------- |
 | `skills-lock.json` | Manifest of third-party skills (name → upstream repo). No files vendored.    |
-| `custom/`          | Skills I authored. Real files here, symlinked live into `~/.claude/skills`.  |
+| `custom/`          | Skills I authored. Real files here, linked into installed Claude Code and Codex CLIs. |
+| `CLAUDE.md` / `AGENTS.md` | Repository instructions. `CLAUDE.md` is the source; `AGENTS.md` links to it. |
+| `global/agent-instructions.md` | Shared global instructions linked for both installed CLIs. |
 | `plugins.sh`       | Adds the marketplaces and installs the Claude Code plugins.                  |
-| `install.sh`       | Installs everything (or a named subset) into `~/.claude` — skills + plugins. |
+| `install.sh`       | Installs skills for installed Claude Code and Codex CLIs; Claude Code hooks and plugins on full installs. |

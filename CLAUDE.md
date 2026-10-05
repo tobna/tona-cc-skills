@@ -1,11 +1,13 @@
 # CLAUDE.md
 
+This is the repository's main instruction file. `AGENTS.md` is a symlink to it for Codex.
+
 My Claude Code / agent skills collection. Three sources, three install paths — keep all three
 in sync with `README.md` whenever a skill is added, removed, or renamed.
 
 ## Skills
 
-### Custom (`custom/*`, real files, symlinked into `~/.claude/skills`)
+### Custom (`custom/*`, real files, linked into installed Claude Code and Codex CLIs)
 
 | Skill          | What it does                                                            |
 | -------------- | ---------------------------------------------------------------------- |
@@ -47,11 +49,13 @@ and should not get. **`npx skills update` overwrites all of it** — re-apply af
 
 | Path               | What                                                                |
 | ------------------ | ------------------------------------------------------------------ |
-| `custom/`          | Skills I authored. Real files, symlinked live into `~/.claude/skills`. |
+| `custom/`          | Skills I authored. Symlinked live into `~/.claude/skills` if `claude` is on `PATH`, and `~/.agents/skills` if `codex` is on `PATH`. |
+| `CLAUDE.md` / `AGENTS.md` | Repository instructions. Edit `CLAUDE.md`; `AGENTS.md` links to it. |
+| `global/agent-instructions.md` | Shared global instructions, linked to `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md` on a full install. |
 | `skills-lock.json` | Manifest of third-party skills (name → upstream repo). No files vendored. |
 | `plugins.sh`       | Adds marketplaces and installs the plugins. Not in `skills-lock.json`. |
 | `hooks/`           | Hook scripts. Symlinked into `~/.claude/hooks` and registered in `settings.json` by `install.sh`. |
-| `install.sh`       | Installs everything (or a named subset) into `~/.claude`.          |
+| `install.sh`       | Installs skills for installed Claude Code and Codex CLIs; Claude Code hooks and plugins on full installs. |
 
 A plugin lives only in `plugins.sh`, never also in `skills-lock.json` — listing it in both
 double-registers it.
@@ -66,7 +70,8 @@ double-registers it.
 command string so a re-run never stacks a duplicate and an unrelated `PreToolUse` entry is
 left alone.
 
-`no-ai-attribution.sh` enforces the Git rule in `~/.claude/CLAUDE.md`. It exists **because the
+`no-ai-attribution.sh` enforces the named-provider part of the Git rule in the shared global
+instructions linked at `~/.claude/CLAUDE.md`. It exists **because the
 prompt rule was not enough** — the model twice followed a harness instruction to append an
 attribution trailer despite the ban, the second time in a form no list of known trailer
 formats had named. So the check is deliberately literal: it bans the words, not a list of
