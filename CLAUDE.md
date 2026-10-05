@@ -24,6 +24,13 @@ in sync with `README.md` whenever a skill is added, removed, or renamed.
 | `jupyter-to-marimo`   | Converts a Jupyter `.ipynb` into a marimo `.py` notebook.     |
 | `find-skills`         | Finds an existing skill for a task.                           |
 | `analyze-results`     | ML experiment results — stats, comparison tables, insights.   |
+| `openscad`            | Parametric 3D CAD with OpenSCAD — design, STL reconstruction, print export. |
+
+`openscad` carries local patches in `~/.agents/skills/openscad`: its Python scripts got PEP 723
+headers (`#!/usr/bin/env -S uv run --script`), the `*-stl-*.sh` scripts call `$PY`
+(`uv run --with trimesh …  python`) instead of `python3`, and `SKILL.md` invokes the scripts with
+`uv run`. Upstream assumes system-wide `pip3 install trimesh …`, which this machine does not have
+and should not get. **`npx skills update` overwrites all of it** — re-apply after an update.
 
 ### Plugins (`plugins.sh`, `claude plugin install`)
 

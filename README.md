@@ -59,6 +59,7 @@ Third-party skills and Claude Code plugins I rely on. (Skills auto-load; a few t
 | `jupyter-to-marimo`   | Converts a Jupyter `.ipynb` into a marimo `.py` notebook.                                           |
 | `find-skills`         | Finds an existing skill for a task. Triggers on "is there a skill for X".                           |
 | `analyze-results`     | Analyzes ML experiment results — stats, comparison tables, insights. Triggers on "analyze results". |
+| `openscad`            | Parametric 3D CAD with OpenSCAD — design, render previews, reconstruct from STL, export for printing. |
 
 ### Plugins (`plugins.sh`)
 
