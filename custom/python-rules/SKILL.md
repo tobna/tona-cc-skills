@@ -22,6 +22,22 @@ needs no logger, no tests, no layout. Whether code should exist at all is `ponyt
 
 `uv init` · `uv add torch` · `uv add --dev ruff pytest` · `uv run x.py` · `uv sync` · `uvx ruff check`
 
+**Standalone scripts get their deps at runtime, never a venv you manage.** A single-file script
+carries a PEP 723 header and runs itself:
+
+```python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.10"
+# dependencies = ["numpy", "trimesh"]
+# ///
+```
+
+`uv run script.py` (or `./script.py`) then resolves and caches those on the spot. For a script you
+can't edit — someone else's, or an inline `python -c` — pass them at the call site:
+`uv run --with numpy --with trimesh python script.py`. Installing into the system interpreter,
+or standing up a `~/.venvs/foo` by hand to put packages somewhere, is never the answer.
+
 Never `pip install` into a system Python, never a hand-managed venv, never `requirements.txt` or
 `setup.py`. Commit `uv.lock` (apps; libraries may skip). uv pins the Python version — any release
 is fine. **`uv add` resolves versions — never hand-write a guessed one.** Constrain with

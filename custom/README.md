@@ -1,6 +1,6 @@
 # Custom skills
 
-Skills I author. `install.sh` symlinks each `custom/*` into `~/.claude/skills/`, so edits go live immediately.
+Skills I author. `install.sh` symlinks each `custom/*` into `~/.claude/skills/` when `claude` is on `PATH`, and `~/.agents/skills/` when `codex` is on `PATH`, so edits go live immediately.
 
 - [`paper-writing`](paper-writing/SKILL.md) — paper-writing guidance: framing, clarity, figures, citation integrity, rebuttals.
 - [`latex-rules`](latex-rules/SKILL.md) — LaTeX conventions: packages, typography, tables, cleveref refs, source hygiene.

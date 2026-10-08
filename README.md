@@ -1,6 +1,6 @@
 # tona-cc-skills
 
-My Claude Code / agent skills — opinionated guides for academic paper writing and clean LaTeX.
+My Claude Code / Codex skills — opinionated guides for academic paper writing and clean LaTeX.
 The repo also bundles the third-party skills and plugins I rely on, so a single install sets
 everything up.
 
@@ -13,119 +13,82 @@ Install the custom skills from github.com/tobna/tona-cc-skills (the custom/ fold
 Only want some? Tell Claude which (e.g. "only `latex-rules`"). Re-run to update. Restart Claude
 Code after installing. For the full set — third-party skills and plugins too — see [Install](#install).
 
-In my experience it helps to tell claude to always load the relevant skills in the global `CLAUDE.md` at `~/.claude/CLAUDE.md`.
-
-## Hooks (`hooks/`)
-
-Shell hooks that Claude Code runs itself, so they hold even when a prompt rule does not.
-`install.sh` symlinks them into `~/.claude/hooks` and registers them in `~/.claude/settings.json`.
-
-| Hook                   | Fires on         | What it does                                                                          |
-| ---------------------- | ---------------- | ------------------------------------------------------------------------------------- |
-| `no-ai-attribution.sh` | every Bash call  | Refuses a `git commit` or `gh pr create` whose text contains "claude" or "anthropic" — no `Co-Authored-By`, no "Generated with", no session-URL trailer, in any wording. |
-
-The ban is on the words, not on a list of known trailer formats, so a novel form is refused
-too. The trade-off is deliberate: a commit message that merely names the `CLAUDE.md` file is
-also refused.
-
 ## My skills (`custom/`)
 
-| Skill                                            | What it does                                                                                                                                                              |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`paper-writing`](custom/paper-writing/SKILL.md) | Opinionated paper-writing guidance — framing, abstract/intro, clarity, figures, rebuttals. Loads when drafting or revising a paper.                                       |
-| [`latex-rules`](custom/latex-rules/SKILL.md)     | Opinionated LaTeX conventions — packages, typography, math macros, booktabs/siunitx tables, cleveref refs. Loads on `.tex` files.                                         |
-| [`python-rules`](custom/python-rules/SKILL.md)   | Opinionated Python conventions — uv/ruff/pyright, modern syntax, loguru, tests that run anywhere. Loads on `.py` files.                                                   |
-| [`papis-latex`](custom/papis-latex/SKILL.md)     | papis workflow for a LaTeX project's bibliography — generate the `.bib` via export + filter-cited, Makefile targets, `papis bibtex` traps. Loads on `.bib`/citation work. |
-| [`slidewriting`](custom/slidewriting/SKILL.md)   | The Slidewriting method for talk decks — storyboard, action titles, framing, real slides, gated on user feedback at each step, plus slide design rules. |
+| Skill                                            | What it does                                                                                     |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| [`paper-writing`](custom/paper-writing/SKILL.md) | Writing and revising papers — framing, abstract/intro, clarity, figures, rebuttals.              |
+| [`latex-rules`](custom/latex-rules/SKILL.md)     | LaTeX conventions — packages, typography, math macros, booktabs/siunitx tables, cleveref.        |
+| [`python-rules`](custom/python-rules/SKILL.md)   | Python conventions — uv/ruff/pyright, modern syntax, loguru, tests that run anywhere.            |
+| [`papis-latex`](custom/papis-latex/SKILL.md)     | papis-driven `.bib` for LaTeX projects — export + filter-cited, Makefile, `papis bibtex` traps.  |
+| [`slidewriting`](custom/slidewriting/SKILL.md)   | Talk decks via the Slidewriting method — storyboard, action titles, framing, slides; gated per step. |
 
 Like all skills, these **activate automatically** — you don't call them; Claude pulls one in
 when you're doing the thing it covers.
 
-<br>
-
----
-
 ## Also bundled
-
-Third-party skills and Claude Code plugins I rely on. (Skills auto-load; a few tools ship as
-**plugins** instead — same idea, different packaging.)
 
 ### Third-party skills (`skills-lock.json`)
 
-| Skill                 | What it does                                                                                        |
-| --------------------- | --------------------------------------------------------------------------------------------------- |
-| `marimo-notebook`     | Authoring marimo notebooks in the reactive-cell format. Auto-loads on `.py` marimo files.           |
-| `anywidget-generator` | Scaffolds [anywidget](https://anywidget.dev) interactive components (JS + Python) for marimo.       |
-| `jupyter-to-marimo`   | Converts a Jupyter `.ipynb` into a marimo `.py` notebook.                                           |
-| `find-skills`         | Finds an existing skill for a task. Triggers on "is there a skill for X".                           |
-| `analyze-results`     | Analyzes ML experiment results — stats, comparison tables, insights. Triggers on "analyze results". |
+| Skill                 | What it does                                                                |
+| --------------------- | --------------------------------------------------------------------------- |
+| `marimo-notebook`     | Authoring marimo notebooks in the reactive-cell format.                     |
+| `anywidget-generator` | Scaffolds [anywidget](https://anywidget.dev) components for marimo.         |
+| `jupyter-to-marimo`   | Converts a Jupyter `.ipynb` into a marimo `.py` notebook.                   |
+| `find-skills`         | Finds an existing skill for a task.                                         |
+| `analyze-results`     | ML experiment results — stats, comparison tables, insights.                 |
+| `openscad`            | Parametric 3D CAD with OpenSCAD — design, STL reconstruction, print export. |
 
 ### Plugins (`plugins.sh`)
 
-| Plugin                   | What it does                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------- |
-| `ponytail`               | Forces the laziest solution that works. Toggle `/ponytail lite\|full\|ultra`.         |
-| `frontend-design`        | Pushes past generic "AI slop" UI toward distinctive frontends. Loads on web UI work.  |
-| `tufte-vdqi`             | Tufte's data-viz principles (route / assess / render) for making or critiquing plots. |
-| `andrej-karpathy-skills` | Karpathy's guidelines to cut common LLM coding mistakes.                              |
-| `pyright-lsp`            | Pyright language server for Python — type errors, diagnostics. Auto on `.py`.         |
-| `humanizer`              | Strips AI-sounding tells from prose so writing reads as human.                        |
+| Plugin                   | What it does                                             |
+| ------------------------ | -------------------------------------------------------- |
+| `ponytail`               | Forces the laziest solution that works.                  |
+| `frontend-design`        | Pushes past generic UI toward distinctive frontends.     |
+| `tufte-vdqi`             | Tufte's data-viz principles for making or critiquing plots. |
+| `andrej-karpathy-skills` | Karpathy's guidelines to cut common LLM coding mistakes. |
+| `pyright-lsp`            | Pyright language server for Python.                      |
+| `humanizer`              | Strips AI-sounding tells from prose.                     |
 
-### Niceties
+### Hooks (`hooks/`)
 
-I'm using [this](https://github.com/daniel3303/ClaudeCodeStatusLine) statusline for claude code, which gives all the information that's necessary in my opinion.
-Install it by asking claude to
+`no-ai-attribution.sh` refuses a `git commit` or `gh pr create`/`edit` whose message contains
+"claude", "anthropic", "codex", "chatgpt", "openai", or "gpt-…", in any wording. Only the
+message is checked: committing a `CLAUDE.md` file is fine, a message naming it is not.
 
-```
+### Statusline
+
+I use [ClaudeCodeStatusLine](https://github.com/daniel3303/ClaudeCodeStatusLine). Ask Claude:
+
+```text
 Clone https://github.com/daniel3303/ClaudeCodeStatusLine to ~/.claude/statusline/ (or %USERPROFILE%\.claude\statusline\ on Windows) and configure it as my status bar by following its INSTALL.md.
-```
-
-```
-
 ```
 
 ## Install
 
-**Custom skills, no clone** — ask Claude (the prompt up top), or in one line:
-`Install the custom skills from github.com/tobna/tona-cc-skills into ~/.claude/skills/.`
+**Custom skills only** — [ask Claude](#tona-cc-skills), no clone needed.
 
-**A single third-party skill**, straight from upstream:
-
-```bash
-npx skills add marimo-team/skills@marimo-notebook
-```
-
-**Full setup via script** — custom skills, third-party skills, and plugins at once (needs
-`npx` + `jq`):
+**Full setup via script** — custom skills, third-party skills, hooks, plugins, and the shared
+global instructions at once, for Claude Code and/or Codex (needs `npx` + `jq`):
 
 ```bash
 git clone https://github.com/tobna/tona-cc-skills && cd tona-cc-skills && ./install.sh
-./install.sh find-skills paper-writing    # or a named subset (skills-only, no plugins)
+./install.sh find-skills paper-writing    # or a named subset (skills only)
 ```
 
-Third-party skills install globally (active in every project); custom skills are symlinked
-from `custom/`.
+The shared instructions ([`global/agent-instructions.md`](global/agent-instructions.md)) replace
+`~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md`; existing files are backed up first. Restart the
+CLI afterwards.
 
-## Maintaining this repo
-
-Track a third-party skill, pull upstream fixes, or restore the exact pinned set:
+## Maintaining
 
 ```bash
-npx skills add <owner>/<repo>@<skill>   # adds it to skills-lock.json
+npx skills add <owner>/<repo>@<skill>   # track a third-party skill in skills-lock.json
 npx skills update                       # pull upstream fixes
 npx skills experimental_install         # restore the exact locked set
-git add skills-lock.json && git commit
 ```
 
 New custom skill: `cd custom && npx skills init <name>`, write its `SKILL.md`, re-run
-`./install.sh`. A tool listed under **Plugins** lives only in `plugins.sh`, not
-`skills-lock.json` — installing it as both would double-register it.
-
-### Layout
-
-| Path               | What                                                                         |
-| ------------------ | ---------------------------------------------------------------------------- |
-| `skills-lock.json` | Manifest of third-party skills (name → upstream repo). No files vendored.    |
-| `custom/`          | Skills I authored. Real files here, symlinked live into `~/.claude/skills`.  |
-| `plugins.sh`       | Adds the marketplaces and installs the Claude Code plugins.                  |
-| `install.sh`       | Installs everything (or a named subset) into `~/.claude` — skills + plugins. |
+`./install.sh`; edits to existing skills show up through the links. A plugin lives only in
+`plugins.sh`, never also in `skills-lock.json`, or it registers twice. After touching a hook,
+run `tests/no-ai-attribution.sh`.
