@@ -42,4 +42,5 @@ This is not an exhaustive list. Always load **all** relevant skills for _any_ ta
 
 # Further Rules
 
-- **Always** keep local CLAUDE.md and AGENTS.md files up-to-date
+- **Always** keep local CLAUDE.md and AGENTS.md files up-to-date with the **relevant** information that will also be useful to future sessions.
+- Instead of leaving an old rule/decision in a document and adding a note that it no longer holds, remove that old rule/decision.
