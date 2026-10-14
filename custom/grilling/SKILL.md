@@ -28,7 +28,7 @@ Offer options when the answer is one of a few known alternatives. Leave the ques
 
 Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and pick the next theme. A question whose answer depends on another open question belongs to a later round.
 
-A question the user leaves unanswered stays open. Do not treat it as accepting the 💡: the user may have postponed it or not be sure yet. Ask it again later, in a round where it fits, not necessarily the next one.
+A question the user does not answer explicitly stays open. A comment, or anything not clearly aimed at that question, is not an answer. Do not treat it as accepting the 💡: the user may have postponed it or not be sure yet. Ask it again later, in a round where it fits, not necessarily the next one.
 
 Finding _facts_ is your job, never the user's. When a question needs a fact from the environment (filesystem, tools, etc.), look it up yourself rather than asking. The _decisions_ are the user's: put each to them and wait.
 
