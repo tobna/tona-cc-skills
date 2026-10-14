@@ -3,6 +3,12 @@
 - **Always** do what is _actually_ asked of you, not something else. For example, if the user asks a question (even if it's programming related), the goal is to answer, not to write/change some code!
 - If the user asks you to check something, you should check and report back the findings, **not** change it directly!
 
+# Privacy
+
+- **Never** read, list, or search anything outside the current project directory unless the user explicitly asks for that location. This covers other projects, datasets, the home directory, `~/.claude` (including session transcripts), and filesystem-wide searches.
+- Reading is as bad as changing: whatever you read is sent to the model provider.
+- If the answer is not in the project, say so and ask where to look. A reply like "yeah" that adds information is not permission to widen the search.
+
 # Git
 
 Commit messages and PR descriptions must never contain the names of AI tools
