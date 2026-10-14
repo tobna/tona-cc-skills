@@ -16,6 +16,8 @@ in sync with `README.md` whenever a skill is added, removed, or renamed.
 | `python-rules` | Python conventions — uv/ruff/pyright, modern syntax, loguru, tests.    |
 | `slidewriting` | Talk decks via the Slidewriting method — storyboard, action titles, framing, real slides; gated per step. |
 | `papis-latex`  | papis-driven `.bib` generation for LaTeX projects — export + filter-cited, Makefile, `papis bibtex` traps. |
+| `grilling`     | Grills the user on a plan in small themed rounds, 💡 suggestion per question. Adapted from mattpocock/skills (MIT, `LICENSE` in folder). |
+| `wait-what`    | Re-pitches a message that didn't land ("what?", "huh?"). Adapted from mattpocock/skills (MIT, `LICENSE` in folder). |
 
 ### Third-party (`skills-lock.json`, installed globally via `npx skills`)
 
@@ -49,13 +51,14 @@ and should not get. **`npx skills update` overwrites all of it** — re-apply af
 
 | Path               | What                                                                |
 | ------------------ | ------------------------------------------------------------------ |
-| `custom/`          | Skills I authored. Symlinked live into `~/.claude/skills` if `claude` is on `PATH`, and `~/.agents/skills` if `codex` is on `PATH`. |
+| `custom/`          | Skills I authored or adapted. Symlinked live into `~/.claude/skills` if `claude` is on `PATH`, and `~/.agents/skills` if `codex` is on `PATH`. |
 | `CLAUDE.md` / `AGENTS.md` | Repository instructions. Edit `CLAUDE.md`; `AGENTS.md` links to it. |
 | `global/agent-instructions.md` | Shared global instructions, linked to `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md` on a full install. |
 | `skills-lock.json` | Manifest of third-party skills (name → upstream repo). No files vendored. |
 | `plugins.sh`       | Adds marketplaces and installs the plugins. Not in `skills-lock.json`. |
 | `hooks/`           | Hook scripts. Symlinked into `~/.claude/hooks` and registered in `settings.json` by `install.sh`. |
 | `tests/`           | Hook checks. `tests/no-ai-attribution.sh` feeds commands to the hook; run it after touching the hook. |
+| `LICENSE`          | MIT for the repo. Adapted skills keep their own `LICENSE` with the original author's notice. |
 | `install.sh`       | Installs skills for installed Claude Code and Codex CLIs; Claude Code hooks and plugins on full installs. |
 
 A plugin lives only in `plugins.sh`, never also in `skills-lock.json` — listing it in both

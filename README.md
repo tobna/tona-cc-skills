@@ -22,6 +22,8 @@ Code after installing. For the full set — third-party skills and plugins too �
 | [`python-rules`](custom/python-rules/SKILL.md)   | Python conventions — uv/ruff/pyright, modern syntax, loguru, tests that run anywhere.            |
 | [`papis-latex`](custom/papis-latex/SKILL.md)     | papis-driven `.bib` for LaTeX projects — export + filter-cited, Makefile, `papis bibtex` traps.  |
 | [`slidewriting`](custom/slidewriting/SKILL.md)   | Talk decks via the Slidewriting method — storyboard, action titles, framing, slides; gated per step. |
+| [`grilling`](custom/grilling/SKILL.md)           | Grills you on a plan in small themed rounds, each question with a 💡 suggestion. Adapted from [mattpocock/skills](https://github.com/mattpocock/skills) (MIT). |
+| [`wait-what`](custom/wait-what/SKILL.md)         | Re-pitches a message that didn't land when you reply "what?". Adapted from [mattpocock/skills](https://github.com/mattpocock/skills) (MIT). |
 
 Like all skills, these **activate automatically** — you don't call them; Claude pulls one in
 when you're doing the thing it covers.
@@ -92,3 +94,10 @@ New custom skill: `cd custom && npx skills init <name>`, write its `SKILL.md`, r
 `./install.sh`; edits to existing skills show up through the links. A plugin lives only in
 `plugins.sh`, never also in `skills-lock.json`, or it registers twice. After touching a hook,
 run `tests/no-ai-attribution.sh`.
+
+## License
+
+[MIT](LICENSE). `grilling` and `wait-what` are adapted from
+[mattpocock/skills](https://github.com/mattpocock/skills) and carry their own MIT `LICENSE`
+with both copyright notices. Third-party skills and plugins are not vendored here; they keep
+their upstream licenses.
