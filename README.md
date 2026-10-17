@@ -71,7 +71,9 @@ Clone https://github.com/daniel3303/ClaudeCodeStatusLine to ~/.claude/statusline
 **Custom skills only** — [ask Claude](#tona-cc-skills), no clone needed.
 
 **Full setup via script** — custom skills, third-party skills, hooks, plugins, and the shared
-global instructions at once, for Claude Code and/or Codex (needs `npx` + `jq`):
+global instructions at once, for Claude Code and/or Codex (needs `npx` + `jq`). A full run
+also updates all globally installed skills, plugin marketplaces, and the plugins listed in
+`plugins.sh`:
 
 ```bash
 git clone https://github.com/tobna/tona-cc-skills && cd tona-cc-skills && ./install.sh
@@ -80,13 +82,14 @@ git clone https://github.com/tobna/tona-cc-skills && cd tona-cc-skills && ./inst
 
 The shared instructions ([`global/agent-instructions.md`](global/agent-instructions.md)) replace
 `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md`; existing files are backed up first. Restart the
-CLI afterwards.
+CLI afterwards. Updates can overwrite local changes to third-party skills; the local `openscad`
+patches described in [`CLAUDE.md`](CLAUDE.md) need to be reapplied after a full run.
 
 ## Maintaining
 
 ```bash
 npx skills add <owner>/<repo>@<skill>   # track a third-party skill in skills-lock.json
-npx skills update                       # pull upstream fixes
+npx skills update -g                    # update global skills separately
 npx skills experimental_install         # restore the exact locked set
 ```
 

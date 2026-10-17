@@ -34,7 +34,8 @@ in sync with `README.md` whenever a skill is added, removed, or renamed.
 headers (`#!/usr/bin/env -S uv run --script`), the `*-stl-*.sh` scripts call `$PY`
 (`uv run --with trimesh …  python`) instead of `python3`, and `SKILL.md` invokes the scripts with
 `uv run`. Upstream assumes system-wide `pip3 install trimesh …`, which this machine does not have
-and should not get. **`npx skills update` overwrites all of it** — re-apply after an update.
+and should not get. **A full `./install.sh` run updates global skills and overwrites these
+patches when `openscad` changes upstream** — re-apply them after an update.
 
 ### Plugins (`plugins.sh`, `claude plugin install`)
 
@@ -55,11 +56,11 @@ and should not get. **`npx skills update` overwrites all of it** — re-apply af
 | `CLAUDE.md` / `AGENTS.md` | Repository instructions. Edit `CLAUDE.md`; `AGENTS.md` links to it. |
 | `global/agent-instructions.md` | Shared global instructions, linked to `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md` on a full install. |
 | `skills-lock.json` | Manifest of third-party skills (name → upstream repo). No files vendored. |
-| `plugins.sh`       | Adds marketplaces and installs the plugins. Not in `skills-lock.json`. |
+| `plugins.sh`       | Adds and updates marketplaces; installs and updates the listed plugins. Not in `skills-lock.json`. |
 | `hooks/`           | Hook scripts. Symlinked into `~/.claude/hooks` and registered in `settings.json` by `install.sh`. |
 | `tests/`           | Hook checks. `tests/no-ai-attribution.sh` feeds commands to the hook; run it after touching the hook. |
 | `LICENSE`          | MIT for the repo. Adapted skills keep their own `LICENSE` with the original author's notice. |
-| `install.sh`       | Installs skills for installed Claude Code and Codex CLIs; Claude Code hooks and plugins on full installs. |
+| `install.sh`       | Installs skills for installed Claude Code and Codex CLIs; full installs also update all global skills and set up Claude Code hooks and plugins. |
 
 A plugin lives only in `plugins.sh`, never also in `skills-lock.json` — listing it in both
 double-registers it.

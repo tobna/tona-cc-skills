@@ -23,7 +23,11 @@ for m in "${marketplaces[@]}"; do
   echo "marketplace: $m"
   claude plugin marketplace add "$m" </dev/null || true # already-added is fine
 done
+echo "updating marketplaces"
+claude plugin marketplace update </dev/null
 for p in "${plugins[@]}"; do
   echo "install: $p"
   claude plugin install "$p" -s user </dev/null
+  echo "update: $p"
+  claude plugin update "$p" -s user -y </dev/null
 done

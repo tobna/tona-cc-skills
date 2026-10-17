@@ -5,7 +5,8 @@
 #   ./install.sh find-skills implement-paper       # just these (third-party or custom)
 #
 # Third-party skills come from skills-lock.json via the `skills` CLI (npx skills),
-# installed globally so they're active in every project.
+# installed globally so they're active in every project. Full installs also
+# update all globally installed skills.
 # Custom skills (./custom/*) are symlinked into each agent's personal skills
 # directory so edits stay live.
 # Shared global instructions are linked to each installed agent's expected path.
@@ -56,6 +57,10 @@ if [ ${#install_agents[@]} -gt 0 ]; then
     echo "installing $name  ($pkg)"
     npx --yes skills@latest add "$pkg" -g -y -a "${install_agents[@]}" >/dev/null </dev/null
   done < <(jq -r '.skills | to_entries[] | "\(.key)\t\(.value.source)@\(.key)"' skills-lock.json)
+  if [ ${#want[@]} -eq 0 ]; then
+    echo "updating global skills"
+    npx --yes skills@latest update -g -y </dev/null
+  fi
 fi
 
 # 2. Custom skills symlinked into each installed agent's skills directory.
