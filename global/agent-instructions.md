@@ -40,6 +40,11 @@ This is not an exhaustive list. Always load **all** relevant skills for _any_ ta
 
 - use ripgrep `rg` instead of `grep`
 
+# Coding
+
+- Everything needs to have human-readable variable and function names
+- Always attack google-style docstrings with input and output shapes to python functions
+
 # Further Rules
 
 - **Always** keep local CLAUDE.md and AGENTS.md files up-to-date with the **relevant** information that will also be useful to future sessions.
