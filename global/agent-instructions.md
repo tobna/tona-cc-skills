@@ -43,7 +43,7 @@ This is not an exhaustive list. Always load **all** relevant skills for _any_ ta
 # Coding
 
 - Everything needs to have human-readable variable and function names
-- Always attack google-style docstrings with input and output shapes to python functions
+- Always attack google-style docstrings with input and output shapes to python functions, classes, methods, etc.
 
 # Further Rules
 

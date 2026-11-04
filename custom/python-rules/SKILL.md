@@ -75,6 +75,8 @@ ignore = ["E501"]                                   # the formatter owns line le
 - **`match`** only for real structural dispatch, not a dressed-up `if/elif`.
 - **`if __name__ == "__main__":`** in anything runnable. No `global` for shared state — pass it in.
 - **argparse** — booleans via `action=argparse.BooleanOptionalAction` (gives `--flag`/`--no-flag`). Never `type=bool` (`bool("False")` is `True`). `typer`/`tyro` only when the arg surface hurts.
+- Everything needs to have human-readable variable and function names
+- Always attack google-style docstrings with input and output shapes to python functions, classes, methods, etc.
 
 ## Type hints & docstrings
 
