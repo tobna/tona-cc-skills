@@ -38,6 +38,7 @@ This is not an exhaustive list. Always load **all** relevant skills for _any_ ta
 
 # Commands
 
+- always make sure to not cause a hang on the machine by overfilling the RAM. On memory-hungry commands estimate the memory use before running the command.
 - use ripgrep `rg` instead of `grep`
 
 # Coding
